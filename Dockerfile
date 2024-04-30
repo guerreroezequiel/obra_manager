@@ -5,13 +5,13 @@ WORKDIR /usr/src/app
 
 # Install dependencies
 COPY package*.json ./
-RUN npm ci --production
+RUN npm i 
 
 # Copy app source code
 COPY . .
 
 # Build app
-RUN npm run build --production
+RUN npm run build 
 
 
 
@@ -19,4 +19,4 @@ RUN npm run build --production
 EXPOSE 3333
 
 # Start app
-CMD ["node", "./build/server.js"]
+CMD ["node", "./build/bin/server.js"]
