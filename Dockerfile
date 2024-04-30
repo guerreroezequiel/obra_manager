@@ -12,7 +12,7 @@ COPY . .
 
 # Build app
 RUN npm run build 
-
+RUN npm migration:run
 
 
 # Expose port
