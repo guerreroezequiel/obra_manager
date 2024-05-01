@@ -2,24 +2,28 @@ import { DateTime } from 'luxon'
 import { BaseModel, column } from '@adonisjs/lucid/orm'
 
 export class Tarea extends BaseModel {
-    @column({ isPrimary: true })
-    declare ID: number
-  
-    @column()
-    declare NOMBRE: string
-  
-    @column()
-    declare FK_ESTADOS: number
-  
-    @column()
-    declare DESCRIPCION: string
-  
-    @column()
-    declare CONDICION: string | null
-  
-    @column()
-    declare COND_BOOL: number | null
+  @column({ isPrimary: true })
+  declare id: number
 
-    @column.dateTime({ autoCreate: true, autoUpdate: true })
-    declare FEC_ACT: DateTime | null
-  }
+  @column()
+  declare nombre: string
+
+  @column()
+  declare fk_estados: number
+
+  @column()
+  declare descripcion: string
+
+  @column()
+  declare condicion: string | null
+
+  @column()
+  declare cond_bool: number | null
+
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime
+
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime
+
+}

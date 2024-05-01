@@ -12,6 +12,7 @@ export default class extends BaseSchema {
       table.string('telefono', 20).notNullable()
       table.timestamp('created_at').defaultTo(this.now())
       table.timestamp('updated_at').defaultTo(this.now())
+      table.integer('fk_estados').nullable().references('id').inTable('estados')
     })
   }
 
