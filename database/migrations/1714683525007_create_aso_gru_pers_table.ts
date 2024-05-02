@@ -6,8 +6,8 @@ export default class extends BaseSchema {
   async up() {
     this.schema.createTable(this.tableName, (table) => {
       table.increments('id')
-      table.integer('fkPersonal').notNullable()
-      table.integer('fkGruPer').notNullable()
+      table.integer('fk_personal').notNullable()
+      table.integer('fk_gru_per').notNullable()
       table.timestamp('created_at', { useTz: true })
       table.timestamp('updated_at', { useTz: true })
     })

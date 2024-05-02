@@ -9,7 +9,7 @@ export default class extends BaseSchema {
       table.string('nombre').notNullable()
       table.string('mail').nullable()
       table.string('tel').nullable()
-      table.integer('fkEstados').nullable()
+      table.integer('fk_estados').nullable()
       table.string('direccion').nullable()
       table.string('descripcion').nullable()
       table.timestamp('created_at', { useTz: true })
