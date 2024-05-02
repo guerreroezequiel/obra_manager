@@ -1,4 +1,4 @@
-import Cliente from '#models/cliente'
+import Cliente from '#models/cliente/cliente'
 import { HttpContext } from '@adonisjs/core/http'
 
 

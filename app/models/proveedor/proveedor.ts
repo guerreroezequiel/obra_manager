@@ -2,7 +2,7 @@ import { DateTime } from 'luxon'
 import { BaseModel, column } from '@adonisjs/lucid/orm'
 
 
-class Cliente extends BaseModel {
+export default class Proveedor extends BaseModel {
   @column({ isPrimary: true })
   declare id: number
   
@@ -13,19 +13,21 @@ class Cliente extends BaseModel {
   declare mail: string | null
   
   @column()
+  declare tel: string | null
+
+  @column()
   declare fkEstados: number | null
-  
-  @column.dateTime()
-  declare fecAct: DateTime | null
-  
+   
   @column()
   declare direccion: string | null
   
   @column()
   declare descripcion: string | null
   
-  @column.dateTime({ autoCreate: true, autoUpdate: true })
-  declare updatedAt: DateTime | null
-}
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime
 
-export default Cliente;
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime
+
+}

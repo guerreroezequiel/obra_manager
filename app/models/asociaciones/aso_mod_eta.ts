@@ -1,24 +1,15 @@
 import { DateTime } from 'luxon'
 import { BaseModel, column } from '@adonisjs/lucid/orm'
 
-export class Tarea extends BaseModel {
+export default class AsoModEta extends BaseModel {
   @column({ isPrimary: true })
   declare id: number
 
   @column()
-  declare nombre: string
+  declare fkEtapas: number
 
   @column()
-  declare fk_estados: number
-
-  @column()
-  declare descripcion: string
-
-  @column()
-  declare condicion: string | null
-
-  @column()
-  declare cond_bool: number | null
+  declare fkModulos: number
 
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
