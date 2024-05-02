@@ -12,10 +12,10 @@ export default class ArtTarea extends BaseModel {
   declare fkTareas: number
 
   @column()
-  declare uniMed: number
+  declare uniMed: number 
 
   @column()
-  declare descripcion: string
+  declare descripcion: string | null
 
   @column()
   declare cantidad: number | null

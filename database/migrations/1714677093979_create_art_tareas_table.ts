@@ -9,7 +9,7 @@ export default class extends BaseSchema {
       table.string('nombre').notNullable()
       table.integer('fk_tareas').notNullable()
       table.integer('uni_med').notNullable()
-      table.string('descripcion').notNullable()
+      table.string('descripcion').nullable()
       table.integer('cantidad').nullable()
       table.timestamp('created_at', { useTz: true })
       table.timestamp('updated_at', { useTz: true })

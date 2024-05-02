@@ -9,10 +9,10 @@ export default class Tarea extends BaseModel {
   declare nombre: string
 
   @column()
-  declare fkEstados: number
+  declare fkEstados: number | null
 
   @column()
-  declare descripcion: string
+  declare descripcion: string | null
 
   @column()
   declare condicion: string | null
