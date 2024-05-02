@@ -1,7 +1,7 @@
 import { DateTime } from 'luxon'
 import { BaseModel, column } from '@adonisjs/lucid/orm'
 
-export default class Etapas extends BaseModel {
+export default class UniMed extends BaseModel {
   @column({ isPrimary: true })
   declare id: number
 
@@ -9,16 +9,7 @@ export default class Etapas extends BaseModel {
   declare nombre: string
 
   @column()
-  declare fkEstados: number
-
-  @column()
   declare descripcion: string
-
-  @column()
-  declare fkAsoModEta: number
-
-  @column()
-  declare fkModulos: number
 
   @column()
   declare habilitado: boolean
@@ -30,4 +21,3 @@ export default class Etapas extends BaseModel {
   declare updatedAt: DateTime
 
 }
-
