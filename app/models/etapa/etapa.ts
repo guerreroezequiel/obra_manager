@@ -1,5 +1,7 @@
 import { DateTime } from 'luxon'
-import { BaseModel, column } from '@adonisjs/lucid/orm'
+import type { HasMany } from '@adonisjs/lucid/types/relations'
+import { BaseModel, column, hasMany } from '@adonisjs/lucid/orm'
+import Modulos from '#models/modulo/modulo'
 
 export default class Etapas extends BaseModel {
   @column({ isPrimary: true })
@@ -28,6 +30,9 @@ export default class Etapas extends BaseModel {
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   declare updatedAt: DateTime
+
+  @hasMany(() => Modulos)
+  declare modulos: HasMany<typeof Modulos>
 
 }
 

@@ -1,5 +1,8 @@
 import { DateTime } from 'luxon'
-import { BaseModel, column } from '@adonisjs/lucid/orm'
+
+import type { BelongsTo } from '@adonisjs/lucid/types/relations'
+import { BaseModel, column, belongsTo } from '@adonisjs/lucid/orm'
+import Tarea from '../tarea.js'
 
 export default class PerTarea extends BaseModel {
   @column({ isPrimary: true })
@@ -13,5 +16,8 @@ export default class PerTarea extends BaseModel {
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   declare updatedAt: DateTime
+
+  @belongsTo(() => Tarea )
+  declare tareas: BelongsTo<typeof Tarea>
 
 }
