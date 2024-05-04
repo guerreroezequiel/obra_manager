@@ -1,21 +1,18 @@
 import { DateTime } from 'luxon'
 import type { BelongsTo } from '@adonisjs/lucid/types/relations'
 import { BaseModel, belongsTo, column } from '@adonisjs/lucid/orm'
-import Modulo from '#models/modulo/modulo';
-import Etapa from '#models/etapa/etapa';
+import Obra from '#models/obra/obra';
+import Cliente from '#models/cliente/cliente';
 
-export default class AsoModEta extends BaseModel {
+export default class AsoCliObr extends BaseModel {
   @column({ isPrimary: true })
   declare id: number
 
-  @column()
-  declare area: string
+  @belongsTo(() => Obra)
+  declare obra: BelongsTo<typeof Obra>
 
-  @belongsTo(() => Modulo)
-  declare modulo: BelongsTo<typeof Modulo>
-
-  @belongsTo(() => Etapa)
-  declare etapa: BelongsTo<typeof Etapa>
+  @belongsTo(() => Cliente)
+  declare cliente: BelongsTo<typeof Cliente>
 
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime

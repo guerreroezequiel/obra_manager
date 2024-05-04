@@ -1,5 +1,8 @@
 import { DateTime } from 'luxon'
-import { BaseModel, column } from '@adonisjs/lucid/orm'
+import { BaseModel, column, hasOne } from '@adonisjs/lucid/orm'
+import UniMed from '#models/uni_med/uni_med'
+import type { HasOne } from '@adonisjs/lucid/types/relations'
+import Estado from '#models/estado/estado'
 
 export default class Articulo extends BaseModel {
   @column({ isPrimary: true })
@@ -9,16 +12,10 @@ export default class Articulo extends BaseModel {
   declare nombre: string
 
   @column()
-  declare fkEstados: number
-
-  @column()
-  declare fkUniMed: number
-
-  @column()
   declare descripcion: string
 
   @column()
-  declare fkProveedores: number
+  declare precio: number
 
   @column()
   declare habilitado: boolean
@@ -28,5 +25,11 @@ export default class Articulo extends BaseModel {
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   declare updatedAt: DateTime
+
+  @hasOne(() => UniMed)
+  declare uni_med: HasOne<typeof UniMed>
+
+  @hasOne(() => Estado)
+  declare estado: HasOne<typeof Estado>
 
 }

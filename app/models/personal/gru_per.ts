@@ -1,5 +1,8 @@
 import { DateTime } from 'luxon'
-import { BaseModel, column } from '@adonisjs/lucid/orm'
+import { BaseModel, column, hasMany, hasOne } from '@adonisjs/lucid/orm'
+import Estado from '#models/estado/estado'
+import type { HasOne, HasMany } from '@adonisjs/lucid/types/relations'
+import Personal from './personal.js'
 
 export default class GruPer extends BaseModel {
   @column({ isPrimary: true })
@@ -7,9 +10,6 @@ export default class GruPer extends BaseModel {
 
   @column()
   declare nombre: string
-
-  @column()
-  declare fkEstados: number
 
   @column()
   declare descripcion: string
@@ -22,5 +22,11 @@ export default class GruPer extends BaseModel {
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   declare updatedAt: DateTime
+
+  @hasOne(() => Estado)
+  declare estado: HasOne<typeof Estado>
+
+  @hasMany(() => Personal)
+  declare personal: HasMany <typeof Personal>
 
 }

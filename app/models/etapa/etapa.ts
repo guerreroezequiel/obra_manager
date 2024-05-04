@@ -3,7 +3,7 @@ import type { HasMany } from '@adonisjs/lucid/types/relations'
 import { BaseModel, column, hasMany } from '@adonisjs/lucid/orm'
 import Modulos from '#models/modulo/modulo'
 
-export default class Etapas extends BaseModel {
+export default class Etapa extends BaseModel {
   @column({ isPrimary: true })
   declare id: number
 
@@ -20,7 +20,7 @@ export default class Etapas extends BaseModel {
   declare fkAsoModEta: number
 
   @column()
-  declare fkModulos: number
+  declare area: number | null
 
   @column()
   declare habilitado: boolean

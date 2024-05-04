@@ -1,5 +1,8 @@
 import { DateTime } from 'luxon'
-import { BaseModel, column } from '@adonisjs/lucid/orm'
+import type { HasMany, HasOne } from '@adonisjs/lucid/types/relations'
+import { BaseModel, column, hasMany, hasOne } from '@adonisjs/lucid/orm'
+import PerTarea from '#models/tarea/det_tarea/per_tarea'
+import PerRol from './per_rol.js'
 
 
 export default class Personal extends BaseModel {
@@ -14,9 +17,6 @@ export default class Personal extends BaseModel {
 
   @column()
   declare tel: string | null
-  
-  @column()
-  declare fkEstados: number | null
    
   @column()
   declare direccion: string | null
@@ -29,5 +29,11 @@ export default class Personal extends BaseModel {
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   declare updatedAt: DateTime
+
+  @hasMany(() => PerTarea)
+  declare perTarea: HasMany<typeof PerTarea>
+
+  @hasOne(() => PerRol)
+  declare perRol: HasOne<typeof PerRol>
 
 }

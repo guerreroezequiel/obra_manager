@@ -1,23 +1,21 @@
 import { DateTime } from 'luxon'
-import type { BelongsTo } from '@adonisjs/lucid/types/relations'
-import { BaseModel, column, belongsTo  } from '@adonisjs/lucid/orm'
+import type { BelongsTo, HasOne } from '@adonisjs/lucid/types/relations'
+import { BaseModel, column, belongsTo, hasOne  } from '@adonisjs/lucid/orm'
 import Tarea from '../tarea.js'
+import Articulo from '#models/articulo/articulo'
 
 export default class ArtTarea extends BaseModel {
   @column({ isPrimary: true })
-  declare fkArticulos: number
+  declare id: number
 
   @column()
   declare nombre: string
 
   @column()
-  declare fkTareas: number
-
-  @column()
-  declare uniMed: number 
-
-  @column()
   declare descripcion: string | null
+
+  @column()
+  declare heredaMed: boolean
 
   @column()
   declare cantidad: number | null
@@ -28,6 +26,11 @@ export default class ArtTarea extends BaseModel {
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   declare updatedAt: DateTime
 
+  @hasOne(() => Articulo)
+  declare articulo: HasOne<typeof Articulo>
+
   @belongsTo(() => Tarea )
-  declare tareas: BelongsTo<typeof Tarea>
+  declare tarea: BelongsTo<typeof Tarea>
+
+
 }

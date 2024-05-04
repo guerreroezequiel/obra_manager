@@ -11,9 +11,6 @@ export default class Estado extends BaseModel {
   declare nombre: string
 
   @column()
-  declare fkTipEst: number
-
-  @column()
   declare habilitado: boolean
 
   @column.dateTime({ autoCreate: true })
