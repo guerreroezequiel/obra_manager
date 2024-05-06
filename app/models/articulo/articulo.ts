@@ -12,10 +12,10 @@ export default class Articulo extends BaseModel {
   declare nombre: string
 
   @column()
-  declare descripcion: string
+  declare descripcion: string | null
 
   @column()
-  declare precio: number
+  declare tipo: string | null
 
   @column()
   declare habilitado: boolean

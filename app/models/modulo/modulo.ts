@@ -1,6 +1,6 @@
 import { DateTime } from 'luxon'
-import type { HasMany, HasOne, ManyToMany } from '@adonisjs/lucid/types/relations'
-import { BaseModel, column, hasMany, hasOne, manyToMany } from '@adonisjs/lucid/orm'
+import type { BelongsTo, HasMany, HasOne } from '@adonisjs/lucid/types/relations'
+import { BaseModel, belongsTo, column, hasMany, hasOne } from '@adonisjs/lucid/orm'
 import Etapa from '#models/etapa/etapa'
 import Tarea from '#models/tarea/tarea'
 import Estado from '#models/estado/estado'
@@ -11,9 +11,6 @@ export default class Modulo extends BaseModel {
 
   @column()
   declare nombre: string
-
-  @column()
-  declare fkEstados: number
 
   @column()
   declare descripcion: string
@@ -28,11 +25,8 @@ export default class Modulo extends BaseModel {
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   declare updatedAt: DateTime
 
-  @manyToMany(() => Etapa, {
-    pivotTable: 'aso_mod_eta',
-    pivotColumns: ['area'],
-  })
-  declare etapas: ManyToMany<typeof Etapa>
+  @belongsTo(() => Etapa)
+  declare etapas: BelongsTo<typeof Etapa> | null
 
   @hasMany(() => Tarea)
   declare tareas: HasMany<typeof Tarea>

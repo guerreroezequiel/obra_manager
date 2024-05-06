@@ -1,7 +1,8 @@
 import { DateTime } from 'luxon'
-import type { HasMany } from '@adonisjs/lucid/types/relations'
-import { BaseModel, column, hasMany } from '@adonisjs/lucid/orm'
+import type { HasMany, HasOne } from '@adonisjs/lucid/types/relations'
+import { BaseModel, column, hasMany, hasOne } from '@adonisjs/lucid/orm'
 import Obra from '#models/obra/obra'
+import Estado from '#models/estado/estado'
 
 
 export default class Cliente extends BaseModel {
@@ -16,13 +17,13 @@ export default class Cliente extends BaseModel {
   
   @column()
   declare tel: string | null
-
-  @column()
-  declare fkEstados: number | null
    
   @column()
   declare direccion: string | null
   
+@column()
+  declare habilitado: boolean
+
   @column()
   declare descripcion: string | null
   
@@ -34,5 +35,8 @@ export default class Cliente extends BaseModel {
 
   @hasMany(() => Obra)
   declare obra: HasMany<typeof Obra>
+
+  @hasOne (() => Estado)
+  declare estado: HasOne<typeof Estado>
 
 }

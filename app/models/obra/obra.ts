@@ -1,8 +1,9 @@
 import { DateTime } from 'luxon'
-import type { HasMany, ManyToMany } from '@adonisjs/lucid/types/relations'
-import { BaseModel, manyToMany, column, hasMany } from '@adonisjs/lucid/orm'
+import type { HasMany, HasOne, ManyToMany } from '@adonisjs/lucid/types/relations'
+import { BaseModel, manyToMany, column, hasMany, hasOne } from '@adonisjs/lucid/orm'
 import Etapa from '#models/etapa/etapa'
 import Cliente from '#models/cliente/cliente'
+import Estado from '#models/estado/estado'
 
 export default class Obra extends BaseModel {
   @column({ isPrimary: true })
@@ -10,12 +11,6 @@ export default class Obra extends BaseModel {
 
   @column()
   declare nombre: string
-
-  @column()
-  declare fkEstados: number
-
-  @column()
-  declare fkAsoEtaObr: number
 
   @column()
   declare descripcion: string
@@ -34,5 +29,8 @@ export default class Obra extends BaseModel {
 
   @manyToMany(() => Cliente)
   declare cliente: ManyToMany<typeof Cliente>
+
+  @hasOne(() => Estado) 
+  declare estado: HasOne<typeof Estado>
 
 }

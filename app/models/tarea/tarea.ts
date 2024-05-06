@@ -4,6 +4,7 @@ import { BaseModel, belongsTo, column, hasMany } from '@adonisjs/lucid/orm'
 import ArtTarea from './det_tarea/art_tarea.js'
 import PerTarea from './det_tarea/per_tarea.js'
 import Modulo from '#models/modulo/modulo'
+import Alerta from '#models/alerta/alerta'
 
 
 export default class Tarea extends BaseModel {
@@ -39,5 +40,8 @@ export default class Tarea extends BaseModel {
 
   @hasMany(() => PerTarea)
   declare per_tareas: HasMany<typeof PerTarea>
+
+  @hasMany(() => Alerta)
+  declare alertas: HasMany<typeof Alerta>
 
 }

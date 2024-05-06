@@ -1,5 +1,8 @@
 import { DateTime } from 'luxon'
-import { BaseModel, column } from '@adonisjs/lucid/orm'
+import { BaseModel, belongsTo, column, hasOne } from '@adonisjs/lucid/orm'
+import Estado from '#models/estado/estado'
+import type { BelongsTo, HasOne } from '@adonisjs/lucid/types/relations'
+import Tarea from '#models/tarea/tarea'
 
 export default class Alerta extends BaseModel {
   @column({ isPrimary: true })
@@ -9,18 +12,21 @@ export default class Alerta extends BaseModel {
   declare nombre: string
 
   @column()
-  declare fkEstados: number | null
-
-  @column()
   declare descripcion: string   | null
 
   @column()
-  declare visto: number | null
+  declare visto: number | 0
 
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   declare updatedAt: DateTime
+
+  @hasOne(() => Estado)
+  declare estado: HasOne<typeof Estado>
+
+  @belongsTo(() => Tarea)
+  declare tarea: BelongsTo<typeof Tarea>
 
 }

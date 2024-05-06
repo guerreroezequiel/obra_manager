@@ -1,5 +1,7 @@
 import { DateTime } from 'luxon'
-import { BaseModel, column } from '@adonisjs/lucid/orm'
+import { BaseModel, column, hasOne } from '@adonisjs/lucid/orm'
+import Estado from '#models/estado/estado'
+import type { HasOne } from '@adonisjs/lucid/types/relations'
 
 
 export default class Proveedor extends BaseModel {
@@ -14,9 +16,9 @@ export default class Proveedor extends BaseModel {
   
   @column()
   declare tel: string | null
-
+  
   @column()
-  declare fkEstados: number | null
+  declare habilitado: boolean
    
   @column()
   declare direccion: string | null
@@ -30,4 +32,7 @@ export default class Proveedor extends BaseModel {
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   declare updatedAt: DateTime
 
+
+  @hasOne (() => Estado)
+  declare estado: HasOne<typeof Estado>
 }

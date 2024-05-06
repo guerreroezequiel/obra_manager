@@ -16,7 +16,7 @@ export default class PerTarea extends BaseModel {
   declare updatedAt: DateTime
 
   @hasOne(() => Personal)
-  declare personal: HasOne<typeof Personal>
+  declare personal: HasOne<typeof Personal> 
 
   @belongsTo(() => Tarea )
   declare tarea: BelongsTo<typeof Tarea>
