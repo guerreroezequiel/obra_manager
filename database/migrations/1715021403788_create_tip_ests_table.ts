@@ -1,17 +1,13 @@
 import { BaseSchema } from '@adonisjs/lucid/schema'
 
 export default class extends BaseSchema {
-  protected tableName = 'etapas'
+  protected tableName = 'tip_ests'
 
   async up() {
     this.schema.createTable(this.tableName, (table) => {
       table.increments('id')
-      table.string('nombre').notNullable()
-      table.integer('fk_estados').notNullable()
-      table.string('descripcion').notNullable()
-      table.integer('fk_aso_mod_eta').notNullable()
-      table.integer('fk_modulos').notNullable()
-      table.boolean('habilitado').notNullable()
+      table.string('nombre')
+      table.boolean('habilitado')
       table.timestamp('created_at', { useTz: true })
       table.timestamp('updated_at', { useTz: true })
     })

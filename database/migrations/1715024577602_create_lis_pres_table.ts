@@ -1,16 +1,15 @@
 import { BaseSchema } from '@adonisjs/lucid/schema'
 
 export default class extends BaseSchema {
-  protected tableName = 'estados'
+  protected tableName = 'lis_pres'
 
   async up() {
     this.schema.createTable(this.tableName, (table) => {
       table.increments('id')
-      table.string('nombre').notNullable()
-      table.integer('fk_tip_est').notNullable()
-      table.boolean('habilitado').notNullable()
       table.timestamp('created_at', { useTz: true })
       table.timestamp('updated_at', { useTz: true })
+      // table.integer('proveedor_id').unsigned().references('id').inTable('proveedores')
+      // table.integer('articulo_id').unsigned().references('id').inTable('articulos')
     })
   }
 

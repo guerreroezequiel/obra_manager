@@ -28,7 +28,7 @@ export default class Obra extends BaseModel {
   declare etapa: HasMany<typeof Etapa>
 
   @manyToMany(() => Cliente)
-  declare cliente: ManyToMany<typeof Cliente>
+  declare cliente: ManyToMany<typeof Cliente> 
 
   @hasOne(() => Estado) 
   declare estado: HasOne<typeof Estado>

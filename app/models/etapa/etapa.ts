@@ -1,7 +1,9 @@
 import { DateTime } from 'luxon'
-import type { HasMany } from '@adonisjs/lucid/types/relations'
-import { BaseModel, column, hasMany } from '@adonisjs/lucid/orm'
+import type { BelongsTo, HasMany, HasOne } from '@adonisjs/lucid/types/relations'
+import { BaseModel, belongsTo, column, hasMany, hasOne } from '@adonisjs/lucid/orm'
 import Modulos from '#models/modulo/modulo'
+import Estado from '#models/estado/estado'
+import Obra from '#models/obra/obra'
 
 export default class Etapa extends BaseModel {
   @column({ isPrimary: true })
@@ -11,19 +13,16 @@ export default class Etapa extends BaseModel {
   declare nombre: string
 
   @column()
-  declare fkEstados: number
-
-  @column()
   declare descripcion: string
-
-  @column()
-  declare fkAsoModEta: number
 
   @column()
   declare area: number | null
 
   @column()
   declare habilitado: boolean
+  
+  @column()
+  declare heredaMed: boolean
 
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
@@ -33,6 +32,12 @@ export default class Etapa extends BaseModel {
 
   @hasMany(() => Modulos)
   declare modulos: HasMany<typeof Modulos>
+
+  @hasOne(() => Estado)
+  declare estado: HasOne<typeof Estado>
+
+  @belongsTo(() => Obra)
+  declare obra: BelongsTo<typeof Obra>
 
 }
 

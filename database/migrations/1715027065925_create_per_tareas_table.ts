@@ -1,17 +1,15 @@
 import { BaseSchema } from '@adonisjs/lucid/schema'
 
 export default class extends BaseSchema {
-  protected tableName = 'gru_pers'
+  protected tableName = 'per_tareas'
 
   async up() {
-    this.schema.createTable('gru_pers', (table) => {
+    this.schema.createTable(this.tableName, (table) => {
       table.increments('id')
-      table.string('nombre').notNullable()
-      table.integer('fk_estados').notNullable()
-      table.string('descripcion').notNullable()
-      table.boolean('habilitado').notNullable()
       table.timestamp('created_at', { useTz: true })
       table.timestamp('updated_at', { useTz: true })
+      // table.integer('personal_id').unsigned().references('id').inTable('personals')
+      // table.integer('tarea_id').unsigned().references('id').inTable('tareas')
     })
   }
 

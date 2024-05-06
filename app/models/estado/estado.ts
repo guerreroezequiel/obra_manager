@@ -1,6 +1,6 @@
 import { DateTime } from 'luxon'
 import type { HasOne } from '@adonisjs/lucid/types/relations'
-import { BaseModel, column, hasOne } from '@adonisjs/lucid/orm'
+import { BaseModel, hasOne, column, } from '@adonisjs/lucid/orm'
 import TipEstado from './tip_est.js'
 
 export default class Estado extends BaseModel {

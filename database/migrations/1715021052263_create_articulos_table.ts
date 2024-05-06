@@ -1,17 +1,19 @@
 import { BaseSchema } from '@adonisjs/lucid/schema'
 
 export default class extends BaseSchema {
-  protected tableName = 'alertas'
+  protected tableName = 'articulos'
 
   async up() {
     this.schema.createTable(this.tableName, (table) => {
       table.increments('id')
-      table.string('nombre').nullable()
-      table.integer('fk_estados').nullable()
+      table.string('nombre')
       table.string('descripcion').nullable()
-      table.integer('visto').nullable()
+      table.string('tipo').nullable()
+      table.boolean('habilitado')
       table.timestamp('created_at', { useTz: true })
       table.timestamp('updated_at', { useTz: true })
+      // table.integer('uni_med_id').unsigned().references('id').inTable('uni_meds')
+      // table.integer('estado_id').unsigned().references('id').inTable('estados')
     })
   }
 
@@ -19,4 +21,3 @@ export default class extends BaseSchema {
     this.schema.dropTable(this.tableName)
   }
 }
-

@@ -1,18 +1,19 @@
 import { BaseSchema } from '@adonisjs/lucid/schema'
 
 export default class extends BaseSchema {
-  protected tableName = 'tareas'
+  protected tableName = 'modulos'
 
   async up() {
     this.schema.createTable(this.tableName, (table) => {
       table.increments('id')
-      table.string('nombre').notNullable()
-      table.integer('fk_estados').nullable()
+      table.string('nombre')
       table.string('descripcion').nullable()
-      table.string('condicion').nullable()
-      table.integer('cond_bool').nullable()
+      table.boolean('habilitado')
+      table.boolean('heredaMed')
       table.timestamp('created_at', { useTz: true })
       table.timestamp('updated_at', { useTz: true })
+      // table.integer('estado_id').unsigned().references('id').inTable('estados')
+      // table.integer('etapa_id').unsigned().references('id').inTable('etapas')
     })
   }
 

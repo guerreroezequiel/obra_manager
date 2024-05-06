@@ -15,7 +15,7 @@ export default class Alerta extends BaseModel {
   declare descripcion: string   | null
 
   @column()
-  declare visto: number | 0
+  declare visto: boolean | 0
 
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime

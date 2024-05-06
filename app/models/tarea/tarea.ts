@@ -26,14 +26,14 @@ export default class Tarea extends BaseModel {
   @column()
   declare condBool: number | null
 
+  @column()
+  declare heredaMed: boolean
+
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   declare updatedAt: DateTime
-
-  @belongsTo(() => Modulo)
-  declare modulo: BelongsTo<typeof Modulo>
 
   @hasMany(() => ArtTarea)
   declare art_tareas: HasMany<typeof ArtTarea>
@@ -43,5 +43,8 @@ export default class Tarea extends BaseModel {
 
   @hasMany(() => Alerta)
   declare alertas: HasMany<typeof Alerta>
+  
+  @belongsTo(() => Modulo)
+  declare modulo: BelongsTo<typeof Modulo>
 
 }

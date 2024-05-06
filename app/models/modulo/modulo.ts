@@ -18,6 +18,9 @@ export default class Modulo extends BaseModel {
   @column()
   declare habilitado: boolean
 
+  @column()
+  declare heredaMed: boolean
+
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
 

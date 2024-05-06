@@ -5,14 +5,12 @@ export default class extends BaseSchema {
 
   async up() {
     this.schema.createTable(this.tableName, (table) => {
-      table.integer('fk_articulos').primary()
-      table.string('nombre').notNullable()
-      table.integer('fk_tareas').notNullable()
-      table.integer('uni_med').notNullable()
-      table.string('descripcion').nullable()
-      table.integer('cantidad').nullable()
+      table.increments('id')
+      table.boolean('heredaMed')
       table.timestamp('created_at', { useTz: true })
       table.timestamp('updated_at', { useTz: true })
+      // table.integer('tarea_id').unsigned().references('id').inTable('tareas')
+      // table.integer('articulo_id').unsigned().references('id').inTable('articulos')
     })
   }
 

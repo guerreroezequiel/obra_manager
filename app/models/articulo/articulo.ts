@@ -18,7 +18,7 @@ export default class Articulo extends BaseModel {
   declare tipo: string | null
 
   @column()
-  declare habilitado: boolean
+  declare habilitado: boolean | 1
 
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
