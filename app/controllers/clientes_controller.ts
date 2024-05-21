@@ -1,34 +1,49 @@
 import Cliente from '#models/cliente/cliente'
 import { HttpContext } from '@adonisjs/core/http'
 
-
-
-
 export default class ClientesController {
-  public async index({}: HttpContext) {
-    const clientes = Cliente.all()
-    
-    return clientes
+
+  //show all clientes
+  public async index({ response }: HttpContext) {
+    const clientes = await Cliente.all()
+    return response.json(clientes)
   }
 
-  async store({ request }: HttpContext) {
-    const { name, email } = request.only(['name', 'email']) // Get the name and email from the request
-    const cliente = await Cliente.create({ nombre: name, mail: email }) // Create a new client using the 'Cliente' class
-    return cliente
+  //create new cliente
+  public async create({ request, response }: HttpContext) {
+    const data = request.only(['nombre', 'mail', 'tel', 'direccion', 'habilitado', 'descripcion'])
+    const cliente = await Cliente.create(data)
+    return response.json(cliente)
   }
 
-  // async update({ params, request }: HttpContext) {
-  // const data = request.only(['name', 'email']) // Get the name and email from the request
-  // const cliente = await Cliente.findOrFail(params.id) // Find a client by ID using the 'Cliente' class or throw an error if not found
-  // cliente.merge(data.email) // Update the client with the new data
-  // await cliente.save() // Save the changes
-  // return cliente
-  // }
-  
-  // async destroy({ params }: HttpContext) {
-  // const cliente = await Cliente.findOrFail(params.id) // Find a client by ID using the 'Cliente' class or throw an error if not found
-  // await cliente.delete() // Delete the client
-  // return cliente
-  // }
+  //show cliente by id
+  public async show({ params, response }: HttpContext) {
+    const cliente = await Cliente.find(params.id)
+    if (!cliente) {
+      return response.status(404).json({ error: 'Cliente not found' })
+    }
+    return response.json(cliente)
+  }
+
+  //update cliente data
+  public async update({ params, request, response }: HttpContext) {
+    const cliente = await Cliente.find(params.id)
+    if (!cliente) {
+      return response.status(404).json({ error: 'Cliente not found' })
+    }
+    const data = request.only(['nombre', 'mail', 'tel', 'direccion', 'habilitado', 'descripcion'])
+    cliente.merge(data)
+    await cliente.save()
+    return response.json(cliente)
+  }
+
+  //delete cliente
+  public async delete({ params, response }: HttpContext) {
+    const cliente = await Cliente.find(params.id)
+    if (!cliente) {
+      return response.status(404).json({ error: 'Cliente not found' })
+    }
+    await cliente.delete()
+    return response.status(200).json({ message: 'Cliente deleted' })
+  }
 }
-

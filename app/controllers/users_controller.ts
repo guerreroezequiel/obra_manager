@@ -1,7 +1,10 @@
 import User from '#models/user/user'
 import type { HttpContext } from '@adonisjs/core/http'
 
+
 export default class UsersController {
+
+    // List all users
     async index({ response }: HttpContext) {
         // Retrieve all users
         const users = await User.all()
@@ -9,6 +12,7 @@ export default class UsersController {
         return response.status(200).json(users)
     }
 
+    // Show user by id
     async show({ params, response }: HttpContext) {
         const { id } = params
 
@@ -22,6 +26,7 @@ export default class UsersController {
         return response.status(200).json(user)
     }
 
+    // Create a new user
     async store({ request, response }: HttpContext) {
         const userData = request.only(['username', 'email', 'password'])
         console.log(userData)
@@ -31,9 +36,7 @@ export default class UsersController {
         return response.status(201).json(user)
     }
 
-
-    
-
+    // Update user data
     async update({ params, request, response }: HttpContext) {
         const { id } = params
         const userData = request.only(['name', 'email', 'password'])
@@ -52,6 +55,7 @@ export default class UsersController {
         return response.status(200).json(user)
     }
 
+    // Delete user
     async destroy({ params, response }: HttpContext) {
         const { id } = params
 
