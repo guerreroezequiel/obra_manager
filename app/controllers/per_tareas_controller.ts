@@ -1,7 +1,5 @@
-import { HttpContext } from '@adonisjs/core/http'
-import Tarea from '#models/tarea/tarea'
-import Personal from '#models/personal/personal'
 import PerTarea from '#models/tarea/det_tarea/per_tarea'
+import { HttpContext } from '@adonisjs/core/http'
 
 export default class PerTareasController {
   public async index({ response }: HttpContext) {
@@ -10,20 +8,10 @@ export default class PerTareasController {
   }
 
   public async create({ request, response }: HttpContext) {
-    const personalId = request.input('personal_id')
-    const tareaId = request.input('tarea_id')
-    const personal = await Personal.find(personalId)
-    const tarea = await Tarea.find(tareaId)
-
-    if (!personal || !tarea) {
-      return response.status(404).json({ error: 'Personal or Tarea not found' })
-    }
-
-    const perTarea = new PerTarea()
-  // perTarea.related('personal').associate(personal)
-    perTarea.related('tarea').associate(tarea)
-    await perTarea.save()
-
+    const data = request.only(['personal_id', 'tarea_id'])
+    const perTarea = await PerTarea.create(data)
+    await perTarea.load('personal')
+    await perTarea.load('tarea')
     return response.json(perTarea)
   }
 
@@ -40,20 +28,11 @@ export default class PerTareasController {
     if (!perTarea) {
       return response.status(404).json({ error: 'PerTarea not found' })
     }
-
-    const personalId = request.input('personal_id')
-    const tareaId = request.input('tarea_id')
-    const personal = await Personal.find(personalId)
-    const tarea = await Tarea.find(tareaId)
-
-    if (!personal || !tarea) {
-      return response.status(404).json({ error: 'Personal or Tarea not found' })
-    }
-
-   // perTarea.related('personal').associate(personal)
-    perTarea.related('tarea').associate(tarea)
+    const data = request.only(['personal_id', 'tarea_id'])
+    perTarea.merge(data)
     await perTarea.save()
-
+    await perTarea.load('personal')
+    await perTarea.load('tarea')
     return response.json(perTarea)
   }
 

@@ -27,7 +27,7 @@ export default class UsersController {
     }
 
     // Create a new user
-    async store({ request, response }: HttpContext) {
+    async create({ request, response }: HttpContext) {
         const userData = request.only(['username', 'email', 'password'])
         console.log(userData)
         // Create a new user
@@ -56,7 +56,7 @@ export default class UsersController {
     }
 
     // Delete user
-    async destroy({ params, response }: HttpContext) {
+    async delete({ params, response }: HttpContext) {
         const { id } = params
 
         // Find user by id

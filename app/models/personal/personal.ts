@@ -23,6 +23,14 @@ export default class Personal extends BaseModel {
   
   @column()
   declare descripcion: string | null
+
+  @column()
+  declare habilitado: boolean | true
+
+  @column()
+  declare per_rol_id: number | null
+
+
   
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime

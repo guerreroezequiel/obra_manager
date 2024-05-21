@@ -13,7 +13,7 @@ export default class ArticulosController {
   /**
    * Store a new article
    */
-  public async store({ request, response }: HttpContext) {
+  public async create({ request, response }: HttpContext) {
     const data = request.only(['nombre', 'descripcion', 'tipo', 'habilitado'])
     const articulo = await Articulo.create(data)
     return response.json(articulo)
@@ -47,7 +47,7 @@ export default class ArticulosController {
   /**
    * Delete an article by id
    */
-  public async destroy({ params, response }: HttpContext) {
+  public async delete({ params, response }: HttpContext) {
     const articulo = await Articulo.find(params.id)
     if (!articulo) {
       return response.status(404).json({ error: 'Articulo not found' })

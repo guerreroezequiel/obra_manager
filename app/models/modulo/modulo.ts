@@ -13,13 +13,21 @@ export default class Modulo extends BaseModel {
   declare nombre: string
 
   @column()
-  declare descripcion: string
+  declare descripcion: string | null
 
   @column()
-  declare habilitado: boolean
+  declare habilitado: boolean | true
 
   @column()
-  declare heredaMed: boolean
+  declare heredaMed: boolean | false
+
+  @column()
+  declare etapas_id: number | null
+
+  @column()
+  declare estado_id: number | null
+
+
 
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime

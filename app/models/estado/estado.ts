@@ -11,7 +11,12 @@ export default class Estado extends BaseModel {
   declare nombre: string
 
   @column()
-  declare habilitado: boolean
+  declare habilitado: boolean | true
+
+  @column()
+  declare tip_est_id: number | false
+
+
 
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime

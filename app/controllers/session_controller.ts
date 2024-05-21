@@ -2,7 +2,7 @@ import User from '#models/user/user'
 import { HttpContext } from '@adonisjs/core/http'
 
 export default class SessionController {
-  async store({ request, auth }: HttpContext) {
+  async create({ request, auth }: HttpContext) {
     /**
      * Step 1: Get credentials from the request body
      */
@@ -26,7 +26,7 @@ export default class SessionController {
     return {email: user.email, token: token,}
   }
 
-  async destroy({ auth, response }: HttpContext) {
+  async delete({ auth, response }: HttpContext) {
     /**
      * Step 1: Logout user
      */

@@ -9,6 +9,14 @@ export default class PerTarea extends BaseModel {
   @column({ isPrimary: true })
   declare id: number
 
+  @column()
+  declare personal_id: number
+
+  @column()
+  declare tarea_id: number
+
+  
+
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
 

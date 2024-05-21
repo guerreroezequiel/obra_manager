@@ -9,10 +9,10 @@ export default class UniMed extends BaseModel {
   declare nombre: string
 
   @column()
-  declare descripcion: string
+  declare descripcion: string | null
 
   @column()
-  declare habilitado: boolean
+  declare habilitado: boolean | true
 
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime

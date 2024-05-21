@@ -10,7 +10,7 @@ export default class AlertasController {
   }
 
   // Create a new alerta
-  public async store({ request, response }: HttpContext) {
+  public async create({ request, response }: HttpContext) {
     const data = request.only(['nombre', 'descripcion', 'visto'])
     const alerta = await Alerta.create(data)
     return response.json(alerta)
@@ -38,7 +38,7 @@ export default class AlertasController {
   }
 
   // Delete alerta
-  public async destroy({ params, response }: HttpContext) {
+  public async delete({ params, response }: HttpContext) {
     const alerta = await Alerta.find(params.id)
     if (!alerta) {
       return response.status(404).json({ error: 'Alerta not found' })

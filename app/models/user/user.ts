@@ -34,7 +34,7 @@ export default class User extends compose(BaseModel, AuthFinder) {
   declare updatedAt: DateTime
   
   @column()
-  declare enabled: boolean
+  declare enabled: boolean | true
 
   static accessTokens = DbAccessTokensProvider.forModel(User, {
     expiresIn: '30 days',

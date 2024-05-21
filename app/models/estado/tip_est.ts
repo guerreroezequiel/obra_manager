@@ -10,7 +10,9 @@ export default class TipEstado extends BaseModel {
   declare nombre: string
 
   @column()
-  declare habilitado: boolean
+  declare habilitado: boolean | true
+
+
 
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime

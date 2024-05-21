@@ -1,34 +1,22 @@
-import { HttpContext } from '@adonisjs/core/http'
-import Tarea from '#models/tarea/tarea'
-import Articulo from '#models/articulo/articulo'
 import ArtTarea from '#models/tarea/det_tarea/art_tarea'
+import { HttpContext } from '@adonisjs/core/http'
 
 export default class ArtTareasController {
   public async index({ response }: HttpContext) {
-    const artTareas = await ArtTarea.query().preload('tarea').preload('articulo')
+    const artTareas = await ArtTarea.query().preload('articulo').preload('tarea')
     return response.json(artTareas)
   }
 
   public async create({ request, response }: HttpContext) {
-    const tareaId = request.input('tarea_id')
-    const articuloId = request.input('articulo_id')
-    const tarea = await Tarea.find(tareaId)
-    const articulo = await Articulo.find(articuloId)
-
-    if (!tarea || !articulo) {
-      return response.status(404).json({ error: 'Tarea or Articulo not found' })
-    }
-
-    const artTarea = new ArtTarea()
-    artTarea.related('tarea').associate(tarea)
-   // artTarea.related('articulo').associate(articulo)   REVISAR PORQUE NO SE ASOCIA, IA lo tiro asi
-    await artTarea.save()
-
+    const data = request.only(['nombre', 'descripcion', 'heredaMed', 'cantidad'])
+    const artTarea = await ArtTarea.create(data)
+    await artTarea.load('articulo')
+    await artTarea.load('tarea')
     return response.json(artTarea)
   }
 
   public async show({ params, response }: HttpContext) {
-    const artTarea = await ArtTarea.query().where('id', params.id).preload('tarea').preload('articulo').first()
+    const artTarea = await ArtTarea.query().where('id', params.id).preload('articulo').preload('tarea').first()
     if (!artTarea) {
       return response.status(404).json({ error: 'ArtTarea not found' })
     }
@@ -40,20 +28,11 @@ export default class ArtTareasController {
     if (!artTarea) {
       return response.status(404).json({ error: 'ArtTarea not found' })
     }
-
-    const tareaId = request.input('tarea_id')
-    const articuloId = request.input('articulo_id')
-    const tarea = await Tarea.find(tareaId)
-    const articulo = await Articulo.find(articuloId)
-
-    if (!tarea || !articulo) {
-      return response.status(404).json({ error: 'Tarea or Articulo not found' })
-    }
-
-    artTarea.related('tarea').associate(tarea)
-  //  artTarea.related('articulo').associate(articulo)      REVISAR PORQUE NO SE ASOCIA, IA lo tiro asi
+    const data = request.only(['nombre', 'descripcion', 'heredaMed', 'cantidad'])
+    artTarea.merge(data)
     await artTarea.save()
-
+    await artTarea.load('articulo')
+    await artTarea.load('tarea')
     return response.json(artTarea)
   }
 

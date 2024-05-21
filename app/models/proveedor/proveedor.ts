@@ -18,13 +18,18 @@ export default class Proveedor extends BaseModel {
   declare tel: string | null
   
   @column()
-  declare habilitado: boolean
+  declare habilitado: boolean | true
    
   @column()
   declare direccion: string | null
   
   @column()
   declare descripcion: string | null
+
+  @column()
+  declare estado_id: number | null
+
+
   
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime

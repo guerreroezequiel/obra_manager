@@ -18,7 +18,15 @@ export default class Articulo extends BaseModel {
   declare tipo: string | null
 
   @column()
-  declare habilitado: boolean | 1
+  declare habilitado: boolean | true
+
+  @column()
+  declare uni_med_id: number | null
+
+  @column()
+  declare estado_id: number | null
+
+
 
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime

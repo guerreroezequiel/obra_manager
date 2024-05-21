@@ -15,10 +15,18 @@ export default class ArtTarea extends BaseModel {
   declare descripcion: string | null
 
   @column()
-  declare heredaMed: boolean
+  declare heredaMed: boolean | false
 
   @column()
-  declare cantidad: number | null
+  declare cantidad: number | 0
+
+  @column()
+  declare tarea_id: number
+
+  @column()
+  declare articulo_id: number
+
+
 
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime

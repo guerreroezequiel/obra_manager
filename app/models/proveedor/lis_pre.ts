@@ -8,6 +8,21 @@ export default class LisPre extends BaseModel {
   @column({ isPrimary: true })
   declare id: number
 
+  @column()
+  declare nombre: string
+
+  @column()
+  declare precio: number | 0
+
+  @column()
+  declare proveedor_id: number | null
+
+  @column()
+  declare articulo_id: number | null
+
+
+
+
   @belongsTo(() => Proveedor)
   declare proveedor: BelongsTo<typeof Proveedor>
 

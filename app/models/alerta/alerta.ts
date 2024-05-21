@@ -15,7 +15,15 @@ export default class Alerta extends BaseModel {
   declare descripcion: string   | null
 
   @column()
-  declare visto: boolean | 0
+  declare visto: boolean | false
+
+  @column()
+  declare estado_id: number | null
+
+  @column()
+  declare tarea_id: number | null
+
+
 
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime

@@ -21,12 +21,17 @@ export default class Cliente extends BaseModel {
   @column()
   declare direccion: string | null
   
-@column()
-  declare habilitado: boolean
-
   @column()
   declare descripcion: string | null
   
+  @column()
+  declare habilitado: boolean | true
+
+  @column()
+  declare estado_id: number | null
+
+
+ 
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
 

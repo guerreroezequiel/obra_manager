@@ -12,10 +12,15 @@ export default class GruPer extends BaseModel {
   declare nombre: string
 
   @column()
-  declare descripcion: string
+  declare descripcion: string | null
 
   @column()
-  declare habilitado: boolean
+  declare habilitado: boolean | true
+
+  @column() 
+  declare estado_id: number | null
+
+
 
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime

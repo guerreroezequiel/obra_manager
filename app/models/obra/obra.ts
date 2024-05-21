@@ -10,13 +10,18 @@ export default class Obra extends BaseModel {
   declare id: number
 
   @column()
-  declare nombre: string
+  declare nombre: string 
 
   @column()
-  declare descripcion: string
+  declare descripcion: string | null
 
   @column()
-  declare habilitado: boolean
+  declare habilitado: boolean | true
+
+  @column()
+  declare estado_id: number | null
+
+
 
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime

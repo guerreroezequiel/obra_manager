@@ -5,8 +5,8 @@ export default class extends BaseSchema {
 
   public async up () {
     this.schema.alterTable(this.tableName, (table) => {
-      table.integer('obra_id').unsigned().references('id').inTable('obras')
-      table.integer('cliente_id').unsigned().references('id').inTable('clientes')
+      table.integer('obra_id').unsigned().references('id').inTable('obras').notNullable()
+      table.integer('cliente_id').unsigned().references('id').inTable('clientes').notNullable()
     })
   }
 

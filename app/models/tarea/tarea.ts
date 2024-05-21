@@ -1,10 +1,11 @@
 import { DateTime } from 'luxon'
-import type { BelongsTo, HasMany } from '@adonisjs/lucid/types/relations'
-import { BaseModel, belongsTo, column, hasMany } from '@adonisjs/lucid/orm'
+import type { BelongsTo, HasMany, HasOne } from '@adonisjs/lucid/types/relations'
+import { BaseModel, belongsTo, column, hasMany, hasOne } from '@adonisjs/lucid/orm'
 import ArtTarea from './det_tarea/art_tarea.js'
 import PerTarea from './det_tarea/per_tarea.js'
 import Modulo from '#models/modulo/modulo'
 import Alerta from '#models/alerta/alerta'
+import Estado from '#models/estado/estado'
 
 
 export default class Tarea extends BaseModel {
@@ -15,25 +16,34 @@ export default class Tarea extends BaseModel {
   declare nombre: string
 
   @column()
-  declare fkEstados: number | null
-
-  @column()
   declare descripcion: string | null
 
   @column()
   declare condicion: string | null
 
   @column()
-  declare condBool: number | null
+  declare condBool: boolean | false
 
   @column()
-  declare heredaMed: boolean
+  declare heredaMed: boolean | false
+
+  @column()
+  declare modulo_id: number | null
+
+  @column() 
+  declare estado_id: number | null
+
+
+
 
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   declare updatedAt: DateTime
+
+  @hasOne(() => Estado)
+  declare estado: HasOne<typeof Estado>
 
   @hasMany(() => ArtTarea)
   declare art_tareas: HasMany<typeof ArtTarea>
