@@ -14,7 +14,7 @@ export default class Estado extends BaseModel {
   declare habilitado: boolean | true
 
   @column()
-  declare tip_est_id: number | false
+  declare tip_estado_id: number | false
 
 
 
