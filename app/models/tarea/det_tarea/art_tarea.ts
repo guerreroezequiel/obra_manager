@@ -15,7 +15,7 @@ export default class ArtTarea extends BaseModel {
   declare descripcion: string | null
 
   @column()
-  declare heredaMed: boolean | false
+  declare hereda_med: boolean | false
 
   @column()
   declare cantidad: number | 0

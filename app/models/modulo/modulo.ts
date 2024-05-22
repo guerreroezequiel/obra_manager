@@ -19,10 +19,10 @@ export default class Modulo extends BaseModel {
   declare habilitado: boolean | true
 
   @column()
-  declare heredaMed: boolean | false
+  declare hereda_med: boolean | false
 
   @column()
-  declare etapas_id: number | null
+  declare etapa_id: number | null
 
   @column()
   declare estado_id: number | null
@@ -37,7 +37,7 @@ export default class Modulo extends BaseModel {
   declare updatedAt: DateTime
 
   @belongsTo(() => Etapa)
-  declare etapas: BelongsTo<typeof Etapa> | null
+  declare etapa: BelongsTo<typeof Etapa> | null
 
   @hasMany(() => Tarea)
   declare tareas: HasMany<typeof Tarea>

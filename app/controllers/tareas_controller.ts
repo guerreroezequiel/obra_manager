@@ -11,7 +11,7 @@ export default class TareasController {
 
     //create a new tarea
   public async create({ request, response }: HttpContext) {
-    const data = request.only(['nombre', 'fkEstados', 'descripcion', 'condicion', 'condBool', 'heredaMed'])
+    const data = request.only(['nombre', 'descripcion', 'condicion', 'condBool', 'heredaMed'])
     const tarea = await Tarea.create(data)
     return response.json(tarea)
   }
@@ -31,7 +31,7 @@ export default class TareasController {
     if (!tarea) {
       return response.status(404).json({ error: 'Tarea not found' })
     }
-    const data = request.only(['nombre', 'fkEstados', 'descripcion', 'condicion', 'condBool', 'heredaMed'])
+    const data = request.only(['nombre',  'descripcion', 'condicion', 'condBool', 'heredaMed'])
     tarea.merge(data)
     await tarea.save()
     return response.json(tarea)

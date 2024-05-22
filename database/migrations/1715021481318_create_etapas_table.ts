@@ -10,7 +10,7 @@ export default class Etapas extends BaseSchema {
       table.string('descripcion', 255).nullable()
       table.float('area').nullable()
       table.boolean('habilitado').defaultTo(true)
-      table.boolean('heredaMed').defaultTo(false)
+      table.boolean('hereda_med').defaultTo(false)
       // table.integer('estado_id').unsigned().references('id').inTable('estados').nullable()
       // table.integer('obra_id').unsigned().references('id').inTable('obras').nullable()
       table.timestamp('created_at', { useTz: true })

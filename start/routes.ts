@@ -20,7 +20,7 @@ import LisPresController from '#controllers/lis_pres_controller'
 // import { middleware } from './kernel.js'
 
 
-
+ 
 //SESSION
 router.post('/login', [SessionController, 'create'])
 router.post('/logout', [SessionController, 'delete'])
