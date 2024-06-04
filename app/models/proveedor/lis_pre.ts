@@ -15,10 +15,10 @@ export default class LisPre extends BaseModel {
   declare precio: number | 0
 
   @column()
-  declare proveedor_id: number | null
+  declare proveedorId: number | null
 
   @column()
-  declare articulo_id: number | null
+  declare articuloId: number | null
 
 
 

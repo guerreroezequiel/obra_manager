@@ -43,7 +43,7 @@ export default class extends BaseSeeder {
 
 
     // ESTADOS
-    await TipEstado.createMany( [
+    await TipEstado.createMany([
       {
         nombre: 'Tipo Estado 1',
         habilitado: true,
@@ -58,191 +58,191 @@ export default class extends BaseSeeder {
       },
     ]),
 
-    await Estado.createMany( [
-      {
-        nombre: 'Estado 1',
-        habilitado: true,
-        tip_estado_id: 1,
-      },
-      {
-        nombre: 'Estado 2',
-        habilitado: true,
-        tip_estado_id: 1,
-      },
-      {
-        nombre: 'Estado 3',
-        habilitado: true,
-        tip_estado_id: 2,
-      },
-    ]),
-    //END ESTADOS
+      await Estado.createMany([
+        {
+          nombre: 'Estado 1',
+          habilitado: true,
+          tipEstId: 1,
+        },
+        {
+          nombre: 'Estado 2',
+          habilitado: true,
+          tipEstId: 1,
+        },
+        {
+          nombre: 'Estado 3',
+          habilitado: true,
+          tipEstId: 2,
+        },
+      ]),
+      //END ESTADOS
 
 
-    // CLIENTE, PERSONAL, GRUPO PERSONAL, ROL PERSONAL
-    await Cliente.createMany( [   
-      {
-        nombre: 'cliente 1',
-        mail: 'cliente1@mail.com',
-        tel: '1234567890',
-        direccion: 'Direccion 1',
-        descripcion: 'Descripcion 1',
-        habilitado: true,
-      },
-      {
-        nombre: 'cliente 2',
-        mail: 'cliente2@mail.com',
-        tel: '0987654321',
-        direccion: 'Direccion 2',
-        descripcion: 'Descripcion 2',
-        habilitado: true,
-      },
-      {
-        nombre: 'cliente 3',
-        mail: 'cliente3@mail.com',
-        tel: '1122334455',
-        direccion: 'Direccion 3',
-        descripcion: 'Descripcion 3',
-        habilitado: true,
-      },
-    ]),
+      // CLIENTE, PERSONAL, GRUPO PERSONAL, ROL PERSONAL
+      await Cliente.createMany([
+        {
+          nombre: 'cliente 1',
+          mail: 'cliente1@mail.com',
+          tel: '1234567890',
+          direccion: 'Direccion 1',
+          descripcion: 'Descripcion 1',
+          habilitado: true,
+        },
+        {
+          nombre: 'cliente 2',
+          mail: 'cliente2@mail.com',
+          tel: '0987654321',
+          direccion: 'Direccion 2',
+          descripcion: 'Descripcion 2',
+          habilitado: true,
+        },
+        {
+          nombre: 'cliente 3',
+          mail: 'cliente3@mail.com',
+          tel: '1122334455',
+          direccion: 'Direccion 3',
+          descripcion: 'Descripcion 3',
+          habilitado: true,
+        },
+      ]),
 
-    await Personal.createMany( [   
-      {
-        nombre: 'Personal 1',
-        mail: 'personal1@mail.com',
-        tel: '1234567890',
-        direccion: 'Direccion 1',
-        descripcion: 'Descripcion 1',
-        habilitado: true,
-      },
-      {
-        nombre: 'Personal 2',
-        mail: 'personal2@mail.com',
-        tel: '0987654321',
-        direccion: 'Direccion 2',
-        descripcion: 'Descripcion 2',
-        habilitado: true,
-      },
-      {
-        nombre: 'Personal 3',
-        mail: 'personal3@mail.com',
-        tel: '1122334455',
-        direccion: 'Direccion 3',
-        descripcion: 'Descripcion 3',
-        habilitado: true,
-      },
-    ]),
+      await Personal.createMany([
+        {
+          nombre: 'Personal 1',
+          mail: 'personal1@mail.com',
+          tel: '1234567890',
+          direccion: 'Direccion 1',
+          descripcion: 'Descripcion 1',
+          habilitado: true,
+        },
+        {
+          nombre: 'Personal 2',
+          mail: 'personal2@mail.com',
+          tel: '0987654321',
+          direccion: 'Direccion 2',
+          descripcion: 'Descripcion 2',
+          habilitado: true,
+        },
+        {
+          nombre: 'Personal 3',
+          mail: 'personal3@mail.com',
+          tel: '1122334455',
+          direccion: 'Direccion 3',
+          descripcion: 'Descripcion 3',
+          habilitado: true,
+        },
+      ]),
 
-    await PerRol.createMany( [   
-      {
-        nombre: 'Rol 1',
-        descripcion: 'Descripción del Rol 1',
-        habilitado: true,
-      },
-      {
-        nombre: 'Rol 2',
-        descripcion: 'Descripción del Rol 2',
-        habilitado: true,
-      },
-      {
-        nombre: 'Rol 3',
-        descripcion: 'Descripción del Rol 3',
-        habilitado: true,
-      },
-    ]),
+      await PerRol.createMany([
+        {
+          nombre: 'Rol 1',
+          descripcion: 'Descripción del Rol 1',
+          habilitado: true,
+        },
+        {
+          nombre: 'Rol 2',
+          descripcion: 'Descripción del Rol 2',
+          habilitado: true,
+        },
+        {
+          nombre: 'Rol 3',
+          descripcion: 'Descripción del Rol 3',
+          habilitado: true,
+        },
+      ]),
 
-    await GruPer.createMany( [   
-      {
-        nombre: 'Grupo 1',
-        descripcion: 'Descripción del Grupo 1',
-        habilitado: true,
-        estado_id: 1,
-      },
-      {
-        nombre: 'Grupo 2',
-        descripcion: 'Descripción del Grupo 2',
-        habilitado: true,
-        estado_id: 2,
-      },
-    ]),
-    //END CLIENTE, PERSONAL, GRUPO PERSONAL, ROL PERSONAL
+      await GruPer.createMany([
+        {
+          nombre: 'Grupo 1',
+          descripcion: 'Descripción del Grupo 1',
+          habilitado: true,
+          estadoId: 1,
+        },
+        {
+          nombre: 'Grupo 2',
+          descripcion: 'Descripción del Grupo 2',
+          habilitado: true,
+          estadoId: 2,
+        },
+      ]),
+      //END CLIENTE, PERSONAL, GRUPO PERSONAL, ROL PERSONAL
 
 
-    //PROVEEDOR, UNIDAD MEDIDA, ARTICULO, LISTA PRECIO, 
-    await Proveedor.createMany([
-      {
-      nombre: 'Proveedor 1',
-      mail: 'proveedor1@mail.com',
-      tel: '1234567890',
-      habilitado: true,
-      direccion: 'Direccion 1',
-      descripcion: 'Descripcion del Proveedor 1',
-      estado_id: 1,
-      },
-      {
-      nombre: 'Proveedor 2',
-      mail: 'proveedor2@mail.com',
-      tel: '0987654321',
-      habilitado: true,
-      direccion: 'Direccion 2',
-      descripcion: 'Descripcion del Proveedor 2',
-      estado_id: 2,
-      },
-    ]);
+      //PROVEEDOR, UNIDAD MEDIDA, ARTICULO, LISTA PRECIO, 
+      await Proveedor.createMany([
+        {
+          nombre: 'Proveedor 1',
+          mail: 'proveedor1@mail.com',
+          tel: '1234567890',
+          habilitado: true,
+          direccion: 'Direccion 1',
+          descripcion: 'Descripcion del Proveedor 1',
+          estadoId: 1,
+        },
+        {
+          nombre: 'Proveedor 2',
+          mail: 'proveedor2@mail.com',
+          tel: '0987654321',
+          habilitado: true,
+          direccion: 'Direccion 2',
+          descripcion: 'Descripcion del Proveedor 2',
+          estadoId: 2,
+        },
+      ]);
 
     await UniMed.createMany([
       {
-      nombre: 'Unidad 1',
-      descripcion: 'Descripcion de la Unidad 1',
-      habilitado: true,
+        nombre: 'Unidad 1',
+        descripcion: 'Descripcion de la Unidad 1',
+        habilitado: true,
       },
       {
-      nombre: 'Unidad 2',
-      descripcion: 'Descripcion de la Unidad 2',
-      habilitado: true,
+        nombre: 'Unidad 2',
+        descripcion: 'Descripcion de la Unidad 2',
+        habilitado: true,
       },
       {
-      nombre: 'Unidad 3',
-      descripcion: 'Descripcion de la Unidad 3',
-      habilitado: true,
+        nombre: 'Unidad 3',
+        descripcion: 'Descripcion de la Unidad 3',
+        habilitado: true,
       },
     ]),
 
-    await Articulo.createMany([
-      {
-      nombre: 'Articulo 1',
-      descripcion: 'Descripcion del articulo 1',
-      habilitado: true,
-      },
-      {
-      nombre: 'Articulo 2',
-      descripcion: 'Descripcion del articulo 2',
-      habilitado: true,
-      },
-      {
-      nombre: 'Articulo 3',
-      descripcion: 'Descripcion del articulo 3',
-      habilitado: true,
-      },
-      {
-      nombre: 'Articulo 4',
-      descripcion: 'Descripcion del articulo 4',
-      habilitado: true,
-      },
-      {
-      nombre: 'Articulo 5',
-      descripcion: 'Descripcion del articulo 5',
-      habilitado: true,
-      },
-    ])
+      await Articulo.createMany([
+        {
+          nombre: 'Articulo 1',
+          descripcion: 'Descripcion del articulo 1',
+          habilitado: true,
+        },
+        {
+          nombre: 'Articulo 2',
+          descripcion: 'Descripcion del articulo 2',
+          habilitado: true,
+        },
+        {
+          nombre: 'Articulo 3',
+          descripcion: 'Descripcion del articulo 3',
+          habilitado: true,
+        },
+        {
+          nombre: 'Articulo 4',
+          descripcion: 'Descripcion del articulo 4',
+          habilitado: true,
+        },
+        {
+          nombre: 'Articulo 5',
+          descripcion: 'Descripcion del articulo 5',
+          habilitado: true,
+        },
+      ])
 
     //LISTA PRECIO
     const articulos = await Articulo.all();
     const lisPreData = articulos.map((articulo) => ({
       nombre: 'Lista 1',
       precio: Math.floor(Math.random() * (10000 - 100 + 1)) + 100,
-      proveedor_id: 1,
-      articulo_id: articulo.id,
+      proveedorId: 1,
+      articuloId: articulo.id,
     }));
 
     await LisPre.createMany(lisPreData);
@@ -250,153 +250,235 @@ export default class extends BaseSeeder {
     const lisPreData2 = articulos.map((articulo) => ({
       nombre: 'Lista 2',
       precio: Math.floor(Math.random() * (10000 - 100 + 1)) + 100,
-      proveedor_id: 2,
-      articulo_id: articulo.id,
+      proveedorId: 2,
+      articuloId: articulo.id,
     }));
 
     await LisPre.createMany(lisPreData2);
     //END PROVEEDOR, UNIDAD MEDIDA, ARTICULO, LISTA PRECIO,
 
     //OBRA, ETAPA, MODULO
-    await Obra.createMany( [
+    await Obra.createMany([
       {
         nombre: 'Obra 1',
         descripcion: 'Descripcion de la Obra 1',
         habilitado: true,
-        estado_id: 1,
+        estadoId: 1,
       },
       {
         nombre: 'Obra 2',
         descripcion: 'Descripcion de la Obra 2',
         habilitado: true,
-        estado_id: 2,
+        estadoId: 2,
       },
     ]),
 
-    await Etapa.createMany( [
-      {
-        nombre: 'Etapa 1',
-        descripcion: 'Descripcion de la Etapa 1',
-        habilitado: true,
-        obra_id: 1,
-      },
-      {
-        nombre: 'Etapa 2',
-        descripcion: 'Descripcion de la Etapa 2',
-        habilitado: true,
-        obra_id: 2,
-      },
-    ]),
+      await Etapa.createMany([
+        {
+          nombre: 'Etapa 1',
+          descripcion: 'Descripcion de la Etapa 1',
+          habilitado: true,
+          obraId: 1,
+        },
+        {
+          nombre: 'Etapa 2',
+          descripcion: 'Descripcion de la Etapa 2',
+          habilitado: true,
+          obraId: 1,
+        },
+      ]),
 
-    await Modulo.createMany( [
-      {
-        nombre: 'Modulo 1',
-        descripcion: 'Descripcion del Modulo 1',
-        habilitado: true,
-        etapa_id: 1,
-      },
-      {
-        nombre: 'Modulo 2',
-        descripcion: 'Descripcion del Modulo 2',
-        habilitado: true,
-        etapa_id: 2,
-      },
-    ]),
-    //END OBRA, ETAPA, MODULO
+      await Modulo.createMany([
+        {
+          nombre: 'Modulo 1',
+          descripcion: 'Descripcion del Modulo etapa 1',
+          habilitado: true,
+          etapaId: 1,
+        },
+        {
+          nombre: 'Modulo 2',
+          descripcion: 'Descripcion del Modulo etapa 1',
+          habilitado: true,
+          etapaId: 1,
+        },
+        {
+          nombre: 'Modulo 3',
+          descripcion: 'Descripcion del Modulo etapa 1',
+          habilitado: true,
+          etapaId: 1,
+        },
+        {
+          nombre: 'Modulo 4',
+          descripcion: 'Descripcion del Modulo etapa 1',
+          habilitado: true,
+          etapaId: 2,
+        },
+        {
+          nombre: 'Modulo 1',
+          descripcion: 'Descripcion del Modulo etapa 2',
+          habilitado: true,
+          etapaId: 2,
+        },
+      ]),
+      //END OBRA, ETAPA, MODULO
 
-    //TAREA, ALERTA, ARTICULO TAREA
-    await Tarea.createMany( [
-      {
-        nombre: 'Tarea 1',
-        descripcion: 'Descripcion de la tarea 1',
-        condicion: 'Condicion de la tarea 1',
-      },
-      {
-        nombre: 'Tarea 2',
-        descripcion: 'Descripcion de la tarea 2',
-        condicion: 'Condicion de la tarea 2',
-      },
-      {
-        nombre: 'Tarea 3',
-        descripcion: 'Descripcion de la tarea 3',
-        condicion: 'Condicion de la tarea 3',
-      },
-    ]),
+      //TAREA, ALERTA, ARTICULO TAREA
+      await Tarea.createMany([
+        {
+          nombre: 'Tarea 1',
+          descripcion: 'Descripcion de la tarea 1',
+          condicion: 'Condicion de la tarea 1',
+          moduloId: 1,
+        },
+        {
+          nombre: 'Tarea 2',
+          descripcion: 'Descripcion de la tarea 2',
+          condicion: 'Condicion de la tarea 2',
+          moduloId: 1,
+        },
+        {
+          nombre: 'Tarea 3',
+          descripcion: 'Descripcion de la tarea 3',
+          condicion: 'Condicion de la tarea 3',
+          moduloId: 1,
+        },
 
-    //detalle tarea (personal articulo)
-    await PerTarea.createMany( [   
-      {
-        personal_id: 1,
-        tarea_id: 1,
-      },
-      {
-        personal_id: 2,
-        tarea_id: 2,
-      },
-      {
-        personal_id: 3,
-        tarea_id: 3,
-      },
-    ]),
+        {
+          nombre: 'Tarea 1',
+          descripcion: 'Descripcion de la tarea 1',
+          condicion: 'Condicion de la tarea 1',
+          moduloId: 1,
+        },
+        {
+          nombre: 'Tarea 2',
+          descripcion: 'Descripcion de la tarea 2',
+          condicion: 'Condicion de la tarea 2',
+          moduloId: 2,
+        },
+        {
+          nombre: 'Tarea 3',
+          descripcion: 'Descripcion de la tarea 3',
+          condicion: 'Condicion de la tarea 3',
+          moduloId: 2,
+        },
+        {
+          nombre: 'Tarea 1',
+          descripcion: 'Descripcion de la tarea 1',
+          condicion: 'Condicion de la tarea 1',
+          moduloId: 3,
+        },
+        {
+          nombre: 'Tarea 2',
+          descripcion: 'Descripcion de la tarea 2',
+          condicion: 'Condicion de la tarea 2',
+          moduloId: 3,
+        },
+        {
+          nombre: 'Tarea 3',
+          descripcion: 'Descripcion de la tarea 3',
+          condicion: 'Condicion de la tarea 3',
+          moduloId: 3,
+        },
+        {
+          nombre: 'Tarea 1',
+          descripcion: 'Descripcion de la tarea 1',
+          condicion: 'Condicion de la tarea 1',
+          moduloId: 4,
+        },
+        {
+          nombre: 'Tarea 2',
+          descripcion: 'Descripcion de la tarea 2',
+          condicion: 'Condicion de la tarea 2',
+          moduloId: 4,
+        },
+        {
+          nombre: 'Tarea 3',
+          descripcion: 'Descripcion de la tarea 3',
+          condicion: 'Condicion de la tarea 3',
+          moduloId: 4,
+        },
+        {
+          nombre: 'Tarea 3',
+          descripcion: 'Descripcion de la tarea 3',
+          condicion: 'Condicion de la tarea 3',
+          moduloId: 4,
+        },
+      ]),
 
-    await ArtTarea.createMany( [   
-      {
-        nombre: 'Articulo 1',
-        descripcion: 'Descripcion del articulo 1',
-        hereda_med: false,
-        cantidad: 1,
-        tarea_id: 1,
-        articulo_id: 1,
-      },
-      {
-        nombre: 'Articulo 2',
-        descripcion: 'Descripcion del articulo 2',
-        hereda_med: false,
-        cantidad: 2,
-        tarea_id: 2,
-        articulo_id: 2,
-      },
-      {
-        nombre: 'Articulo 3',
-        descripcion: 'Descripcion del articulo 3',
-        hereda_med: false,
-        cantidad: 3,
-        tarea_id: 3,
-        articulo_id: 3,
-      },
-    ]),
+      //detalle tarea (personal articulo)
+      await PerTarea.createMany([
+        {
+          personalId: 1,
+          tareaId: 1,
+        },
+        {
+          personalId: 2,
+          tareaId: 2,
+        },
+        {
+          personalId: 3,
+          tareaId: 3,
+        },
+      ]),
 
-    await Alerta.createMany( [
-      {
-        nombre: 'Alerta 1',
-        descripcion: 'Descripcion de la Alerta 1',
-        visto: false,
-        estado_id: 1,
-        tarea_id: 1,
-      },
-      {
-        nombre: 'Alerta 2',
-        descripcion: 'Descripcion de la Alerta 2',
-        visto: false,
-        estado_id: 2,
-        tarea_id: 2,
-      },
-    ]),
-    //END TAREA, ALERTA, ARTICULO TAREA
-    
-    await AsoCliObr.createMany( [
-      {
-        obra_id: 1,
-        cliente_id: 1,
-      },
-      {
-        obra_id: 2,
-        cliente_id: 2,
-      },
-      {
-        obra_id: 2,
-        cliente_id: 1,
-      },
-    ])
+      await ArtTarea.createMany([
+        {
+          nombre: 'Articulo 1',
+          descripcion: 'Descripcion del articulo 1',
+          heredaMed: false,
+          cantidad: 1,
+          tareaId: 1,
+          articuloId: 1,
+        },
+        {
+          nombre: 'Articulo 2',
+          descripcion: 'Descripcion del articulo 2',
+          heredaMed: false,
+          cantidad: 2,
+          tareaId: 2,
+          articuloId: 2,
+        },
+        {
+          nombre: 'Articulo 3',
+          descripcion: 'Descripcion del articulo 3',
+          heredaMed: false,
+          cantidad: 3,
+          tareaId: 3,
+          articuloId: 3,
+        },
+      ]),
+
+      await Alerta.createMany([
+        {
+          nombre: 'Alerta 1',
+          descripcion: 'Descripcion de la Alerta 1',
+          visto: false,
+          estadoId: 1,
+          tareaId: 1,
+        },
+        {
+          nombre: 'Alerta 2',
+          descripcion: 'Descripcion de la Alerta 2',
+          visto: false,
+          estadoId: 2,
+          tareaId: 2,
+        },
+      ]),
+      //END TAREA, ALERTA, ARTICULO TAREA
+
+      await AsoCliObr.createMany([
+        {
+          obraId: 1,
+          clienteId: 1,
+        },
+        {
+          obraId: 2,
+          clienteId: 2,
+        },
+        {
+          obraId: 2,
+          clienteId: 1,
+        },
+      ])
   }
 }

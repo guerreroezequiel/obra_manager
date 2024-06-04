@@ -14,7 +14,7 @@ export default class Estado extends BaseModel {
   declare habilitado: boolean | true
 
   @column()
-  declare tip_estado_id: number | false
+  declare tipEstId: number | false
 
 
 
@@ -25,5 +25,5 @@ export default class Estado extends BaseModel {
   declare updatedAt: DateTime
 
   @hasOne(() => TipEstado)
-  declare tip_est: HasOne<typeof TipEstado>
+  declare tipEst: HasOne<typeof TipEstado>
 }

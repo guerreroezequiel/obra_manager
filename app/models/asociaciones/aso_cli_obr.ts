@@ -9,13 +9,11 @@ export default class AsoCliObr extends BaseModel {
   declare id: number
 
   @column()
-  declare obra_id: number
+  declare obraId: number
 
   @column()
-  declare cliente_id: number
+  declare clienteId: number
 
-  
-  
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
 

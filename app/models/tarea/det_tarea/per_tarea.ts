@@ -10,12 +10,12 @@ export default class PerTarea extends BaseModel {
   declare id: number
 
   @column()
-  declare personal_id: number
+  declare personalId: number
 
   @column()
-  declare tarea_id: number
+  declare tareaId: number
 
-  
+
 
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
@@ -24,9 +24,9 @@ export default class PerTarea extends BaseModel {
   declare updatedAt: DateTime
 
   @hasOne(() => Personal)
-  declare personal: HasOne<typeof Personal> 
+  declare personal: HasOne<typeof Personal>
 
-  @belongsTo(() => Tarea )
+  @belongsTo(() => Tarea)
   declare tarea: BelongsTo<typeof Tarea>
 
 

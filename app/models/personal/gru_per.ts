@@ -17,8 +17,8 @@ export default class GruPer extends BaseModel {
   @column()
   declare habilitado: boolean | true
 
-  @column() 
-  declare estado_id: number | null
+  @column()
+  declare estadoId: number | null
 
 
 
@@ -32,6 +32,6 @@ export default class GruPer extends BaseModel {
   declare estado: HasOne<typeof Estado>
 
   @hasMany(() => Personal)
-  declare personal: HasMany <typeof Personal>
+  declare personal: HasMany<typeof Personal>
 
 }

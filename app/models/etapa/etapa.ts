@@ -20,15 +20,15 @@ export default class Etapa extends BaseModel {
 
   @column()
   declare habilitado: boolean | true
-  
-  @column()
-  declare hereda_med: boolean | false
 
   @column()
-  declare estado_id: number | null
+  declare heredaMed: boolean | false
 
   @column()
-  declare obra_id: number | null
+  declare estadoId: number | null
+
+  @column()
+  declare obraId: number | null
 
 
 

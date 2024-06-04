@@ -1,9 +1,10 @@
 import { HttpContext } from '@adonisjs/core/http'
 import Etapa from '#models/etapa/etapa'
+import db from '@adonisjs/lucid/services/db'
 
 export default class EtapasController {
 
-    // List all etapas
+  // List all etapas
   public async index({ response }: HttpContext) {
     const etapas = await Etapa.all()
     return response.json(etapas)
@@ -16,7 +17,7 @@ export default class EtapasController {
     return response.json(etapa)
   }
 
-    // Show etapa by id
+  // Show etapa by id
   public async show({ params, response }: HttpContext) {
     const etapa = await Etapa.find(params.id)
     if (!etapa) {
@@ -25,7 +26,7 @@ export default class EtapasController {
     return response.json(etapa)
   }
 
-    // Update etapa data
+  // Update etapa data
   public async update({ params, request, response }: HttpContext) {
     const etapa = await Etapa.find(params.id)
     if (!etapa) {
@@ -37,7 +38,7 @@ export default class EtapasController {
     return response.json(etapa)
   }
 
-    // Delete etapa
+  // Delete etapa
   public async delete({ params, response }: HttpContext) {
     const etapa = await Etapa.find(params.id)
     if (!etapa) {
@@ -45,5 +46,25 @@ export default class EtapasController {
     }
     await etapa.delete()
     return response.status(200).json({ message: 'Etapa deleted' })
+  }
+
+
+  //Obtener modelo de modulos
+  public async getModulosModel({ response }: HttpContext) {
+    try {
+      const modulosModelSchema = await db.rawQuery('DESCRIBE modulos');
+      const filteredSchema = modulosModelSchema[0]
+        .filter((field: any) => field.Field !== 'created_at' && field.Field !== 'updated_at')
+        .map((field: any) => ({
+          Field: field.Field,
+          Type: field.Type,
+          Null: field.Null,
+          Key: field.Key,
+          Default: field.Default,
+        }));
+      return response.json({ modulosModelSchema: filteredSchema });
+    } catch (error) {
+      return response.status(500).json({ message: 'Algo salió mal' + error });
+    }
   }
 }

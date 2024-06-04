@@ -1,5 +1,6 @@
 import User from '#models/user/user'
 import type { HttpContext } from '@adonisjs/core/http'
+import db from '@adonisjs/lucid/services/db'
 
 
 export default class UsersController {
@@ -31,8 +32,8 @@ export default class UsersController {
         const userData = request.only(['username', 'email', 'password'])
         console.log(userData)
         // Create a new user
-        const user = await User.create(userData)    
-    
+        const user = await User.create(userData)
+
         return response.status(201).json(user)
     }
 
@@ -70,5 +71,24 @@ export default class UsersController {
         await user.delete()
 
         return response.status(204).json(null)
+    }
+
+    //Obtener modelo de usuarios
+    async getUsersModel({ response }: HttpContext) {
+        try {
+            const usersModelSchema = await db.rawQuery('DESCRIBE users');
+            const filteredSchema = usersModelSchema[0]
+                .filter((field: any) => field.Field !== 'created_at' && field.Field !== 'updated_at')
+                .map((field: any) => ({
+                    Field: field.Field,
+                    Type: field.Type,
+                    Null: field.Null,
+                    Key: field.Key,
+                    Default: field.Default,
+                }));
+            return response.json({ usersModelSchema: filteredSchema });
+        } catch (error) {
+            return response.status(500).json({ message: 'Internal server error' })
+        }
     }
 }

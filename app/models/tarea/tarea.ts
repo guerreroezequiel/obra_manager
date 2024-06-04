@@ -28,10 +28,10 @@ export default class Tarea extends BaseModel {
   declare heredaMed: boolean | false
 
   @column()
-  declare modulo_id: number | null
+  declare moduloId: number | null
 
-  @column() 
-  declare estado_id: number | null
+  @column()
+  declare estadoId: number | null
 
 
 
@@ -53,7 +53,7 @@ export default class Tarea extends BaseModel {
 
   @hasMany(() => Alerta)
   declare alertas: HasMany<typeof Alerta>
-  
+
   @belongsTo(() => Modulo)
   declare modulo: BelongsTo<typeof Modulo>
 

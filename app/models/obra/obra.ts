@@ -10,7 +10,7 @@ export default class Obra extends BaseModel {
   declare id: number
 
   @column()
-  declare nombre: string 
+  declare nombre: string
 
   @column()
   declare descripcion: string | null
@@ -19,7 +19,7 @@ export default class Obra extends BaseModel {
   declare habilitado: boolean | true
 
   @column()
-  declare estado_id: number | null
+  declare estadoId: number | null
 
 
 
@@ -30,12 +30,12 @@ export default class Obra extends BaseModel {
   declare updatedAt: DateTime
 
   @hasMany(() => Etapa)
-  declare etapa: HasMany<typeof Etapa>
+  declare etapas: HasMany<typeof Etapa>
 
   @manyToMany(() => Cliente)
-  declare cliente: ManyToMany<typeof Cliente> 
+  declare clientes: ManyToMany<typeof Cliente>
 
-  @hasOne(() => Estado) 
+  @hasOne(() => Estado)
   declare estado: HasOne<typeof Estado>
 
 }

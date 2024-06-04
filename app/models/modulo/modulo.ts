@@ -22,11 +22,10 @@ export default class Modulo extends BaseModel {
   declare hereda_med: boolean | false
 
   @column()
-  declare etapa_id: number | null
+  declare etapaId: number | null
 
   @column()
-  declare estado_id: number | null
-
+  declare estadoId: number | null
 
 
   @column.dateTime({ autoCreate: true })

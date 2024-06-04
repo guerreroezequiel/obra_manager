@@ -8,19 +8,19 @@ import PerRol from './per_rol.js'
 export default class Personal extends BaseModel {
   @column({ isPrimary: true })
   declare id: number
-  
+
   @column()
-  declare nombre: string 
-  
+  declare nombre: string
+
   @column()
   declare mail: string | null
 
   @column()
   declare tel: string | null
-   
+
   @column()
   declare direccion: string | null
-  
+
   @column()
   declare descripcion: string | null
 
@@ -28,10 +28,10 @@ export default class Personal extends BaseModel {
   declare habilitado: boolean | true
 
   @column()
-  declare per_rol_id: number | null
+  declare perRolId: number | null
 
 
-  
+
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
 

@@ -12,16 +12,16 @@ export default class Alerta extends BaseModel {
   declare nombre: string
 
   @column()
-  declare descripcion: string   | null
+  declare descripcion: string | null
 
   @column()
   declare visto: boolean | false
 
   @column()
-  declare estado_id: number | null
+  declare estadoId: number | null
 
   @column()
-  declare tarea_id: number | null
+  declare tareaId: number | null
 
 
 

@@ -21,10 +21,10 @@ export default class Articulo extends BaseModel {
   declare habilitado: boolean | true
 
   @column()
-  declare uni_med_id: number | null
+  declare uniMedId: number | null
 
   @column()
-  declare estado_id: number | null
+  declare estadoId: number | null
 
 
 
