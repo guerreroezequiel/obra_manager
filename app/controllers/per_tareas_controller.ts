@@ -19,32 +19,53 @@ export default class PerTareasController {
   //   return response.json(perTarea)
   // }
 
-  //mostrar perTarea
+  //mostrar personal de tarea 
+  public async getPersonalFromTarea({ params, response }: HttpContext) {
+    try {
+      const perTareas = await PerTarea.query()
+        .preload('personal')
+        .where('tareaId', params.id)
+
+      if (!perTareas || perTareas.length === 0) {
+        return response.status(404).json({ message: 'Tarea no encontrada' })
+      }
+
+      const personalIds = perTareas.map(perTarea => perTarea.personalId)
+
+      return response.json(personalIds)
+    } catch (error) {
+      return response.status(500).json({ message: 'Algo salió mal' + error })
+    }
+  }
+
+  //mostrar pertarea por id
   public async show({ params, response }: HttpContext) {
-    const perTarea = await PerTarea.query().where('id', params.id).preload('personal').preload('tarea').first()
+    const perTarea = await PerTarea.find(params.id)
     if (!perTarea) {
       return response.status(404).json({ error: 'PerTarea not found' })
     }
+    await perTarea.load('personal')
+    await perTarea.load('tarea')
     return response.json(perTarea)
   }
 
   //actualizar perTarea
-  // public async update({ params, request, response }: HttpContext) {
-  //   const perTarea = await PerTarea.find(params.id)
-  //   if (!perTarea) {
-  //     return response.status(404).json({ error: 'PerTarea not found' })
-  //   }
-  //   const data = request.only(['personal_id', 'tarea_id'])
-  //   const updatedData = {
-  //     personalId: data.personal_id,
-  //     tareaId: data.tarea_id
-  //   }
-  //   perTarea.merge(updatedData)
-  //   await perTarea.save()
-  //   await perTarea.load('personal')
-  //   await perTarea.load('tarea')
-  //   return response.json(perTarea)
-  // }
+  public async update({ params, request, response }: HttpContext) {
+    const perTarea = await PerTarea.find(params.id)
+    if (!perTarea) {
+      return response.status(404).json({ error: 'PerTarea not found' })
+    }
+    const data = request.only(['personal_id', 'tarea_id'])
+    const updatedData = {
+      personalId: data.personal_id,
+      tareaId: data.tarea_id
+    }
+    perTarea.merge(updatedData)
+    await perTarea.save()
+    await perTarea.load('personal')
+    await perTarea.load('tarea')
+    return response.json(perTarea)
+  }
 
   //borrar perTarea
   public async delete({ params, response }: HttpContext) {

@@ -1,53 +1,56 @@
 import { HttpContext } from '@adonisjs/core/http'
-import Etapa from '#models/etapa/etapa'
 import db from '@adonisjs/lucid/services/db'
+import Modulo from '#models/modulo/modulo'
 
-export default class EtapasController {
-
-  // List all etapas
+export default class ModulosController {
+  // List all modulos
   public async index({ response }: HttpContext) {
-    const etapas = await Etapa.all()
-    return response.json(etapas)
+    const modulos = await Modulo.all()
+    return response.json(modulos)
   }
 
-  // Create a new etapa
+  // Create a new modulo
   public async create({ request, response }: HttpContext) {
     const data = request.only(['nombre', 'descripcion', 'area', 'habilitado', 'heredaMed'])
-    const etapa = await Etapa.create(data)
-    return response.json(etapa)
+    const modulo = await Modulo.create(data)
+    return response.json(modulo)
   }
 
-  // Show etapa by id
+  // Show modulo by id
   public async show({ params, response }: HttpContext) {
-    const etapa = await Etapa.find(params.id)
-    if (!etapa) {
-      return response.status(404).json({ error: 'Etapa not found' })
+    const modulo = await Modulo.query()
+      .preload('tareas', (query) => {
+        query.select('id');
+      })
+      .where('id', params.id)
+      .first()
+    if (!modulo) {
+      return response.status(404).json({ error: 'Modulo not found' })
     }
-    return response.json(etapa)
+    return response.json(modulo)
   }
 
-  // Update etapa data
+  // Update modulo data
   public async update({ params, request, response }: HttpContext) {
-    const etapa = await Etapa.find(params.id)
-    if (!etapa) {
-      return response.status(404).json({ error: 'Etapa not found' })
+    const modulo = await Modulo.find(params.id)
+    if (!modulo) {
+      return response.status(404).json({ error: 'Modulo not found' })
     }
     const data = request.only(['nombre', 'descripcion', 'area', 'habilitado', 'heredaMed'])
-    etapa.merge(data)
-    await etapa.save()
-    return response.json(etapa)
+    modulo.merge(data)
+    await modulo.save()
+    return response.json(modulo)
   }
 
-  // Delete etapa
+  // Delete modulo
   public async delete({ params, response }: HttpContext) {
-    const etapa = await Etapa.find(params.id)
-    if (!etapa) {
-      return response.status(404).json({ error: 'Etapa not found' })
+    const modulo = await Modulo.find(params.id)
+    if (!modulo) {
+      return response.status(404).json({ error: 'Modulo not found' })
     }
-    await etapa.delete()
-    return response.status(200).json({ message: 'Etapa deleted' })
+    await modulo.delete()
+    return response.status(200).json({ message: 'Modulo deleted' })
   }
-
 
   //Obtener modelo de modulos
   public async getModulosModel({ response }: HttpContext) {
@@ -67,4 +70,5 @@ export default class EtapasController {
       return response.status(500).json({ message: 'Algo salió mal' + error });
     }
   }
+
 }

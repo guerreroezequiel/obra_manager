@@ -1,7 +1,7 @@
 import { DateTime } from 'luxon'
 
-import type { BelongsTo, HasOne } from '@adonisjs/lucid/types/relations'
-import { BaseModel, column, belongsTo, hasOne } from '@adonisjs/lucid/orm'
+import type { BelongsTo } from '@adonisjs/lucid/types/relations'
+import { BaseModel, column, belongsTo } from '@adonisjs/lucid/orm'
 import Tarea from '../tarea.js'
 import Personal from '#models/personal/personal'
 
@@ -16,15 +16,14 @@ export default class PerTarea extends BaseModel {
   declare tareaId: number
 
 
-
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   declare updatedAt: DateTime
 
-  @hasOne(() => Personal)
-  declare personal: HasOne<typeof Personal>
+  @belongsTo(() => Personal)
+  declare personal: BelongsTo<typeof Personal>
 
   @belongsTo(() => Tarea)
   declare tarea: BelongsTo<typeof Tarea>

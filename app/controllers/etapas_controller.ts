@@ -19,7 +19,12 @@ export default class EtapasController {
 
   // Show etapa by id
   public async show({ params, response }: HttpContext) {
-    const etapa = await Etapa.find(params.id)
+    const etapa = await Etapa.query()
+      .preload('modulos', (query) => {
+        query.select('id');
+      })
+      .where('id', params.id)
+      .first()
     if (!etapa) {
       return response.status(404).json({ error: 'Etapa not found' })
     }
@@ -67,4 +72,6 @@ export default class EtapasController {
       return response.status(500).json({ message: 'Algo salió mal' + error });
     }
   }
+
+
 }

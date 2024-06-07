@@ -19,7 +19,12 @@ export default class TareasController {
 
   //show a tarea
   public async show({ params, response }: HttpContext) {
-    const tarea = await Tarea.find(params.id)
+    const tarea = await Tarea.query()
+      .preload('art_tareas', (query) => {
+        query.select('id');
+      })
+      .where('id', params.id)
+      .first()
     if (!tarea) {
       return response.status(404).json({ error: 'Tarea not found' })
     }

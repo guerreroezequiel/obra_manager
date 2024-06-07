@@ -6,7 +6,8 @@ export default class ArtTareas extends BaseSchema {
   public async up() {
     this.schema.createTable(this.tableName, (table) => {
       table.increments('id')
-      table.string('nombre', 255).notNullable()
+      table.string('articulo_nombre').nullable()
+      table.string('articulo_uni_med').nullable()
       table.string('descripcion', 255).nullable()
       table.boolean('hereda_med').defaultTo(false)
       table.integer('cantidad').defaultTo(0)
@@ -21,3 +22,4 @@ export default class ArtTareas extends BaseSchema {
     this.schema.dropTable(this.tableName)
   }
 }
+

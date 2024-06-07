@@ -20,22 +20,22 @@ import LisPresController from '#controllers/lis_pres_controller'
 // import { middleware } from './kernel.js'
 
 //MODELOS
-router.get('/models/obra', [ObrasController, 'getObraModel'])
-router.get('/models/personal', [PersonalsController, 'getPersonalsModel'])
-router.get('/models/cliente', [ClientesController, 'getClientesModel'])
-router.get('/models/proveedor', [ProveedoresController, 'getProveedorsModel'])
-router.get('/models/articulo', [ArticulosController, 'getArticulosModel'])
-router.get('/models/tarea', [TareasController, 'getTareasModel'])
-router.get('/models/uni_med', [UniMedsController, 'getUniMedsModel'])
-router.get('/models/art_tarea', [ArtTareasController, 'getArtTareasModel'])
-router.get('/models/per_tarea', [PerTareasController, 'getPerTareasModel'])
-router.get('/models/estado', [EstadosController, 'getEstadosModel'])
-router.get('/models/tip_estado', [TipEstadosController, 'getTipEstadosModel'])
-router.get('/models/per_rol', [PerRolsController, 'getPerRolsModel'])
-router.get('/models/lis_pre', [LisPresController, 'getLisPresModel'])
-router.get('/models/modulo', [ModulosController, 'getModulosModel'])
-router.get('/models/alerta', [AlertasController, 'getAlertasModel'])
-router.get('/models/etapa', [EtapasController, 'getEtapasModel'])
+router.get('/models/obras', [ObrasController, 'getObraModel'])
+router.get('/models/personals', [PersonalsController, 'getPersonalsModel'])
+router.get('/models/clientes', [ClientesController, 'getClientesModel'])
+router.get('/models/proveedors', [ProveedoresController, 'getProveedorsModel'])
+router.get('/models/articulos', [ArticulosController, 'getArticulosModel'])
+router.get('/models/tareas', [TareasController, 'getTareasModel'])
+router.get('/models/uni_meds', [UniMedsController, 'getUniMedsModel'])
+router.get('/models/art_tareas', [ArtTareasController, 'getArtTareasModel'])
+router.get('/models/per_tareas', [PerTareasController, 'getPerTareasModel'])
+router.get('/models/estados', [EstadosController, 'getEstadosModel'])
+router.get('/models/tip_estados', [TipEstadosController, 'getTipEstadosModel'])
+router.get('/models/per_rols', [PerRolsController, 'getPerRolsModel'])
+router.get('/models/lis_pres', [LisPresController, 'getLisPresModel'])
+router.get('/models/modulos', [ModulosController, 'getModulosModel'])
+router.get('/models/alertas', [AlertasController, 'getAlertasModel'])
+router.get('/models/etapas', [EtapasController, 'getEtapasModel'])
 
 //SESSION
 router.post('/login', [SessionController, 'create'])
@@ -153,6 +153,7 @@ router.delete('/tareas/:id', [TareasController, 'delete'])
 
 //ART_TAREAS
 router.get('/art_tareas', [ArtTareasController, 'index'])
+router.get('/art_tareas/tarea/:id', [ArtTareasController, 'getArticuloFromTarea'])
 router.get('/art_tareas/:id', [ArtTareasController, 'show'])
 router.post('/art_tareas', [ArtTareasController, 'create'])
 router.put('/art_tareas/:id', [ArtTareasController, 'update'])
@@ -160,9 +161,10 @@ router.delete('/art_tareas/:id', [ArtTareasController, 'delete'])
 
 //PER_TAREAS
 router.get('/per_tareas', [PerTareasController, 'index'])
+router.get('/per_tareas/tarea/:id', [PerTareasController, 'getPersonalFromTarea'])
 router.get('/per_tareas/:id', [PerTareasController, 'show'])
 // router.post('/per_tareas', [PerTareasController, 'create'])
-// router.put('/per_tareas/:id', [PerTareasController, 'update'])
+router.put('/per_tareas/:id', [PerTareasController, 'update'])
 router.delete('/per_tareas/:id', [PerTareasController, 'delete'])
 
 

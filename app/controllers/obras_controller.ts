@@ -20,7 +20,12 @@ export default class ObrasController {
 
   // Show obra by id
   public async show({ params, response }: HttpContext) {
-    const obra = await Obra.find(params.id)
+    const obra = await Obra.query()
+      .preload('etapas', (query) => {
+        query.select('id');
+      })
+      .where('id', params.id)
+      .first()
     if (!obra) {
       return response.status(404).json({ error: 'Obra not found 1' })
     }
@@ -67,6 +72,7 @@ export default class ObrasController {
       return response.status(500).json({ message: 'Algo salió mal' + error });
     }
   }
+
 
 
   //Asociaciones de obra

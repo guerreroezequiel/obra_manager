@@ -413,57 +413,48 @@ export default class extends BaseSeeder {
         },
         {
           personalId: 2,
+          tareaId: 1,
+        },
+        {
+          personalId: 2,
           tareaId: 2,
         },
         {
           personalId: 3,
           tareaId: 3,
-        },
-      ]),
+        }
+      ]);
 
-      await ArtTarea.createMany([
-        {
-          nombre: 'Articulo 1',
-          descripcion: 'Descripcion del articulo 1',
-          heredaMed: false,
-          cantidad: 1,
-          tareaId: 1,
-          articuloId: 1,
-        },
-        {
-          nombre: 'Articulo 2',
-          descripcion: 'Descripcion del articulo 2',
-          heredaMed: false,
-          cantidad: 2,
-          tareaId: 2,
-          articuloId: 2,
-        },
-        {
-          nombre: 'Articulo 3',
-          descripcion: 'Descripcion del articulo 3',
-          heredaMed: false,
-          cantidad: 3,
-          tareaId: 3,
-          articuloId: 3,
-        },
-      ]),
+    const artTareasData = [];
 
-      await Alerta.createMany([
-        {
-          nombre: 'Alerta 1',
-          descripcion: 'Descripcion de la Alerta 1',
-          visto: false,
-          estadoId: 1,
-          tareaId: 1,
-        },
-        {
-          nombre: 'Alerta 2',
-          descripcion: 'Descripcion de la Alerta 2',
-          visto: false,
-          estadoId: 2,
-          tareaId: 2,
-        },
-      ]),
+    for (let i = 1; i <= 25; i++) {
+      artTareasData.push({
+        heredaMed: false,
+        descripcion: `Descripcion del articulo ${i}`,
+        cantidad: i,
+        tareaId: i % 3 + 1, // Esto distribuirá los artículos entre las tareas 1, 2 y 3
+        articuloId: i % 5 + 1,
+      });
+    }
+
+    await ArtTarea.createMany(artTareasData)
+
+    await Alerta.createMany([
+      {
+        nombre: 'Alerta 1',
+        descripcion: 'Descripcion de la Alerta 1',
+        visto: false,
+        estadoId: 1,
+        tareaId: 1,
+      },
+      {
+        nombre: 'Alerta 2',
+        descripcion: 'Descripcion de la Alerta 2',
+        visto: false,
+        estadoId: 2,
+        tareaId: 2,
+      },
+    ]),
       //END TAREA, ALERTA, ARTICULO TAREA
 
       await AsoCliObr.createMany([

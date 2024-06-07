@@ -1,8 +1,9 @@
 import { DateTime } from 'luxon'
-import { BaseModel, column, hasOne } from '@adonisjs/lucid/orm'
+import { BaseModel, column, hasMany, hasOne } from '@adonisjs/lucid/orm'
 import UniMed from '#models/uni_med/uni_med'
-import type { HasOne } from '@adonisjs/lucid/types/relations'
+import type { HasMany, HasOne } from '@adonisjs/lucid/types/relations'
 import Estado from '#models/estado/estado'
+import ArtTarea from '#models/tarea/det_tarea/art_tarea'
 
 export default class Articulo extends BaseModel {
   @column({ isPrimary: true })
@@ -39,5 +40,8 @@ export default class Articulo extends BaseModel {
 
   @hasOne(() => Estado)
   declare estado: HasOne<typeof Estado>
+
+  @hasMany(() => ArtTarea)
+  declare perTareaId: HasMany<typeof ArtTarea>
 
 }

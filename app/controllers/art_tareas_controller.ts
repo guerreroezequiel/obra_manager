@@ -3,11 +3,23 @@ import { HttpContext } from '@adonisjs/core/http'
 import db from '@adonisjs/lucid/services/db'
 
 export default class ArtTareasController {
+
+  //mostrar todos los articulos de todas las tareas
   public async index({ response }: HttpContext) {
     const artTareas = await ArtTarea.query().preload('articulo').preload('tarea')
     return response.json(artTareas)
   }
 
+  //mostrar articulos de una tarea
+  public async getArticuloFromTarea({ response, params }: HttpContext) {
+    const artTareas = await ArtTarea.query()
+      .where('tareaId', params.id)
+
+    return response.json(artTareas)
+  }
+
+
+  //mostrar tareas de un articulo
   public async create({ request, response }: HttpContext) {
     const data = request.only(['nombre', 'descripcion', 'heredaMed', 'cantidad'])
     const artTarea = await ArtTarea.create(data)
@@ -16,6 +28,7 @@ export default class ArtTareasController {
     return response.json(artTarea)
   }
 
+  //mostrar articulo de una tarea
   public async show({ params, response }: HttpContext) {
     const artTarea = await ArtTarea.query().where('id', params.id).preload('articulo').preload('tarea').first()
     if (!artTarea) {
@@ -24,6 +37,9 @@ export default class ArtTareasController {
     return response.json(artTarea)
   }
 
+
+
+  //actualizar articulo de una tarea
   public async update({ params, request, response }: HttpContext) {
     const artTarea = await ArtTarea.find(params.id)
     if (!artTarea) {

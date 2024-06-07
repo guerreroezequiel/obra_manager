@@ -15,6 +15,7 @@ export default class Obra extends BaseModel {
   @column()
   declare descripcion: string | null
 
+
   @column()
   declare habilitado: boolean | true
 

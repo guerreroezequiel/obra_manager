@@ -39,7 +39,7 @@ export default class Personal extends BaseModel {
   declare updatedAt: DateTime
 
   @hasMany(() => PerTarea)
-  declare perTarea: HasMany<typeof PerTarea>
+  declare perTareaId: HasMany<typeof PerTarea>
 
   @hasOne(() => PerRol)
   declare perRol: HasOne<typeof PerRol>
