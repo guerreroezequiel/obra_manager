@@ -11,6 +11,7 @@ export default class Tareas extends BaseSchema {
       table.string('condicion', 255).nullable()
       table.boolean('cond_bool').defaultTo(false)
       table.boolean('hereda_med').defaultTo(false)
+      table.decimal('medida', 5, 2).nullable()
       // table.integer('modulo_id').unsigned().references('id').inTable('modulos').nullable()
       // table.integer('estado_id').unsigned().references('id').inTable('estados').nullable()
       table.timestamp('created_at', { useTz: true })

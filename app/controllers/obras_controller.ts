@@ -76,7 +76,7 @@ export default class ObrasController {
 
 
   //Asociaciones de obra
-  async getObraWithDetails({ params, response }: HttpContext) {
+  async getObraRelations({ params, response }: HttpContext) {
 
     try {
       const obra = await Obra.query()
@@ -86,6 +86,31 @@ export default class ObrasController {
           etapaQuery.select('id', 'nombre').preload('modulos', (modulosQuery) => {
             modulosQuery.select('id', 'nombre').preload('tareas', (tareasQuery) => {
               tareasQuery.select('id', 'nombre');
+            });
+          });
+        })
+        .first();
+
+      if (!obra) {
+        return response.status(404).json({ message: 'Obra no encontrada' });
+      }
+      return response.json({ obra });
+    } catch (error) {
+      return response.status(500).json({ message: 'Algo salió mal' + error });
+    }
+  }
+
+  //Asociaciones de obra
+  async getObraFullDetails({ params, response }: HttpContext) {
+
+    try {
+      const obra = await Obra.query()
+        .where('id', params.id)
+        .select('*')
+        .preload('etapas', (etapaQuery) => {
+          etapaQuery.select('*').preload('modulos', (modulosQuery) => {
+            modulosQuery.select('*').preload('tareas', (tareasQuery) => {
+              tareasQuery.select('*');
             });
           });
         })

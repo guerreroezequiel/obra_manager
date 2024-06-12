@@ -434,6 +434,7 @@ export default class extends BaseSeeder {
         cantidad: i,
         tareaId: i % 3 + 1, // Esto distribuirá los artículos entre las tareas 1, 2 y 3
         articuloId: i % 5 + 1,
+        uniMedId: 1,
       });
     }
 

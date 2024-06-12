@@ -37,6 +37,9 @@ router.get('/models/modulos', [ModulosController, 'getModulosModel'])
 router.get('/models/alertas', [AlertasController, 'getAlertasModel'])
 router.get('/models/etapas', [EtapasController, 'getEtapasModel'])
 
+//CAMPOS EDITABLES
+router.get('/editables/art_tareas', [ArtTareasController, 'getEditableFields'])
+
 //SESSION
 router.post('/login', [SessionController, 'create'])
 router.post('/logout', [SessionController, 'delete'])
@@ -111,7 +114,8 @@ router.get('/obras/:id', [ObrasController, 'show'])
 router.post('/obras', [ObrasController, 'create'])
 router.put('/obras/:id', [ObrasController, 'update'])
 router.delete('/obras/:id', [ObrasController, 'delete'])
-router.get('/obras/:id/details', [ObrasController, 'getObraWithDetails'])
+router.get('/obras/:id/relations', [ObrasController, 'getObraRelations'])
+router.get('/obras/:id/full', [ObrasController, 'getObraFullDetails'])
 
 
 //PERSONAL

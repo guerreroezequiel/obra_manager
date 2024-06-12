@@ -37,8 +37,6 @@ export default class ArtTareasController {
     return response.json(artTarea)
   }
 
-
-
   //actualizar articulo de una tarea
   public async update({ params, request, response }: HttpContext) {
     const artTarea = await ArtTarea.find(params.id)
@@ -53,6 +51,7 @@ export default class ArtTareasController {
     return response.json(artTarea)
   }
 
+  //eliminar articulo de una tarea
   public async delete({ params, response }: HttpContext) {
     const artTarea = await ArtTarea.find(params.id)
     if (!artTarea) {
@@ -79,5 +78,11 @@ export default class ArtTareasController {
     } catch (error) {
       return response.status(500).json({ message: 'Algo salió mal' + error });
     }
+  }
+
+  //Obtener campos editables de artTareas
+  public async getEditableFields({ response }: HttpContext) {
+    const artTarea = new ArtTarea();
+    return response.json(artTarea.editableFields);
   }
 }

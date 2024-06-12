@@ -16,7 +16,7 @@ export default class ArtTarea extends BaseModel {
   declare articuloNombre: string | null
 
   @column()
-  declare articuloUniMed: string | null
+  declare uniMedId: number | null
 
   @column()
   declare descripcion: string | null
@@ -26,6 +26,12 @@ export default class ArtTarea extends BaseModel {
 
   @column()
   declare cantidad: number | 0
+
+  @column()
+  declare precioUnitario: number | 0
+
+  @column()
+  declare precioTotal: number | 0
 
   @column()
   declare tareaId: number
@@ -43,6 +49,21 @@ export default class ArtTarea extends BaseModel {
 
   @belongsTo(() => Tarea)
   declare tarea: BelongsTo<typeof Tarea>
+
+  public get editableFields() {
+    return {
+      articuloId: true,
+      articuloNombre: true,
+      uniMedId: false,
+      descripcion: true,
+      heredaMed: false,
+      cantidad: true,
+      precioUnitario: true,
+      precioTotal: false,
+      tareaId: true,
+    }
+  }
+
 
 
 }

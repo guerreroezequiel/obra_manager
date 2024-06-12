@@ -12,8 +12,7 @@ export default class EtapasController {
 
   // Create a new etapa
   public async create({ request, response }: HttpContext) {
-    const data = request.only(['nombre', 'descripcion', 'area', 'habilitado', 'heredaMed'])
-    const etapa = await Etapa.create(data)
+    const etapa = request.only(['nombre', 'descripcion', 'area', 'habilitado', 'heredaMed'])
     return response.json(etapa)
   }
 
