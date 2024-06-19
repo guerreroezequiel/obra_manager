@@ -21,6 +21,9 @@ export default class Tarea extends BaseModel {
   declare descripcion: string | null
 
   @column()
+  declare precioTotal: number | 0
+
+  @column()
   declare condicion: string | null
 
   @column()
@@ -67,5 +70,15 @@ export default class Tarea extends BaseModel {
 
   @belongsTo(() => Modulo)
   declare modulo: BelongsTo<typeof Modulo>
+
+  public get editableFields() {
+    return {
+      uni_med: true,
+      art_tareas: true,
+      per_tareas: true,
+      alertas: true,
+      modulo: true,
+    }
+  }
 
 }

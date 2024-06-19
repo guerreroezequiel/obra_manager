@@ -72,5 +72,11 @@ export default class EtapasController {
     }
   }
 
+  //Obtener campos editables de etapas
+  public async getEditableFields({ response }: HttpContext) {
+    const etapa = new Etapa()
+    return response.json(etapa.editableFields)
+  }
+
 
 }

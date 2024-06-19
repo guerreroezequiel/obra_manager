@@ -15,6 +15,11 @@ export default class Obra extends BaseModel {
   @column()
   declare descripcion: string | null
 
+  @column()
+  declare precioTotal: number | 0
+
+  @column()
+  declare medida: number | null
 
   @column()
   declare habilitado: boolean | true
@@ -38,5 +43,17 @@ export default class Obra extends BaseModel {
 
   @hasOne(() => Estado)
   declare estado: HasOne<typeof Estado>
+
+  public get editableFields() {
+    return {
+      id: false,
+      nombre: true,
+      descripcion: true,
+      precioTotal: true,
+      medida: true,
+      habilitado: true,
+      estadoId: true,
+    }
+  }
 
 }

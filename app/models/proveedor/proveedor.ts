@@ -40,4 +40,14 @@ export default class Proveedor extends BaseModel {
 
   @hasOne(() => Estado)
   declare estado: HasOne<typeof Estado>
+
+  public get editableFields() {
+    return {
+      direccion: true,
+      descripcion: true,
+      estadoId: true,
+      createdAt: false,
+      updatedAt: false,
+    }
+  }
 }

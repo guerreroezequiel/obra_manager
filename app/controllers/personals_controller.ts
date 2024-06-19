@@ -66,4 +66,10 @@ export default class PersonalsController {
       return response.status(500).json({ message: 'Algo salió mal' + error });
     }
   }
+
+  //obtener campos editables de personals
+  public async getEditableFields({ response }: HttpContext) {
+    const personal = new Personal();
+    return response.json(personal.editableFields);
+  }
 }

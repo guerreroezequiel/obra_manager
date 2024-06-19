@@ -39,6 +39,10 @@ router.get('/models/etapas', [EtapasController, 'getEtapasModel'])
 
 //CAMPOS EDITABLES
 router.get('/editables/art_tareas', [ArtTareasController, 'getEditableFields'])
+router.get('/editables/obras', [ObrasController, 'getEditableFields'])
+router.get('/editables/etapas', [EtapasController, 'getEditableFields'])
+router.get('/editables/tareas', [TareasController, 'getEditableFields'])
+router.get('/editables/articulos', [ArticulosController, 'getEditableFields'])
 
 //SESSION
 router.post('/login', [SessionController, 'create'])

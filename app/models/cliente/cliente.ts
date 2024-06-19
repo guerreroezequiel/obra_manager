@@ -44,4 +44,17 @@ export default class Cliente extends BaseModel {
   @hasOne(() => Estado)
   declare estado: HasOne<typeof Estado>
 
+
+  public get editableFields() {
+    return {
+      nombre: true,
+      tel: true,
+      direccion: true,
+      descripcion: true,
+      habilitado: true,
+      estadoId: true,
+      createdAt: false,
+      updatedAt: false,
+    }
+  }
 }

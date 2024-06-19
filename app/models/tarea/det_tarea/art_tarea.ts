@@ -28,6 +28,9 @@ export default class ArtTarea extends BaseModel {
   declare cantidad: number | 0
 
   @column()
+  declare cantidadTotal: number | 0
+
+  @column()
   declare precioUnitario: number | 0
 
   @column()
@@ -52,15 +55,16 @@ export default class ArtTarea extends BaseModel {
 
   public get editableFields() {
     return {
-      articuloId: true,
+      articuloId: false,
       articuloNombre: true,
-      uniMedId: false,
+      uniMedId: true,
       descripcion: true,
-      heredaMed: false,
+      heredaMed: true,
       cantidad: true,
+      cantidadTotal: false,
       precioUnitario: true,
-      precioTotal: false,
-      tareaId: true,
+      precioTotal: true,
+      tareaId: false,
     }
   }
 

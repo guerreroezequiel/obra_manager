@@ -44,4 +44,17 @@ export default class Personal extends BaseModel {
   @hasOne(() => PerRol)
   declare perRol: HasOne<typeof PerRol>
 
+  public get editableFields() {
+    return {
+      direccion: true,
+      descripcion: true,
+      habilitado: true,
+      perRolId: true,
+      perTareaId: true,
+      perRol: true,
+      createdAt: false,
+      updatedAt: false,
+    }
+  }
+
 }

@@ -75,4 +75,11 @@ export default class ArticulosController {
       return response.status(500).json({ message: 'Algo salió mal' + error });
     }
   }
+
+  //Obtener campos editables de articulos
+  public async getEditableFields({ response }: HttpContext) {
+    const articulo = new Articulo()
+    return response.json(articulo.editableFields)
+  }
+
 }

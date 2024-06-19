@@ -67,4 +67,10 @@ export default class ClientesController {
       return response.status(500).json({ message: 'Algo salió mal' + error });
     }
   }
+
+  //obtener camps editables
+  public async getEditableFields({ response }: HttpContext) {
+    const cliente = new Cliente()
+    return response.json(cliente.editableFields)
+  }
 }

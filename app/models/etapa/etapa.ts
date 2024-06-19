@@ -16,7 +16,10 @@ export default class Etapa extends BaseModel {
   declare descripcion: string | null
 
   @column()
-  declare area: number | null
+  declare precioTotal: number | 0
+
+  @column()
+  declare medida: number | null
 
   @column()
   declare habilitado: boolean | true
@@ -47,5 +50,18 @@ export default class Etapa extends BaseModel {
   @belongsTo(() => Obra)
   declare obra: BelongsTo<typeof Obra>
 
+  public get editableFields() {
+    return {
+      precioTotal: true,
+      medida: true,
+      habilitado: true,
+      heredaMed: true,
+      estadoId: true,
+      obraId: false,
+    }
+  }
+
 }
+
+
 

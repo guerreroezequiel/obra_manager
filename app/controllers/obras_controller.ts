@@ -100,7 +100,7 @@ export default class ObrasController {
     }
   }
 
-  //Asociaciones de obra
+  //FULL obra
   async getObraFullDetails({ params, response }: HttpContext) {
 
     try {
@@ -126,5 +126,10 @@ export default class ObrasController {
   }
 
 
+  //Obtener campos editables de artTareas
+  public async getEditableFields({ response }: HttpContext) {
+    const obra = new Obra();
+    return response.json(obra.editableFields);
+  }
 
 }

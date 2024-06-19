@@ -262,6 +262,7 @@ export default class extends BaseSeeder {
       {
         nombre: 'Obra 1',
         descripcion: 'Descripcion de la Obra 1',
+        medida: 110,
         habilitado: true,
         estadoId: 1,
       },

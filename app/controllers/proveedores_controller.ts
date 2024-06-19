@@ -67,4 +67,10 @@ export default class ProveedorsController {
       return response.status(500).json({ message: 'Algo salió mal' + error });
     }
   }
+
+  //obtener campos editables de proveedors
+  public async getEditableFields({ response }: HttpContext) {
+    const proveedor = new Proveedor()
+    return response.json({ editableFields: proveedor.editableFields })
+  }
 }

@@ -37,7 +37,7 @@ export default class TareasController {
     if (!tarea) {
       return response.status(404).json({ error: 'Tarea not found' })
     }
-    const data = request.only(['nombre', 'descripcion', 'condicion', 'condBool', 'heredaMed'])
+    const data = request.only(['nombre', 'descripcion', 'precioTotal', 'condicion', 'condBool', 'heredaMed'])
     tarea.merge(data)
     await tarea.save()
     return response.json(tarea)
@@ -71,5 +71,11 @@ export default class TareasController {
     } catch (error) {
       return response.status(500).json({ message: 'Algo salió mal' + error });
     }
+  }
+
+  //Obtener campos editables de tareas
+  public async getEditableFields({ response }: HttpContext) {
+    const tarea = new Tarea()
+    return response.json({ editableFields: tarea.editableFields })
   }
 }

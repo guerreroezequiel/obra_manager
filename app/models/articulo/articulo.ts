@@ -44,4 +44,16 @@ export default class Articulo extends BaseModel {
   @hasMany(() => ArtTarea)
   declare perTareaId: HasMany<typeof ArtTarea>
 
+  public get editableFields() {
+    return {
+      id: false,
+      nombre: true,
+      descripcion: true,
+      tipo: true,
+      habilitado: true,
+      uniMedId: true,
+      estadoId: true,
+    }
+  }
+
 }
