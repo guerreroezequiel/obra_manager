@@ -6,7 +6,7 @@ export default class ArtTareasController {
 
   //mostrar todos los articulos de todas las tareas
   public async index({ response }: HttpContext) {
-    const artTareas = await ArtTarea.query().preload('articulo').preload('tarea')
+    const artTareas = await ArtTarea.query()
     return response.json(artTareas)
   }
 
@@ -30,7 +30,7 @@ export default class ArtTareasController {
 
   //mostrar articulo de una tarea
   public async show({ params, response }: HttpContext) {
-    const artTarea = await ArtTarea.query().where('id', params.id).preload('articulo').preload('tarea').first()
+    const artTarea = await ArtTarea.query().where('id', params.id).first()
     if (!artTarea) {
       return response.status(404).json({ error: 'ArtTarea not found' })
     }

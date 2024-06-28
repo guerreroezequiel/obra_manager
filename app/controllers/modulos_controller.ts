@@ -36,7 +36,7 @@ export default class ModulosController {
     if (!modulo) {
       return response.status(404).json({ error: 'Modulo not found' })
     }
-    const data = request.only(['nombre', 'descripcion', 'area', 'habilitado', 'heredaMed'])
+    const data = request.only(['nombre', 'descripcion', 'area', 'habilitado',])
     modulo.merge(data)
     await modulo.save()
     return response.json(modulo)
@@ -48,8 +48,9 @@ export default class ModulosController {
     if (!modulo) {
       return response.status(404).json({ error: 'Modulo not found' })
     }
-    await modulo.delete()
-    return response.status(200).json({ message: 'Modulo deleted' })
+    modulo.habilitado = false;
+    await modulo.save()
+    return response.json(modulo)
   }
 
   //Obtener modelo de modulos

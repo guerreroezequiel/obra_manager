@@ -8,6 +8,7 @@ export default class Tareas extends BaseSchema {
       table.increments('id')
       table.string('nombre', 255).notNullable()
       table.string('descripcion', 255).nullable()
+      table.boolean('habilitado').defaultTo(true)
       table.decimal('precio_total', 12, 2).nullable()
       table.string('condicion', 255).nullable()
       table.boolean('cond_bool').defaultTo(false)

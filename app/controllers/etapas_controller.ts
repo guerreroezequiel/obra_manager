@@ -48,8 +48,9 @@ export default class EtapasController {
     if (!etapa) {
       return response.status(404).json({ error: 'Etapa not found' })
     }
-    await etapa.delete()
-    return response.status(200).json({ message: 'Etapa deleted' })
+    etapa.habilitado = false;
+    await etapa.save()
+    return response.json(etapa)
   }
 
 

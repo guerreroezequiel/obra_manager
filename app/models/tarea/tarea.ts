@@ -24,6 +24,9 @@ export default class Tarea extends BaseModel {
   declare precioTotal: number | 0
 
   @column()
+  declare habilitado: boolean | true
+
+  @column()
   declare condicion: string | null
 
   @column()
@@ -43,8 +46,6 @@ export default class Tarea extends BaseModel {
 
   @column()
   declare UniMedId: number | null
-
-
 
 
   @column.dateTime({ autoCreate: true })

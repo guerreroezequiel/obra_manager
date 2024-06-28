@@ -102,15 +102,15 @@ export default class ObrasController {
 
   //FULL obra
   async getObraFullDetails({ params, response }: HttpContext) {
-
     try {
       const obra = await Obra.query()
         .where('id', params.id)
+        .where('habilitado', true)
         .select('*')
         .preload('etapas', (etapaQuery) => {
-          etapaQuery.select('*').preload('modulos', (modulosQuery) => {
-            modulosQuery.select('*').preload('tareas', (tareasQuery) => {
-              tareasQuery.select('*');
+          etapaQuery.where('habilitado', true).select('*').preload('modulos', (modulosQuery) => {
+            modulosQuery.where('habilitado', true).select('*').preload('tareas', (tareasQuery) => {
+              tareasQuery.where('habilitado', true).select('*');
             });
           });
         })

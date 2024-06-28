@@ -49,10 +49,29 @@ export default class TareasController {
     if (!tarea) {
       return response.status(404).json({ error: 'Tarea not found' })
     }
-    await tarea.delete()
-    return response.status(200).json({ message: 'Tarea deleted' })
+    tarea.habilitado = false;
+    await tarea.save()
+    return response.json(tarea)
   }
 
+  //copiar tarea
+  public async copy({ params, request, response }: HttpContext) {
+    const tarea = await Tarea.find(params.id)
+    if (!tarea) {
+      return response.status(404).json({ error: 'Tarea not found' })
+    }
+    const moduloId = request.input('moduloId');
+    const newTarea = new Tarea();
+    newTarea.nombre = tarea.nombre;
+    newTarea.descripcion = tarea.descripcion;
+    newTarea.precioTotal = tarea.precioTotal;
+    newTarea.condicion = tarea.condicion;
+    newTarea.condBool = tarea.condBool;
+    newTarea.heredaMed = tarea.heredaMed;
+    newTarea.moduloId = moduloId;
+    await newTarea.save();
+    return response.json(newTarea)
+  }
 
   //Obtener modelo de tareas
   public async getTareasModel({ response }: HttpContext) {

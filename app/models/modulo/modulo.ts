@@ -27,6 +27,9 @@ export default class Modulo extends BaseModel {
   @column()
   declare estadoId: number | null
 
+  @column()
+  declare hablitado: boolean | true
+
 
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime

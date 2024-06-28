@@ -38,11 +38,15 @@ router.get('/models/alertas', [AlertasController, 'getAlertasModel'])
 router.get('/models/etapas', [EtapasController, 'getEtapasModel'])
 
 //CAMPOS EDITABLES
-router.get('/editables/art_tareas', [ArtTareasController, 'getEditableFields'])
 router.get('/editables/obras', [ObrasController, 'getEditableFields'])
 router.get('/editables/etapas', [EtapasController, 'getEditableFields'])
 router.get('/editables/tareas', [TareasController, 'getEditableFields'])
+router.get('/editables/art_tareas', [ArtTareasController, 'getEditableFields'])
 router.get('/editables/articulos', [ArticulosController, 'getEditableFields'])
+router.get('/editables/personals', [PersonalsController, 'getEditableFields'])
+router.get('/editables/clientes', [ClientesController, 'getEditableFields'])
+router.get('/editables/proveedors', [ProveedoresController, 'getEditableFields'])
+
 
 //SESSION
 router.post('/login', [SessionController, 'create'])
@@ -158,6 +162,7 @@ router.get('/tareas/:id', [TareasController, 'show'])
 router.post('/tareas', [TareasController, 'create'])
 router.put('/tareas/:id', [TareasController, 'update'])
 router.delete('/tareas/:id', [TareasController, 'delete'])
+router.post('/tareas/copy/:id', [TareasController, 'copy'])
 
 //ART_TAREAS
 router.get('/art_tareas', [ArtTareasController, 'index'])
