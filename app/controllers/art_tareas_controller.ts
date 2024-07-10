@@ -19,9 +19,9 @@ export default class ArtTareasController {
   }
 
 
-  //mostrar tareas de un articulo
+  //crear tareas de un articulo
   public async create({ request, response }: HttpContext) {
-    const data = request.only(['nombre', 'descripcion', 'heredaMed', 'cantidad'])
+    const data = request.only(['nombre', 'descripcion', 'heredaMed', 'cantidad', 'cantidadTotal', 'precioUnitario', 'precioTotal', 'uniMedId', 'tareaId', 'articuloId'])
     const artTarea = await ArtTarea.create(data)
     await artTarea.load('articulo')
     await artTarea.load('tarea')

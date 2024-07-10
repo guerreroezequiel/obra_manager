@@ -17,6 +17,7 @@ import PerTareasController from '#controllers/per_tareas_controller'
 import TipEstadosController from '#controllers/tip_ests_controller'
 import PerRolsController from '#controllers/per_rols_controller'
 import LisPresController from '#controllers/lis_pres_controller'
+import UserFieldSettingsController from '#controllers/user_field_settings_controller'
 // import { middleware } from './kernel.js'
 
 //MODELOS
@@ -59,6 +60,15 @@ router.get('/users/:id', [UsersController, 'show'])
 router.post('/users', [UsersController, 'create'])
 router.put('/users/:id', [UsersController, 'update'])
 router.delete('/users/:id', [UsersController, 'delete'])
+
+//USER FIELD SETTINGS
+router.get('/user_field_settings', [UserFieldSettingsController, 'indexById'])
+router.get('/user_field_settings/table/:tableName', [UserFieldSettingsController, 'index'])
+router.get('/user_field_settings/:id', [UserFieldSettingsController, 'show'])
+router.post('/user_field_settings', [UserFieldSettingsController, 'create'])
+router.put('/user_field_settings/:id', [UserFieldSettingsController, 'update'])
+router.put('/user_field_settings/:userId/:tableName', [UserFieldSettingsController, 'updateByUserIdAndTableName'])
+
 
 
 //ALERTAS

@@ -4,8 +4,26 @@ import db from '@adonisjs/lucid/services/db'
 
 export default class LisPresController {
   public async index({ response }: HttpContext) {
-    const lisPres = await LisPre.query().preload('proveedor').preload('articulo')
-    return response.json(lisPres)
+    const lisPres = await LisPre.query().preload('articulo', (query) => {
+      query.select('nombre', 'descripcion', 'uniMedId', 'id')
+    })
+
+    // Convert each LisPre object to a plain JavaScript object and flatten the articulo object
+    const lisPresObjects = lisPres.map((lisPre) => {
+      const lisPreObject = lisPre.toJSON()
+
+      if (lisPreObject.articulo) {
+        lisPreObject.articuloNombre = lisPreObject.articulo.nombre
+        lisPreObject.articuloDescripcion = lisPreObject.articulo.descripcion
+        lisPreObject.articuloUniMed = lisPreObject.articulo.uniMedId
+        lisPreObject.articuloId = lisPreObject.articulo.id
+        delete lisPreObject.articulo
+      }
+
+      return lisPreObject
+    })
+
+    return response.json(lisPresObjects)
   }
 
   public async create({ request, response }: HttpContext) {
@@ -21,7 +39,7 @@ export default class LisPresController {
   }
 
   public async show({ params, response }: HttpContext) {
-    const lisPre = await LisPre.query().where('id', params.id).preload('proveedor').preload('articulo').first()
+    const lisPre = await LisPre.query().where('id', params.id).preload('articulo').first()
     if (!lisPre) {
       return response.status(404).json({ error: 'LisPre not found' })
     }

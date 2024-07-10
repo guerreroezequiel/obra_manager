@@ -38,7 +38,7 @@ export default class ObrasController {
     if (!obra) {
       return response.status(404).json({ error: 'Obra not found 2' })
     }
-    const data = request.only(['nombre', 'descripcion', 'habilitado'])
+    const data = request.only(['nombre', 'descripcion', 'habilitado', 'medida', 'precioTotal', 'estadoId'])
     obra.merge(data)
     await obra.save()
     return response.json(obra)

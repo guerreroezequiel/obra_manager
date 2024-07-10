@@ -4,6 +4,7 @@ import UniMed from '#models/uni_med/uni_med'
 import type { HasMany, HasOne } from '@adonisjs/lucid/types/relations'
 import Estado from '#models/estado/estado'
 import ArtTarea from '#models/tarea/det_tarea/art_tarea'
+import LisPre from '#models/proveedor/lis_pre'
 
 export default class Articulo extends BaseModel {
   @column({ isPrimary: true })
@@ -43,6 +44,9 @@ export default class Articulo extends BaseModel {
 
   @hasMany(() => ArtTarea)
   declare perTareaId: HasMany<typeof ArtTarea>
+
+  @hasMany(() => LisPre)
+  declare lisPreId: HasMany<typeof LisPre>
 
   public get editableFields() {
     return {
