@@ -16,7 +16,7 @@ export default class ArtTarea extends BaseModel {
   declare articuloNombre: string | null
 
   @column()
-  declare uniMedId: number | null
+  declare uniMedId: string | null
 
   @column()
   declare descripcion: string | null

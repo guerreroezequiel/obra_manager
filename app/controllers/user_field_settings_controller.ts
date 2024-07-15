@@ -16,12 +16,12 @@ export default class UserFieldSettingsController {
     }
 
     //update user field setting by user id and table name
-    public async updateByUserIdAndTableName({ params, request, response }: HttpContext) {
-        const userFieldSetting = await UserFieldSetting.query().where('userId', params.userId).where('tableName', params.tableName).first()
+    public async updateByUserIdAndId({ params, request, response }: HttpContext) {
+        const userFieldSetting = await UserFieldSetting.query().where('userId', params.userId).where('id', params.id).first()
         if (!userFieldSetting) {
             return response.status(404).json({ error: 'UserFieldSetting not found' })
         }
-        const data = request.only(['userId', 'tableName', 'fieldName', 'tag', 'width', 'order', 'isEditable', 'isHidden'])
+        const data = request.only(['userId', 'id', 'fieldName', 'tag', 'width', 'order', 'isEditable', 'isHidden'])
         userFieldSetting.merge(data)
         await userFieldSetting.save()
         return response.json(userFieldSetting)

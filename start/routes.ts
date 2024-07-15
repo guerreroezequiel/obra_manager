@@ -18,6 +18,10 @@ import TipEstadosController from '#controllers/tip_ests_controller'
 import PerRolsController from '#controllers/per_rols_controller'
 import LisPresController from '#controllers/lis_pres_controller'
 import UserFieldSettingsController from '#controllers/user_field_settings_controller'
+import PresentacionsController from '#controllers/presentacions_controller'
+import MarcasController from '#controllers/marcas_controller'
+import TiposController from '#controllers/tipos_controller'
+import RubrosController from '#controllers/rubros_controller'
 // import { middleware } from './kernel.js'
 
 //MODELOS
@@ -67,8 +71,7 @@ router.get('/user_field_settings/table/:tableName', [UserFieldSettingsController
 router.get('/user_field_settings/:id', [UserFieldSettingsController, 'show'])
 router.post('/user_field_settings', [UserFieldSettingsController, 'create'])
 router.put('/user_field_settings/:id', [UserFieldSettingsController, 'update'])
-router.put('/user_field_settings/:userId/:tableName', [UserFieldSettingsController, 'updateByUserIdAndTableName'])
-
+router.put('/user_field_settings/:userId/:id', [UserFieldSettingsController, 'updateByUserIdAndId'])
 
 
 //ALERTAS
@@ -192,16 +195,45 @@ router.delete('/per_tareas/:id', [PerTareasController, 'delete'])
 
 
 //UNI_MED
-router.get('/uni_med', [UniMedsController, 'index'])
-router.get('/uni_med/:id', [UniMedsController, 'show'])
-router.post('/uni_med', [UniMedsController, 'create'])
-router.put('/uni_med/:id', [UniMedsController, 'update'])
-router.delete('/uni_med/:id', [UniMedsController, 'delete'])
+// router.get('/uni_meds', [UniMedsController, 'index'])
+router.get('/uni_meds', [UniMedsController, 'indexIds'])
+router.get('/uni_meds/:id', [UniMedsController, 'show'])
+router.post('/uni_meds', [UniMedsController, 'create'])
+router.put('/uni_meds/:id', [UniMedsController, 'update'])
+router.delete('/uni_meds/:id', [UniMedsController, 'delete'])
+
+//PRESENACIONES
+router.get('/presentacions', [PresentacionsController, 'index'])
+router.get('/presentacions/:id', [PresentacionsController, 'show'])
+router.post('/presentacions', [PresentacionsController, 'create'])
+router.put('/presentacions/:id', [PresentacionsController, 'update'])
+router.delete('/presentacions/:id', [PresentacionsController, 'delete'])
+
+//MARCAS
+router.get('/marcas', [MarcasController, 'index'])
+router.get('/marcaId', [MarcasController, 'index']) //es igual a index pero para el componente ModalElegirId
+router.get('/marcas/:id', [MarcasController, 'show'])
+router.post('/marcas', [MarcasController, 'create'])
+router.put('/marcas/:id', [MarcasController, 'update'])
+router.delete('/marcas/:id', [MarcasController, 'delete'])
+
+//TIPOS
+router.get('/tipos', [TiposController, 'index'])
+router.get('/tipoId', [TiposController, 'index']) //es igual a index pero para el componente ModalElegirId
+router.get('/tipos/:id', [TiposController, 'show'])
+router.post('/tipos', [TiposController, 'create'])
+router.put('/tipos/:id', [TiposController, 'update'])
+router.delete('/tipos/:id', [TiposController, 'delete'])
+
+//RUBROS
+router.get('/rubros', [RubrosController, 'index'])
+router.get('/rubroId', [RubrosController, 'index']) //es igual a index pero para el componente ModalElegirId
+router.get('/rubros/:id', [RubrosController, 'show'])
+router.post('/rubros', [RubrosController, 'create'])
+router.put('/rubros/:id', [RubrosController, 'update'])
+router.delete('/rubros/:id', [RubrosController, 'delete'])
 
 
-//ASOCIACIONES
-
-//ASO_CLI_OBR
 
 
 

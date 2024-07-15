@@ -39,7 +39,7 @@ export default class ArticulosController {
     if (!articulo) {
       return response.status(404).json({ error: 'Articulo not found' })
     }
-    const data = request.only(['nombre', 'descripcion', 'tipo', 'habilitado'])
+    const data = request.only(['nombre', 'descripcion', 'tipoId', 'habilitado', 'uniMedId', 'rubroId', 'marcaId', 'presentacionId', 'canPack', 'uniMedPack', 'rendimiento'])
     articulo.merge(data)
     await articulo.save()
     return response.json(articulo)
@@ -49,12 +49,19 @@ export default class ArticulosController {
    * Delete an article by id
    */
   public async delete({ params, response }: HttpContext) {
-    const articulo = await Articulo.find(params.id)
-    if (!articulo) {
-      return response.status(404).json({ error: 'Articulo not found' })
+    try {
+      const articulo = await Articulo.find(params.id)
+      if (!articulo) {
+        return response.status(404).json({ error: 'Articulo not found' })
+      }
+      await articulo.delete()
+      return response.status(200).json({ message: 'Articulo deleted' })
+    } catch (error) {
+      if (error.code === 'ER_ROW_IS_REFERENCED_2') {
+        return response.status(400).json({ error: `Cannot delete this articulo because it is being referenced in the lis_pres table.` })
+      }
+      throw error
     }
-    await articulo.delete()
-    return response.status(200).json({ message: 'Articulo deleted' })
   }
 
   //Obtener modelo de articulos

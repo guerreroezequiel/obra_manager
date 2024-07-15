@@ -3,10 +3,7 @@ import { BaseModel, column } from '@adonisjs/lucid/orm'
 
 export default class UniMed extends BaseModel {
   @column({ isPrimary: true })
-  declare id: number
-
-  @column()
-  declare nombre: string
+  declare id: string
 
   @column()
   declare descripcion: string | null

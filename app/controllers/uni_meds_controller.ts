@@ -12,6 +12,12 @@ export default class UniMedsController {
     return response.json(uniMeds)
   }
 
+  //mostrar ids uniMeds
+  public async indexIds({ response }: HttpContext) {
+    const uniMedIds = await UniMed.query().select('id')
+    return response.json(uniMedIds.map(uniMed => uniMed.id))
+  }
+
   //crear uniMed
   public async create({ request, response }: HttpContext) {
     const data = request.only(['nombre', 'descripcion', 'habilitado'])

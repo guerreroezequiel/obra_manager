@@ -12,7 +12,7 @@ export default class TareasController {
 
   //create a new tarea
   public async create({ request, response }: HttpContext) {
-    const data = request.only(['nombre', 'descripcion', 'condicion', 'condBool', 'heredaMed'])
+    const data = request.only(['nombre', 'descripcion', 'condicion', 'condBool', 'heredaMed', 'moduloId',])
     const tarea = await Tarea.create(data)
     return response.json(tarea)
   }

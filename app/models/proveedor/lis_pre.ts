@@ -9,7 +9,7 @@ export default class LisPre extends BaseModel {
   declare id: number
 
   @column()
-  declare nombre: string
+  declare nombre: string | null
 
   @column()
   declare precio: number | 0
@@ -19,6 +19,9 @@ export default class LisPre extends BaseModel {
 
   @column()
   declare articuloId: number | null
+
+  @column()
+  declare observacion: string | null
 
   @belongsTo(() => Proveedor)
   declare proveedor: BelongsTo<typeof Proveedor>

@@ -45,6 +45,9 @@ export default class Tarea extends BaseModel {
   declare medida: number | null
 
   @column()
+  declare uniMedId: string | null
+
+  @column()
   declare UniMedId: number | null
 
 

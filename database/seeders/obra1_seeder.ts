@@ -1,5 +1,9 @@
 import Alerta from '#models/alerta/alerta'
 import Articulo from '#models/articulo/articulo'
+import Marca from '#models/articulo/marca'
+import Presentacion from '#models/articulo/presentacion'
+import Rubro from '#models/articulo/rubro'
+import Tipo from '#models/articulo/tipo'
 import AsoCliObr from '#models/asociaciones/aso_cli_obr'
 import Cliente from '#models/cliente/cliente'
 import Estado from '#models/estado/estado'
@@ -42,1006 +46,6 @@ export default class extends BaseSeeder {
     ]);
     // END USUARIOS
 
-    // USER FIELD SETTINGS
-    await UserFieldSetting.createMany([
-
-      // settings lis_pre
-      {
-        userId: 1,
-        tableName: 'lis_pre',
-        fieldName: 'id',
-        tag: 'ID',
-        width: 50,
-        order: 1,
-        isEditable: false,
-        isHidden: false
-      },
-      {
-        userId: 1,
-        tableName: 'lis_pre',
-        fieldName: 'nombre',
-        tag: 'Nombre',
-        width: 200,
-        order: 2,
-        isEditable: true,
-        isHidden: false
-      },
-      {
-        userId: 1,
-        tableName: 'lis_pre',
-        fieldName: 'precio',
-        tag: 'Precio',
-        width: 100,
-        order: 3,
-        isEditable: true,
-        isHidden: false
-      },
-      {
-        userId: 1,
-        tableName: 'lis_pre',
-        fieldName: 'proveedorId',
-        tag: 'Proveedor ID',
-        width: 100,
-        order: 4,
-        isEditable: true,
-        isHidden: false
-      },
-      {
-        userId: 1,
-        tableName: 'lis_pre',
-        fieldName: 'articuloId',
-        tag: 'Articulo ID',
-        width: 100,
-        order: 5,
-        isEditable: true,
-        isHidden: false
-      },
-      {
-        userId: 1,
-        tableName: 'lis_pre',
-        fieldName: 'createdAt',
-        tag: 'Creado en',
-        width: 200,
-        order: 6,
-        isEditable: false,
-        isHidden: false
-      },
-      {
-        userId: 1,
-        tableName: 'lis_pre',
-        fieldName: 'updatedAt',
-        tag: 'Actualizado en',
-        width: 200,
-        order: 7,
-        isEditable: false,
-        isHidden: false
-      },
-
-      // settings articulos
-      {
-        userId: 1,
-        tableName: 'lis_pre',
-        fieldName: 'id',
-        tag: 'ID',
-        width: 50,
-        order: 1,
-        isEditable: false,
-        isHidden: false
-      },
-      {
-        userId: 1,
-        tableName: 'lis_pre',
-        fieldName: 'nombre',
-        tag: 'Nombre',
-        width: 200,
-        order: 2,
-        isEditable: true,
-        isHidden: false
-      },
-      {
-        userId: 1,
-        tableName: 'lis_pre',
-        fieldName: 'precio',
-        tag: 'Precio',
-        width: 100,
-        order: 3,
-        isEditable: true,
-        isHidden: false
-      },
-      {
-        userId: 1,
-        tableName: 'lis_pre',
-        fieldName: 'proveedorId',
-        tag: 'Proveedor ID',
-        width: 100,
-        order: 4,
-        isEditable: true,
-        isHidden: false
-      },
-      {
-        userId: 1,
-        tableName: 'lis_pre',
-        fieldName: 'articuloId',
-        tag: 'Articulo ID',
-        width: 100,
-        order: 5,
-        isEditable: true,
-        isHidden: false
-      },
-      {
-        userId: 1,
-        tableName: 'lis_pre',
-        fieldName: 'createdAt',
-        tag: 'Creado en',
-        width: 200,
-        order: 6,
-        isEditable: false,
-        isHidden: false
-      },
-      {
-        userId: 1,
-        tableName: 'lis_pre',
-        fieldName: 'updatedAt',
-        tag: 'Actualizado en',
-        width: 200,
-        order: 7,
-        isEditable: false,
-        isHidden: false
-      },
-
-      // settings clientes
-      {
-        userId: 1,
-        tableName: 'cliente',
-        fieldName: 'id',
-        tag: 'ID',
-        width: 50,
-        order: 1,
-        isEditable: false,
-        isHidden: false
-      },
-      {
-        userId: 1,
-        tableName: 'cliente',
-        fieldName: 'nombre',
-        tag: 'Nombre',
-        width: 200,
-        order: 2,
-        isEditable: true,
-        isHidden: false
-      },
-      {
-        userId: 1,
-        tableName: 'cliente',
-        fieldName: 'mail',
-        tag: 'Correo',
-        width: 200,
-        order: 3,
-        isEditable: true,
-        isHidden: false
-      },
-      {
-        userId: 1,
-        tableName: 'cliente',
-        fieldName: 'tel',
-        tag: 'Teléfono',
-        width: 100,
-        order: 4,
-        isEditable: true,
-        isHidden: false
-      },
-      {
-        userId: 1,
-        tableName: 'cliente',
-        fieldName: 'direccion',
-        tag: 'Dirección',
-        width: 200,
-        order: 5,
-        isEditable: true,
-        isHidden: false
-      },
-      {
-        userId: 1,
-        tableName: 'cliente',
-        fieldName: 'descripcion',
-        tag: 'Descripción',
-        width: 200,
-        order: 6,
-        isEditable: true,
-        isHidden: false
-      },
-      {
-        userId: 1,
-        tableName: 'cliente',
-        fieldName: 'habilitado',
-        tag: 'Habilitado',
-        width: 100,
-        order: 7,
-        isEditable: true,
-        isHidden: false
-      },
-      {
-        userId: 1,
-        tableName: 'cliente',
-        fieldName: 'estadoId',
-        tag: 'Estado ID',
-        width: 100,
-        order: 8,
-        isEditable: true,
-        isHidden: false
-      },
-      {
-        userId: 1,
-        tableName: 'cliente',
-        fieldName: 'createdAt',
-        tag: 'Creado en',
-        width: 200,
-        order: 9,
-        isEditable: false,
-        isHidden: false
-      },
-      {
-        userId: 1,
-        tableName: 'cliente',
-        fieldName: 'updatedAt',
-        tag: 'Actualizado en',
-        width: 200,
-        order: 10,
-        isEditable: false,
-        isHidden: false
-      },
-
-      //settings etapas
-      {
-        userId: 1,
-        tableName: 'etapa',
-        fieldName: 'id',
-        tag: 'ID',
-        width: 50,
-        order: 1,
-        isEditable: false,
-        isHidden: false
-      },
-      {
-        userId: 1,
-        tableName: 'etapa',
-        fieldName: 'nombre',
-        tag: 'Nombre',
-        width: 200,
-        order: 2,
-        isEditable: true,
-        isHidden: false
-      },
-      {
-        userId: 1,
-        tableName: 'etapa',
-        fieldName: 'descripcion',
-        tag: 'Descripción',
-        width: 200,
-        order: 3,
-        isEditable: true,
-        isHidden: false
-      },
-      {
-        userId: 1,
-        tableName: 'etapa',
-        fieldName: 'precioTotal',
-        tag: 'Precio Total',
-        width: 100,
-        order: 4,
-        isEditable: true,
-        isHidden: false
-      },
-      {
-        userId: 1,
-        tableName: 'etapa',
-        fieldName: 'medida',
-        tag: 'Medida',
-        width: 100,
-        order: 5,
-        isEditable: true,
-        isHidden: false
-      },
-      {
-        userId: 1,
-        tableName: 'etapa',
-        fieldName: 'habilitado',
-        tag: 'Habilitado',
-        width: 100,
-        order: 6,
-        isEditable: true,
-        isHidden: false
-      },
-      {
-        userId: 1,
-        tableName: 'etapa',
-        fieldName: 'heredaMed',
-        tag: 'Hereda Medida',
-        width: 100,
-        order: 7,
-        isEditable: true,
-        isHidden: false
-      },
-      {
-        userId: 1,
-        tableName: 'etapa',
-        fieldName: 'estadoId',
-        tag: 'Estado ID',
-        width: 100,
-        order: 8,
-        isEditable: true,
-        isHidden: false
-      },
-      {
-        userId: 1,
-        tableName: 'etapa',
-        fieldName: 'obraId',
-        tag: 'Obra ID',
-        width: 100,
-        order: 9,
-        isEditable: true,
-        isHidden: false
-      },
-      {
-        userId: 1,
-        tableName: 'etapa',
-        fieldName: 'createdAt',
-        tag: 'Creado en',
-        width: 200,
-        order: 10,
-        isEditable: false,
-        isHidden: false
-      },
-      {
-        userId: 1,
-        tableName: 'etapa',
-        fieldName: 'updatedAt',
-        tag: 'Actualizado en',
-        width: 200,
-        order: 11,
-        isEditable: false,
-        isHidden: false
-      },
-
-      //settings modulos
-      {
-        userId: 1,
-        tableName: 'modulo',
-        fieldName: 'id',
-        tag: 'ID',
-        width: 50,
-        order: 1,
-        isEditable: false,
-        isHidden: false
-      },
-      {
-        userId: 1,
-        tableName: 'modulo',
-        fieldName: 'nombre',
-        tag: 'Nombre',
-        width: 200,
-        order: 2,
-        isEditable: true,
-        isHidden: false
-      },
-      {
-        userId: 1,
-        tableName: 'modulo',
-        fieldName: 'descripcion',
-        tag: 'Descripción',
-        width: 200,
-        order: 3,
-        isEditable: true,
-        isHidden: false
-      },
-      {
-        userId: 1,
-        tableName: 'modulo',
-        fieldName: 'habilitado',
-        tag: 'Habilitado',
-        width: 100,
-        order: 4,
-        isEditable: true,
-        isHidden: false
-      },
-      {
-        userId: 1,
-        tableName: 'modulo',
-        fieldName: 'hereda_med',
-        tag: 'Hereda Medida',
-        width: 100,
-        order: 5,
-        isEditable: true,
-        isHidden: false
-      },
-      {
-        userId: 1,
-        tableName: 'modulo',
-        fieldName: 'etapaId',
-        tag: 'Etapa ID',
-        width: 100,
-        order: 6,
-        isEditable: true,
-        isHidden: false
-      },
-      {
-        userId: 1,
-        tableName: 'modulo',
-        fieldName: 'estadoId',
-        tag: 'Estado ID',
-        width: 100,
-        order: 7,
-        isEditable: true,
-        isHidden: false
-      },
-      {
-        userId: 1,
-        tableName: 'modulo',
-        fieldName: 'createdAt',
-        tag: 'Creado en',
-        width: 200,
-        order: 8,
-        isEditable: false,
-        isHidden: false
-      },
-      {
-        userId: 1,
-        tableName: 'modulo',
-        fieldName: 'updatedAt',
-        tag: 'Actualizado en',
-        width: 200,
-        order: 9,
-        isEditable: false,
-        isHidden: false
-      },
-
-      //settings obras
-      {
-        userId: 1,
-        tableName: 'obra',
-        fieldName: 'id',
-        tag: 'ID',
-        width: 50,
-        order: 1,
-        isEditable: false,
-        isHidden: false
-      },
-      {
-        userId: 1,
-        tableName: 'obra',
-        fieldName: 'nombre',
-        tag: 'Nombre',
-        width: 200,
-        order: 2,
-        isEditable: true,
-        isHidden: false
-      },
-      {
-        userId: 1,
-        tableName: 'obra',
-        fieldName: 'descripcion',
-        tag: 'Descripción',
-        width: 200,
-        order: 3,
-        isEditable: true,
-        isHidden: false
-      },
-      {
-        userId: 1,
-        tableName: 'obra',
-        fieldName: 'precioTotal',
-        tag: 'Precio Total',
-        width: 100,
-        order: 4,
-        isEditable: true,
-        isHidden: false
-      },
-      {
-        userId: 1,
-        tableName: 'obra',
-        fieldName: 'medida',
-        tag: 'Medida',
-        width: 100,
-        order: 5,
-        isEditable: true,
-        isHidden: false
-      },
-      {
-        userId: 1,
-        tableName: 'obra',
-        fieldName: 'habilitado',
-        tag: 'Habilitado',
-        width: 100,
-        order: 6,
-        isEditable: true,
-        isHidden: false
-      },
-      {
-        userId: 1,
-        tableName: 'obra',
-        fieldName: 'estadoId',
-        tag: 'Estado ID',
-        width: 100,
-        order: 7,
-        isEditable: true,
-        isHidden: false
-      },
-      {
-        userId: 1,
-        tableName: 'obra',
-        fieldName: 'createdAt',
-        tag: 'Creado en',
-        width: 200,
-        order: 8,
-        isEditable: false,
-        isHidden: false
-      },
-      {
-        userId: 1,
-        tableName: 'obra',
-        fieldName: 'updatedAt',
-        tag: 'Actualizado en',
-        width: 200,
-        order: 9,
-        isEditable: false,
-        isHidden: false
-      },
-
-      //settings personal
-      {
-        userId: 1,
-        tableName: 'personal',
-        fieldName: 'id',
-        tag: 'ID',
-        width: 50,
-        order: 1,
-        isEditable: false,
-        isHidden: false
-      },
-      {
-        userId: 1,
-        tableName: 'personal',
-        fieldName: 'direccion',
-        tag: 'Dirección',
-        width: 200,
-        order: 2,
-        isEditable: true,
-        isHidden: false
-      },
-      {
-        userId: 1,
-        tableName: 'personal',
-        fieldName: 'descripcion',
-        tag: 'Descripción',
-        width: 200,
-        order: 3,
-        isEditable: true,
-        isHidden: false
-      },
-      {
-        userId: 1,
-        tableName: 'personal',
-        fieldName: 'habilitado',
-        tag: 'Habilitado',
-        width: 100,
-        order: 4,
-        isEditable: true,
-        isHidden: false
-      },
-      {
-        userId: 1,
-        tableName: 'personal',
-        fieldName: 'perRolId',
-        tag: 'Rol ID',
-        width: 100,
-        order: 5,
-        isEditable: true,
-        isHidden: false
-      },
-      {
-        userId: 1,
-        tableName: 'personal',
-        fieldName: 'perTareaId',
-        tag: 'Tarea ID',
-        width: 100,
-        order: 6,
-        isEditable: true,
-        isHidden: false
-      },
-      {
-        userId: 1,
-        tableName: 'personal',
-        fieldName: 'createdAt',
-        tag: 'Creado en',
-        width: 200,
-        order: 7,
-        isEditable: false,
-        isHidden: false
-      },
-      {
-        userId: 1,
-        tableName: 'personal',
-        fieldName: 'updatedAt',
-        tag: 'Actualizado en',
-        width: 200,
-        order: 8,
-        isEditable: false,
-        isHidden: false
-      },
-
-      //settings proveedor
-      {
-        userId: 1,
-        tableName: 'proveedor',
-        fieldName: 'id',
-        tag: 'ID',
-        width: 50,
-        order: 1,
-        isEditable: false,
-        isHidden: false
-      },
-      {
-        userId: 1,
-        tableName: 'proveedor',
-        fieldName: 'nombre',
-        tag: 'Nombre',
-        width: 200,
-        order: 2,
-        isEditable: true,
-        isHidden: false
-      },
-      {
-        userId: 1,
-        tableName: 'proveedor',
-        fieldName: 'mail',
-        tag: 'Correo Electrónico',
-        width: 200,
-        order: 3,
-        isEditable: true,
-        isHidden: false
-      },
-      {
-        userId: 1,
-        tableName: 'proveedor',
-        fieldName: 'tel',
-        tag: 'Teléfono',
-        width: 100,
-        order: 4,
-        isEditable: true,
-        isHidden: false
-      },
-      {
-        userId: 1,
-        tableName: 'proveedor',
-        fieldName: 'habilitado',
-        tag: 'Habilitado',
-        width: 100,
-        order: 5,
-        isEditable: true,
-        isHidden: false
-      },
-      {
-        userId: 1,
-        tableName: 'proveedor',
-        fieldName: 'direccion',
-        tag: 'Dirección',
-        width: 200,
-        order: 6,
-        isEditable: true,
-        isHidden: false
-      },
-      {
-        userId: 1,
-        tableName: 'proveedor',
-        fieldName: 'descripcion',
-        tag: 'Descripción',
-        width: 200,
-        order: 7,
-        isEditable: true,
-        isHidden: false
-      },
-      {
-        userId: 1,
-        tableName: 'proveedor',
-        fieldName: 'estadoId',
-        tag: 'Estado ID',
-        width: 100,
-        order: 8,
-        isEditable: true,
-        isHidden: false
-      },
-      {
-        userId: 1,
-        tableName: 'proveedor',
-        fieldName: 'createdAt',
-        tag: 'Creado en',
-        width: 200,
-        order: 9,
-        isEditable: false,
-        isHidden: false
-      },
-      {
-        userId: 1,
-        tableName: 'proveedor',
-        fieldName: 'updatedAt',
-        tag: 'Actualizado en',
-        width: 200,
-        order: 10,
-        isEditable: false,
-        isHidden: false
-      },
-
-      //settings art_tarea
-      {
-        userId: 1,
-        tableName: 'art_tarea',
-        fieldName: 'id',
-        tag: 'ID',
-        type: 'id',
-        width: 50,
-        order: 1,
-        isEditable: false,
-        isHidden: false
-      },
-      {
-        userId: 1,
-        tableName: 'art_tarea',
-        fieldName: 'articuloId',
-        tag: 'Articulo ID',
-        type: 'search',
-        width: 50,
-        order: 2,
-        isEditable: true,
-        isHidden: false
-      },
-      {
-        userId: 1,
-        tableName: 'art_tarea',
-        fieldName: 'articuloNombre',
-        tag: 'Articulo Nombre',
-        type: 'string',
-        width: 200,
-        order: 3,
-        isEditable: true,
-        isHidden: false
-      },
-      {
-        userId: 1,
-        tableName: 'art_tarea',
-        fieldName: 'uniMedId',
-        tag: 'Unidad de Medida ID',
-        type: 'choice',
-        width: 50,
-        order: 4,
-        isEditable: true,
-        isHidden: false
-      },
-      {
-        userId: 1,
-        tableName: 'art_tarea',
-        fieldName: 'descripcion',
-        tag: 'Descripción',
-        type: 'string',
-        width: 200,
-        order: 5,
-        isEditable: true,
-        isHidden: false
-      },
-      {
-        userId: 1,
-        tableName: 'art_tarea',
-        fieldName: 'heredaMed',
-        tag: 'Hereda Medida',
-        type: 'check',
-        width: 50,
-        order: 6,
-        isEditable: true,
-        isHidden: false
-      },
-      {
-        userId: 1,
-        tableName: 'art_tarea',
-        fieldName: 'cantidad',
-        tag: 'Cantidad',
-        type: 'number',
-        width: 50,
-        order: 7,
-        isEditable: true,
-        isHidden: false
-      },
-      {
-        userId: 1,
-        tableName: 'art_tarea',
-        fieldName: 'cantidadTotal',
-        tag: 'Cantidad Total',
-        type: 'number',
-        width: 50,
-        order: 8,
-        isEditable: true,
-        isHidden: false
-      },
-      {
-        userId: 1,
-        tableName: 'art_tarea',
-        fieldName: 'precioUnitario',
-        tag: 'Precio Unitario',
-        type: 'number',
-        width: 50,
-        order: 9,
-        isEditable: true,
-        isHidden: false
-      },
-      {
-        userId: 1,
-        tableName: 'art_tarea',
-        fieldName: 'precioTotal',
-        tag: 'Precio Total',
-        type: 'number',
-        width: 50,
-        order: 10,
-        isEditable: true,
-        isHidden: false
-      },
-      {
-        userId: 1,
-        tableName: 'art_tarea',
-        fieldName: 'tareaId',
-        tag: 'Tarea ID',
-        type: 'id',
-        width: 50,
-        order: 11,
-        isEditable: true,
-        isHidden: false
-      },
-      {
-        userId: 1,
-        tableName: 'art_tarea',
-        fieldName: 'createdAt',
-        tag: 'Creado en',
-        type: 'date',
-        width: 200,
-        order: 12,
-        isEditable: false,
-        isHidden: false
-      },
-      {
-        userId: 1,
-        tableName: 'art_tarea',
-        fieldName: 'updatedAt',
-        tag: 'Actualizado en',
-        type: 'date',
-        width: 200,
-        order: 13,
-        isEditable: false,
-        isHidden: false
-      },
-
-      //settings tareas
-      {
-        userId: 1,
-        tableName: 'tarea',
-        fieldName: 'id',
-        tag: 'ID',
-        width: 50,
-        order: 1,
-        isEditable: false,
-        isHidden: false
-      },
-      {
-        userId: 1,
-        tableName: 'tarea',
-        fieldName: 'nombre',
-        tag: 'Nombre',
-        width: 200,
-        order: 2,
-        isEditable: true,
-        isHidden: false
-      },
-      {
-        userId: 1,
-        tableName: 'tarea',
-        fieldName: 'descripcion',
-        tag: 'Descripción',
-        width: 200,
-        order: 3,
-        isEditable: true,
-        isHidden: false
-      },
-      {
-        userId: 1,
-        tableName: 'tarea',
-        fieldName: 'precioTotal',
-        tag: 'Precio Total',
-        width: 100,
-        order: 4,
-        isEditable: true,
-        isHidden: false
-      },
-      {
-        userId: 1,
-        tableName: 'tarea',
-        fieldName: 'habilitado',
-        tag: 'Habilitado',
-        width: 100,
-        order: 5,
-        isEditable: true,
-        isHidden: false
-      },
-      {
-        userId: 1,
-        tableName: 'tarea',
-        fieldName: 'condicion',
-        tag: 'Condición',
-        width: 200,
-        order: 6,
-        isEditable: true,
-        isHidden: false
-      },
-      {
-        userId: 1,
-        tableName: 'tarea',
-        fieldName: 'condBool',
-        tag: 'Condición Booleana',
-        width: 100,
-        order: 7,
-        isEditable: true,
-        isHidden: false
-      },
-      {
-        userId: 1,
-        tableName: 'tarea',
-        fieldName: 'heredaMed',
-        tag: 'Hereda Medida',
-        width: 100,
-        order: 8,
-        isEditable: true,
-        isHidden: false
-      },
-      {
-        userId: 1,
-        tableName: 'tarea',
-        fieldName: 'moduloId',
-        tag: 'Módulo ID',
-        width: 100,
-        order: 9,
-        isEditable: true,
-        isHidden: false
-      },
-      {
-        userId: 1,
-        tableName: 'tarea',
-        fieldName: 'estadoId',
-        tag: 'Estado ID',
-        width: 100,
-        order: 10,
-        isEditable: true,
-        isHidden: false
-      },
-      {
-        userId: 1,
-        tableName: 'tarea',
-        fieldName: 'createdAt',
-        tag: 'Creado en',
-        width: 200,
-        order: 11,
-        isEditable: false,
-        isHidden: false
-      },
-      {
-        userId: 1,
-        tableName: 'tarea',
-        fieldName: 'updatedAt',
-        tag: 'Actualizado en',
-        width: 200,
-        order: 12,
-        isEditable: false,
-        isHidden: false
-      },
-
-    ]);
-    // END USER FIELD SETTINGS
-
-
     // ESTADOS
     await TipEstado.createMany([
       {
@@ -1075,7 +79,6 @@ export default class extends BaseSeeder {
           tipEstId: 2,
         },
       ]),
-      //END ESTADOS
 
 
       // CLIENTE, PERSONAL, GRUPO PERSONAL, ROL PERSONAL
@@ -1192,64 +195,192 @@ export default class extends BaseSeeder {
 
     await UniMed.createMany([
       {
-        nombre: 'mts',
+        id: 'mts',
         descripcion: 'metros',
         habilitado: true,
       },
       {
-        nombre: 'm2',
+        id: 'm2',
         descripcion: 'metros cuadrados',
         habilitado: true,
       },
       {
-        nombre: 'm3',
+        id: 'm3',
         descripcion: 'metros cubicos',
         habilitado: true,
       },
       {
-        nombre: 'kg',
+        id: 'kg',
         descripcion: 'kilogramos',
         habilitado: true,
       },
       {
-        nombre: 'lts',
+        id: 'lts',
         descripcion: 'litros',
         habilitado: true,
       },
     ]),
 
-      await Articulo.createMany([
+      //TIPO, RUBRO, MARCA, PRESENTACION
+      //tipo
+      await Tipo.createMany([
         {
-          nombre: 'Articulo 1',
-          descripcion: 'Descripcion del articulo 1',
-          habilitado: true,
-          uniMedId: 1,
+          nombre: 'Tipo 1',
         },
         {
-          nombre: 'Articulo 2',
-          descripcion: 'Descripcion del articulo 2',
-          habilitado: true,
-          uniMedId: 2,
+          nombre: 'Tipo 2',
         },
         {
-          nombre: 'Articulo 3',
-          descripcion: 'Descripcion del articulo 3',
-          habilitado: true,
-          uniMedId: 3,
+          nombre: 'Tipo 3',
         },
-        {
-          nombre: 'Articulo 4',
-          descripcion: 'Descripcion del articulo 4',
-          habilitado: true,
-          uniMedId: 4,
-        },
-        {
-          nombre: 'Articulo 5',
-          descripcion: 'Descripcion del articulo 5',
-          habilitado: true,
-          uniMedId: 5,
-        },
-      ])
+      ]);
+
+    //rubro
+    await Rubro.createMany([
+      {
+        nombre: 'Rubro 1',
+      },
+      {
+        nombre: 'Rubro 2',
+      },
+      {
+        nombre: 'Rubro 3',
+      },
+    ]);
+
+    //marca
+    await Marca.createMany([
+      {
+        nombre: 'Marca 1',
+      },
+      {
+        nombre: 'Marca 2',
+      },
+      {
+        nombre: 'Marca 3',
+      },
+    ]);
+
+    //presentacion
+    await Presentacion.createMany([
+      {
+        nombre: 'Presentacion 1',
+      },
+      {
+        nombre: 'Presentacion 2',
+      },
+      {
+        nombre: 'Presentacion 3',
+      },
+    ]);
+
+    await Articulo.createMany([
+      {
+        nombre: 'Articulo 1',
+        descripcion: 'Descripcion del articulo 1',
+        habilitado: true,
+        uniMedId: 'mts',
+        uniMedPack: 'm2',
+        canPack: 10,
+        rendimiento: 5.22,
+        rubroId: 1,
+        marcaId: 2,
+        tipoId: 1,
+        presentacionId: 1,
+      },
+      {
+        nombre: 'Articulo 2',
+        descripcion: 'Descripcion del articulo 2',
+        habilitado: false,
+        uniMedId: 'm2',
+        uniMedPack: 'm2',
+        canPack: 15,
+        rendimiento: 3.14,
+        rubroId: 1,
+        marcaId: 2,
+        tipoId: 3,
+        presentacionId: 2,
+      },
+      {
+        nombre: 'Articulo 3',
+        descripcion: 'Descripcion del articulo 3',
+        habilitado: true,
+        uniMedId: 'kg',
+        uniMedPack: 'm3',
+        canPack: 20,
+        rendimiento: 2.71,
+        rubroId: 3,
+        marcaId: 1,
+        tipoId: 3,
+        presentacionId: 3,
+      },
+      {
+        nombre: 'Articulo 4',
+        descripcion: 'Descripcion del articulo 4',
+        habilitado: false,
+        uniMedId: 'lts',
+        uniMedPack: 'm3',
+        canPack: 25,
+        rendimiento: 1.61,
+        rubroId: 3,
+        marcaId: 3,
+        tipoId: 2,
+        presentacionId: 1,
+      },
+      {
+        nombre: 'Articulo 5',
+        descripcion: 'Descripcion del articulo 5',
+        habilitado: true,
+        uniMedId: 'mts',
+        uniMedPack: 'kg',
+        canPack: 30,
+        rendimiento: 4.56,
+        rubroId: 3,
+        marcaId: 2,
+        tipoId: 1,
+        presentacionId: 1,
+      },
+      {
+        nombre: 'Articulo 6',
+        descripcion: 'Descripcion del articulo 6',
+        habilitado: false,
+        uniMedId: 'kg',
+        uniMedPack: 'lts',
+        canPack: 35,
+        rendimiento: 3.89,
+        rubroId: 1,
+        marcaId: 2,
+        tipoId: 1,
+        presentacionId: 2,
+      },
+      {
+        nombre: 'Articulo 7',
+        descripcion: 'Descripcion del articulo 7',
+        habilitado: true,
+        uniMedId: 'm3',
+        uniMedPack: 'm3',
+        canPack: 40,
+        rendimiento: 2.98,
+        rubroId: 3,
+        marcaId: 3,
+        tipoId: 2,
+        presentacionId: 2,
+      },
+      {
+        nombre: 'Articulo 8',
+        descripcion: 'Descripcion del articulo 8',
+        habilitado: false,
+        uniMedId: 'kg',
+        uniMedPack: 'kg',
+        canPack: 45,
+        rendimiento: 1.73,
+        rubroId: 2,
+        marcaId: 2,
+        tipoId: 3,
+        presentacionId: 3,
+      }
+
+    ])
 
     //LISTA PRECIO
     const articulos = await Articulo.all();
@@ -1442,6 +573,8 @@ export default class extends BaseSeeder {
       ]);
 
     const artTareasData = [];
+    const uniMedArray = ['mts', 'm2', 'm3', 'kg', 'lts'];
+    const uniMedId = uniMedArray[Math.floor(Math.random() * uniMedArray.length)];
 
     for (let i = 1; i <= 25; i++) {
       artTareasData.push({
@@ -1450,7 +583,7 @@ export default class extends BaseSeeder {
         cantidad: i,
         tareaId: i % 3 + 1, // Esto distribuirá los artículos entre las tareas 1, 2 y 3
         articuloId: i % 5 + 1,
-        uniMedId: 1,
+        uniMedId: uniMedId as string,
       });
     }
 
@@ -1487,6 +620,1066 @@ export default class extends BaseSeeder {
           obraId: 2,
           clienteId: 1,
         },
-      ])
+      ]),
+
+      // USER FIELD SETTINGS
+      await UserFieldSetting.createMany([
+
+        // settings lis_pre
+        {
+          userId: 1,
+          tableName: 'lis_pre',
+          fieldName: 'id',
+          tag: 'ID',
+          width: 50,
+          order: 1,
+          isEditable: false,
+          isHidden: false
+        },
+        {
+          userId: 1,
+          tableName: 'lis_pre',
+          fieldName: 'nombre',
+          tag: 'Nombre',
+          width: 200,
+          order: 2,
+          isEditable: true,
+          isHidden: false
+        },
+        {
+          userId: 1,
+          tableName: 'lis_pre',
+          fieldName: 'precio',
+          tag: 'Precio',
+          width: 100,
+          order: 3,
+          isEditable: true,
+          isHidden: false
+        },
+        {
+          userId: 1,
+          tableName: 'lis_pre',
+          fieldName: 'proveedorId',
+          tag: 'Proveedor ID',
+          width: 100,
+          order: 4,
+          isEditable: true,
+          isHidden: false
+        },
+        {
+          userId: 1,
+          tableName: 'lis_pre',
+          fieldName: 'articuloId',
+          tag: 'Articulo ID',
+          width: 100,
+          order: 5,
+          isEditable: true,
+          isHidden: false
+        },
+        {
+          userId: 1,
+          tableName: 'lis_pre',
+          fieldName: 'createdAt',
+          tag: 'Creado en',
+          width: 200,
+          order: 6,
+          isEditable: false,
+          isHidden: false
+        },
+        {
+          userId: 1,
+          tableName: 'lis_pre',
+          fieldName: 'updatedAt',
+          tag: 'Actualizado en',
+          width: 200,
+          order: 7,
+          isEditable: false,
+          isHidden: false
+        },
+
+        {
+          userId: 1,
+          tableName: 'articulos',
+          fieldName: 'id',
+          type: 'id',
+          tag: 'ID',
+          width: 50,
+          order: 1,
+          isEditable: false,
+          isHidden: false
+        },
+        {
+          userId: 1,
+          tableName: 'articulos',
+          fieldName: 'nombre',
+          type: 'text',
+          tag: 'Nombre',
+          width: 200,
+          order: 2,
+          isEditable: true,
+          isHidden: false
+        },
+        {
+          userId: 1,
+          tableName: 'articulos',
+          fieldName: 'descripcion',
+          type: 'text',
+          tag: 'Descripción',
+          width: 200,
+          order: 3,
+          isEditable: true,
+          isHidden: false
+        },
+        {
+          userId: 1,
+          tableName: 'articulos',
+          fieldName: 'habilitado',
+          type: 'check',
+          tag: 'Habilitado',
+          width: 100,
+          order: 4,
+          isEditable: true,
+          isHidden: false
+        },
+        {
+          userId: 1,
+          tableName: 'articulos',
+          fieldName: 'uniMedId',
+          type: 'list',
+          tag: 'Uni Med Art',
+          width: 100,
+          order: 5,
+          isEditable: true,
+          isHidden: false
+        },
+        {
+          userId: 1,
+          tableName: 'articulos',
+          fieldName: 'uniMedPack',
+          type: 'list',
+          tag: 'Uni Med Pack',
+          width: 100,
+          order: 6,
+          isEditable: true,
+          isHidden: false
+        },
+        {
+          userId: 1,
+          tableName: 'articulos',
+          fieldName: 'canPack',
+          type: 'number',
+          tag: 'Can Pack',
+          width: 100,
+          order: 7,
+          isEditable: true,
+          isHidden: false
+        },
+        {
+          userId: 1,
+          tableName: 'articulos',
+          fieldName: 'rendimiento',
+          type: 'number',
+          tag: 'Rendimiento',
+          width: 100,
+          order: 8,
+          isEditable: true,
+          isHidden: false
+        },
+        {
+          userId: 1,
+          tableName: 'articulos',
+          fieldName: 'rubroId',
+          type: 'search',
+          tag: 'Rubro',
+          width: 100,
+          order: 9,
+          isEditable: true,
+          isHidden: false
+        },
+        {
+          userId: 1,
+          tableName: 'articulos',
+          fieldName: 'marcaId',
+          type: 'search',
+          tag: 'Marca',
+          width: 100,
+          order: 10,
+          isEditable: true,
+          isHidden: false
+        },
+        {
+          userId: 1,
+          tableName: 'articulos',
+          fieldName: 'tipoId',
+          type: 'search',
+          tag: 'Tipo',
+          width: 100,
+          order: 11,
+          isEditable: true,
+          isHidden: false
+        },
+        {
+          userId: 1,
+          tableName: 'articulos',
+          fieldName: 'presentacionId',
+          type: 'list',
+          tag: 'Presentación',
+          width: 100,
+          order: 12,
+          isEditable: true,
+          isHidden: false
+        },
+        // settings clientes
+        {
+          userId: 1,
+          tableName: 'cliente',
+          fieldName: 'id',
+          tag: 'ID',
+          width: 50,
+          order: 1,
+          isEditable: false,
+          isHidden: false
+        },
+        {
+          userId: 1,
+          tableName: 'cliente',
+          fieldName: 'nombre',
+          tag: 'Nombre',
+          width: 200,
+          order: 2,
+          isEditable: true,
+          isHidden: false
+        },
+        {
+          userId: 1,
+          tableName: 'cliente',
+          fieldName: 'mail',
+          tag: 'Correo',
+          width: 200,
+          order: 3,
+          isEditable: true,
+          isHidden: false
+        },
+        {
+          userId: 1,
+          tableName: 'cliente',
+          fieldName: 'tel',
+          tag: 'Teléfono',
+          width: 100,
+          order: 4,
+          isEditable: true,
+          isHidden: false
+        },
+        {
+          userId: 1,
+          tableName: 'cliente',
+          fieldName: 'direccion',
+          tag: 'Dirección',
+          width: 200,
+          order: 5,
+          isEditable: true,
+          isHidden: false
+        },
+        {
+          userId: 1,
+          tableName: 'cliente',
+          fieldName: 'descripcion',
+          tag: 'Descripción',
+          width: 200,
+          order: 6,
+          isEditable: true,
+          isHidden: false
+        },
+        {
+          userId: 1,
+          tableName: 'cliente',
+          fieldName: 'habilitado',
+          tag: 'Habilitado',
+          width: 100,
+          order: 7,
+          isEditable: true,
+          isHidden: false
+        },
+        {
+          userId: 1,
+          tableName: 'cliente',
+          fieldName: 'estadoId',
+          tag: 'Estado ID',
+          width: 100,
+          order: 8,
+          isEditable: true,
+          isHidden: false
+        },
+        {
+          userId: 1,
+          tableName: 'cliente',
+          fieldName: 'createdAt',
+          tag: 'Creado en',
+          width: 200,
+          order: 9,
+          isEditable: false,
+          isHidden: false
+        },
+        {
+          userId: 1,
+          tableName: 'cliente',
+          fieldName: 'updatedAt',
+          tag: 'Actualizado en',
+          width: 200,
+          order: 10,
+          isEditable: false,
+          isHidden: false
+        },
+
+        //settings etapas
+        {
+          userId: 1,
+          tableName: 'etapa',
+          fieldName: 'id',
+          tag: 'ID',
+          width: 50,
+          order: 1,
+          isEditable: false,
+          isHidden: false
+        },
+        {
+          userId: 1,
+          tableName: 'etapa',
+          fieldName: 'nombre',
+          tag: 'Nombre',
+          width: 200,
+          order: 2,
+          isEditable: true,
+          isHidden: false
+        },
+        {
+          userId: 1,
+          tableName: 'etapa',
+          fieldName: 'descripcion',
+          tag: 'Descripción',
+          width: 200,
+          order: 3,
+          isEditable: true,
+          isHidden: false
+        },
+        {
+          userId: 1,
+          tableName: 'etapa',
+          fieldName: 'precioTotal',
+          tag: 'Precio Total',
+          width: 100,
+          order: 4,
+          isEditable: true,
+          isHidden: false
+        },
+        {
+          userId: 1,
+          tableName: 'etapa',
+          fieldName: 'medida',
+          tag: 'Medida',
+          width: 100,
+          order: 5,
+          isEditable: true,
+          isHidden: false
+        },
+        {
+          userId: 1,
+          tableName: 'etapa',
+          fieldName: 'habilitado',
+          tag: 'Habilitado',
+          width: 100,
+          order: 6,
+          isEditable: true,
+          isHidden: false
+        },
+        {
+          userId: 1,
+          tableName: 'etapa',
+          fieldName: 'heredaMed',
+          tag: 'Hereda Medida',
+          width: 100,
+          order: 7,
+          isEditable: true,
+          isHidden: false
+        },
+        {
+          userId: 1,
+          tableName: 'etapa',
+          fieldName: 'estadoId',
+          tag: 'Estado ID',
+          width: 100,
+          order: 8,
+          isEditable: true,
+          isHidden: false
+        },
+        {
+          userId: 1,
+          tableName: 'etapa',
+          fieldName: 'obraId',
+          tag: 'Obra ID',
+          width: 100,
+          order: 9,
+          isEditable: true,
+          isHidden: false
+        },
+        {
+          userId: 1,
+          tableName: 'etapa',
+          fieldName: 'createdAt',
+          tag: 'Creado en',
+          width: 200,
+          order: 10,
+          isEditable: false,
+          isHidden: false
+        },
+        {
+          userId: 1,
+          tableName: 'etapa',
+          fieldName: 'updatedAt',
+          tag: 'Actualizado en',
+          width: 200,
+          order: 11,
+          isEditable: false,
+          isHidden: false
+        },
+
+        //settings modulos
+        {
+          userId: 1,
+          tableName: 'modulo',
+          fieldName: 'id',
+          tag: 'ID',
+          width: 50,
+          order: 1,
+          isEditable: false,
+          isHidden: false
+        },
+        {
+          userId: 1,
+          tableName: 'modulo',
+          fieldName: 'nombre',
+          tag: 'Nombre',
+          width: 200,
+          order: 2,
+          isEditable: true,
+          isHidden: false
+        },
+        {
+          userId: 1,
+          tableName: 'modulo',
+          fieldName: 'descripcion',
+          tag: 'Descripción',
+          width: 200,
+          order: 3,
+          isEditable: true,
+          isHidden: false
+        },
+        {
+          userId: 1,
+          tableName: 'modulo',
+          fieldName: 'habilitado',
+          tag: 'Habilitado',
+          width: 100,
+          order: 4,
+          isEditable: true,
+          isHidden: false
+        },
+        {
+          userId: 1,
+          tableName: 'modulo',
+          fieldName: 'hereda_med',
+          tag: 'Hereda Medida',
+          width: 100,
+          order: 5,
+          isEditable: true,
+          isHidden: false
+        },
+        {
+          userId: 1,
+          tableName: 'modulo',
+          fieldName: 'etapaId',
+          tag: 'Etapa ID',
+          width: 100,
+          order: 6,
+          isEditable: true,
+          isHidden: false
+        },
+        {
+          userId: 1,
+          tableName: 'modulo',
+          fieldName: 'estadoId',
+          tag: 'Estado ID',
+          width: 100,
+          order: 7,
+          isEditable: true,
+          isHidden: false
+        },
+        {
+          userId: 1,
+          tableName: 'modulo',
+          fieldName: 'createdAt',
+          tag: 'Creado en',
+          width: 200,
+          order: 8,
+          isEditable: false,
+          isHidden: false
+        },
+        {
+          userId: 1,
+          tableName: 'modulo',
+          fieldName: 'updatedAt',
+          tag: 'Actualizado en',
+          width: 200,
+          order: 9,
+          isEditable: false,
+          isHidden: false
+        },
+
+        //settings obras
+        {
+          userId: 1,
+          tableName: 'obra',
+          fieldName: 'id',
+          tag: 'ID',
+          width: 50,
+          order: 1,
+          isEditable: false,
+          isHidden: false
+        },
+        {
+          userId: 1,
+          tableName: 'obra',
+          fieldName: 'nombre',
+          tag: 'Nombre',
+          width: 200,
+          order: 2,
+          isEditable: true,
+          isHidden: false
+        },
+        {
+          userId: 1,
+          tableName: 'obra',
+          fieldName: 'descripcion',
+          tag: 'Descripción',
+          width: 200,
+          order: 3,
+          isEditable: true,
+          isHidden: false
+        },
+        {
+          userId: 1,
+          tableName: 'obra',
+          fieldName: 'precioTotal',
+          tag: 'Precio Total',
+          width: 100,
+          order: 4,
+          isEditable: true,
+          isHidden: false
+        },
+        {
+          userId: 1,
+          tableName: 'obra',
+          fieldName: 'medida',
+          tag: 'Medida',
+          width: 100,
+          order: 5,
+          isEditable: true,
+          isHidden: false
+        },
+        {
+          userId: 1,
+          tableName: 'obra',
+          fieldName: 'habilitado',
+          tag: 'Habilitado',
+          width: 100,
+          order: 6,
+          isEditable: true,
+          isHidden: false
+        },
+        {
+          userId: 1,
+          tableName: 'obra',
+          fieldName: 'estadoId',
+          tag: 'Estado ID',
+          width: 100,
+          order: 7,
+          isEditable: true,
+          isHidden: false
+        },
+        {
+          userId: 1,
+          tableName: 'obra',
+          fieldName: 'createdAt',
+          tag: 'Creado en',
+          width: 200,
+          order: 8,
+          isEditable: false,
+          isHidden: false
+        },
+        {
+          userId: 1,
+          tableName: 'obra',
+          fieldName: 'updatedAt',
+          tag: 'Actualizado en',
+          width: 200,
+          order: 9,
+          isEditable: false,
+          isHidden: false
+        },
+
+        //settings personal
+        {
+          userId: 1,
+          tableName: 'personal',
+          fieldName: 'id',
+          tag: 'ID',
+          width: 50,
+          order: 1,
+          isEditable: false,
+          isHidden: false
+        },
+        {
+          userId: 1,
+          tableName: 'personal',
+          fieldName: 'direccion',
+          tag: 'Dirección',
+          width: 200,
+          order: 2,
+          isEditable: true,
+          isHidden: false
+        },
+        {
+          userId: 1,
+          tableName: 'personal',
+          fieldName: 'descripcion',
+          tag: 'Descripción',
+          width: 200,
+          order: 3,
+          isEditable: true,
+          isHidden: false
+        },
+        {
+          userId: 1,
+          tableName: 'personal',
+          fieldName: 'habilitado',
+          tag: 'Habilitado',
+          width: 100,
+          order: 4,
+          isEditable: true,
+          isHidden: false
+        },
+        {
+          userId: 1,
+          tableName: 'personal',
+          fieldName: 'perRolId',
+          tag: 'Rol ID',
+          width: 100,
+          order: 5,
+          isEditable: true,
+          isHidden: false
+        },
+        {
+          userId: 1,
+          tableName: 'personal',
+          fieldName: 'perTareaId',
+          tag: 'Tarea ID',
+          width: 100,
+          order: 6,
+          isEditable: true,
+          isHidden: false
+        },
+        {
+          userId: 1,
+          tableName: 'personal',
+          fieldName: 'createdAt',
+          tag: 'Creado en',
+          width: 200,
+          order: 7,
+          isEditable: false,
+          isHidden: false
+        },
+        {
+          userId: 1,
+          tableName: 'personal',
+          fieldName: 'updatedAt',
+          tag: 'Actualizado en',
+          width: 200,
+          order: 8,
+          isEditable: false,
+          isHidden: false
+        },
+
+        //settings proveedor
+        {
+          userId: 1,
+          tableName: 'proveedor',
+          fieldName: 'id',
+          tag: 'ID',
+          width: 50,
+          order: 1,
+          isEditable: false,
+          isHidden: false
+        },
+        {
+          userId: 1,
+          tableName: 'proveedor',
+          fieldName: 'nombre',
+          tag: 'Nombre',
+          width: 200,
+          order: 2,
+          isEditable: true,
+          isHidden: false
+        },
+        {
+          userId: 1,
+          tableName: 'proveedor',
+          fieldName: 'mail',
+          tag: 'Correo Electrónico',
+          width: 200,
+          order: 3,
+          isEditable: true,
+          isHidden: false
+        },
+        {
+          userId: 1,
+          tableName: 'proveedor',
+          fieldName: 'tel',
+          tag: 'Teléfono',
+          width: 100,
+          order: 4,
+          isEditable: true,
+          isHidden: false
+        },
+        {
+          userId: 1,
+          tableName: 'proveedor',
+          fieldName: 'habilitado',
+          tag: 'Habilitado',
+          width: 100,
+          order: 5,
+          isEditable: true,
+          isHidden: false
+        },
+        {
+          userId: 1,
+          tableName: 'proveedor',
+          fieldName: 'direccion',
+          tag: 'Dirección',
+          width: 200,
+          order: 6,
+          isEditable: true,
+          isHidden: false
+        },
+        {
+          userId: 1,
+          tableName: 'proveedor',
+          fieldName: 'descripcion',
+          tag: 'Descripción',
+          width: 200,
+          order: 7,
+          isEditable: true,
+          isHidden: false
+        },
+        {
+          userId: 1,
+          tableName: 'proveedor',
+          fieldName: 'estadoId',
+          tag: 'Estado ID',
+          width: 100,
+          order: 8,
+          isEditable: true,
+          isHidden: false
+        },
+        {
+          userId: 1,
+          tableName: 'proveedor',
+          fieldName: 'createdAt',
+          tag: 'Creado en',
+          width: 200,
+          order: 9,
+          isEditable: false,
+          isHidden: false
+        },
+        {
+          userId: 1,
+          tableName: 'proveedor',
+          fieldName: 'updatedAt',
+          tag: 'Actualizado en',
+          width: 200,
+          order: 10,
+          isEditable: false,
+          isHidden: false
+        },
+
+        //settings art_tarea
+        {
+          userId: 1,
+          tableName: 'art_tarea',
+          fieldName: 'id',
+          tag: 'ID',
+          type: 'id',
+          width: 50,
+          order: 1,
+          isEditable: false,
+          isHidden: false
+        },
+        {
+          userId: 1,
+          tableName: 'art_tarea',
+          fieldName: 'articuloId',
+          tag: 'Articulo ID',
+          type: 'search',
+          width: 50,
+          order: 2,
+          isEditable: true,
+          isHidden: false
+        },
+        {
+          userId: 1,
+          tableName: 'art_tarea',
+          fieldName: 'articuloNombre',
+          tag: 'Articulo Nombre',
+          type: 'string',
+          width: 200,
+          order: 3,
+          isEditable: true,
+          isHidden: false
+        },
+        {
+          userId: 1,
+          tableName: 'art_tarea',
+          fieldName: 'uniMedId',
+          tag: 'Unidad de Medida ID',
+          type: 'choice',
+          width: 50,
+          order: 4,
+          isEditable: true,
+          isHidden: false
+        },
+        {
+          userId: 1,
+          tableName: 'art_tarea',
+          fieldName: 'descripcion',
+          tag: 'Descripción',
+          type: 'string',
+          width: 200,
+          order: 5,
+          isEditable: true,
+          isHidden: false
+        },
+        {
+          userId: 1,
+          tableName: 'art_tarea',
+          fieldName: 'heredaMed',
+          tag: 'Hereda Medida',
+          type: 'check',
+          width: 50,
+          order: 6,
+          isEditable: true,
+          isHidden: false
+        },
+        {
+          userId: 1,
+          tableName: 'art_tarea',
+          fieldName: 'cantidad',
+          tag: 'Cantidad',
+          type: 'number',
+          width: 50,
+          order: 7,
+          isEditable: true,
+          isHidden: false
+        },
+        {
+          userId: 1,
+          tableName: 'art_tarea',
+          fieldName: 'cantidadTotal',
+          tag: 'Cantidad Total',
+          type: 'number',
+          width: 50,
+          order: 8,
+          isEditable: true,
+          isHidden: false
+        },
+        {
+          userId: 1,
+          tableName: 'art_tarea',
+          fieldName: 'precioUnitario',
+          tag: 'Precio Unitario',
+          type: 'number',
+          width: 50,
+          order: 9,
+          isEditable: true,
+          isHidden: false
+        },
+        {
+          userId: 1,
+          tableName: 'art_tarea',
+          fieldName: 'precioTotal',
+          tag: 'Precio Total',
+          type: 'number',
+          width: 50,
+          order: 10,
+          isEditable: true,
+          isHidden: false
+        },
+        {
+          userId: 1,
+          tableName: 'art_tarea',
+          fieldName: 'tareaId',
+          tag: 'Tarea ID',
+          type: 'id',
+          width: 50,
+          order: 11,
+          isEditable: true,
+          isHidden: false
+        },
+        {
+          userId: 1,
+          tableName: 'art_tarea',
+          fieldName: 'createdAt',
+          tag: 'Creado en',
+          type: 'date',
+          width: 200,
+          order: 12,
+          isEditable: false,
+          isHidden: false
+        },
+        {
+          userId: 1,
+          tableName: 'art_tarea',
+          fieldName: 'updatedAt',
+          tag: 'Actualizado en',
+          type: 'date',
+          width: 200,
+          order: 13,
+          isEditable: false,
+          isHidden: false
+        },
+
+        //settings tareas
+        {
+          userId: 1,
+          tableName: 'tarea',
+          fieldName: 'id',
+          tag: 'ID',
+          width: 50,
+          order: 1,
+          isEditable: false,
+          isHidden: false
+        },
+        {
+          userId: 1,
+          tableName: 'tarea',
+          fieldName: 'nombre',
+          tag: 'Nombre',
+          width: 200,
+          order: 2,
+          isEditable: true,
+          isHidden: false
+        },
+        {
+          userId: 1,
+          tableName: 'tarea',
+          fieldName: 'descripcion',
+          tag: 'Descripción',
+          width: 200,
+          order: 3,
+          isEditable: true,
+          isHidden: false
+        },
+        {
+          userId: 1,
+          tableName: 'tarea',
+          fieldName: 'precioTotal',
+          tag: 'Precio Total',
+          width: 100,
+          order: 4,
+          isEditable: true,
+          isHidden: false
+        },
+        {
+          userId: 1,
+          tableName: 'tarea',
+          fieldName: 'habilitado',
+          tag: 'Habilitado',
+          width: 100,
+          order: 5,
+          isEditable: true,
+          isHidden: false
+        },
+        {
+          userId: 1,
+          tableName: 'tarea',
+          fieldName: 'condicion',
+          tag: 'Condición',
+          width: 200,
+          order: 6,
+          isEditable: true,
+          isHidden: false
+        },
+        {
+          userId: 1,
+          tableName: 'tarea',
+          fieldName: 'condBool',
+          tag: 'Condición Booleana',
+          width: 100,
+          order: 7,
+          isEditable: true,
+          isHidden: false
+        },
+        {
+          userId: 1,
+          tableName: 'tarea',
+          fieldName: 'heredaMed',
+          tag: 'Hereda Medida',
+          width: 100,
+          order: 8,
+          isEditable: true,
+          isHidden: false
+        },
+        {
+          userId: 1,
+          tableName: 'tarea',
+          fieldName: 'moduloId',
+          tag: 'Módulo ID',
+          width: 100,
+          order: 9,
+          isEditable: true,
+          isHidden: false
+        },
+        {
+          userId: 1,
+          tableName: 'tarea',
+          fieldName: 'estadoId',
+          tag: 'Estado ID',
+          width: 100,
+          order: 10,
+          isEditable: true,
+          isHidden: false
+        },
+        {
+          userId: 1,
+          tableName: 'tarea',
+          fieldName: 'createdAt',
+          tag: 'Creado en',
+          width: 200,
+          order: 11,
+          isEditable: false,
+          isHidden: false
+        },
+        {
+          userId: 1,
+          tableName: 'tarea',
+          fieldName: 'updatedAt',
+          tag: 'Actualizado en',
+          width: 200,
+          order: 12,
+          isEditable: false,
+          isHidden: false
+        },
+
+      ]);
+    // END USER FIELD SETTINGS
   }
+  //END ESTADOS
 }
