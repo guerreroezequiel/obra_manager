@@ -3,6 +3,7 @@ import type { HasMany, HasOne } from '@adonisjs/lucid/types/relations'
 import { BaseModel, column, hasMany, hasOne } from '@adonisjs/lucid/orm'
 import Obra from '#models/obra/obra'
 import Estado from '#models/estado/estado'
+import CatIva from './cat_iva.js'
 
 
 export default class Cliente extends BaseModel {
@@ -30,7 +31,8 @@ export default class Cliente extends BaseModel {
   @column()
   declare estadoId: number | null
 
-
+  @column()
+  declare catIvaId: number | null
 
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
@@ -43,6 +45,10 @@ export default class Cliente extends BaseModel {
 
   @hasOne(() => Estado)
   declare estado: HasOne<typeof Estado>
+
+  @hasOne(() => CatIva)
+  declare catIva: HasOne<typeof CatIva>
+
 
 
   public get editableFields() {

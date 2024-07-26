@@ -29,12 +29,14 @@ export default class LisPresController {
   public async create({ request, response }: HttpContext) {
     const proveedorId = request.input('proveedor_id')
     const articuloId = request.input('articulo_id')
+    const listaId = request.input('lis_pre_id') // Agregando lis_pre_id
     const lisPre = new LisPre()
     lisPre.proveedor = proveedorId
     lisPre.articulo = articuloId
+    lisPre.lista = listaId
     await lisPre.save()
-    await lisPre.load('proveedor')
     await lisPre.load('articulo')
+    await lisPre.load('lista')
     return response.json(lisPre)
   }
 
@@ -49,15 +51,11 @@ export default class LisPresController {
   public async update({ params, request, response }: HttpContext) {
     const lisPre = await LisPre.find(params.id)
     if (!lisPre) {
-      return response.status(404).json({ error: 'LisPre not found' })
+      return response.status(404).json({ error: 'Articulo not found' })
     }
-    const proveedorId = request.input('proveedor_id')
-    const articuloId = request.input('articulo_id')
-    lisPre.proveedor = proveedorId
-    lisPre.articulo = articuloId
+    const data = request.only(['proveedorId', 'articuloId', 'listaId', 'precioVenta', 'markUp', 'precioCompra', 'descripcion'])
+    lisPre.merge(data)
     await lisPre.save()
-    await lisPre.load('proveedor')
-    await lisPre.load('articulo')
     return response.json(lisPre)
   }
 

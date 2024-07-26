@@ -11,7 +11,7 @@ export default class ModulosController {
 
   // Create a new modulo
   public async create({ request, response }: HttpContext) {
-    const data = request.only(['nombre', 'descripcion', 'area', 'habilitado', 'heredaMed'])
+    const data = request.only(['nombre', 'descripcion', 'habilitado', 'etapaId'])
     const modulo = await Modulo.create(data)
     return response.json(modulo)
   }
@@ -36,7 +36,7 @@ export default class ModulosController {
     if (!modulo) {
       return response.status(404).json({ error: 'Modulo not found' })
     }
-    const data = request.only(['nombre', 'descripcion', 'area', 'habilitado',])
+    const data = request.only(['nombre', 'descripcion', 'habilitado',])
     modulo.merge(data)
     await modulo.save()
     return response.json(modulo)

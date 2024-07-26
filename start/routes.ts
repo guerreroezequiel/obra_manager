@@ -22,6 +22,7 @@ import PresentacionsController from '#controllers/presentacions_controller'
 import MarcasController from '#controllers/marcas_controller'
 import TiposController from '#controllers/tipos_controller'
 import RubrosController from '#controllers/rubros_controller'
+import LisPreIdsController from '#controllers/lis_pre_ids_controller'
 // import { middleware } from './kernel.js'
 
 //MODELOS
@@ -31,7 +32,6 @@ router.get('/models/clientes', [ClientesController, 'getClientesModel'])
 router.get('/models/proveedors', [ProveedoresController, 'getProveedorsModel'])
 router.get('/models/articulos', [ArticulosController, 'getArticulosModel'])
 router.get('/models/tareas', [TareasController, 'getTareasModel'])
-router.get('/models/uni_meds', [UniMedsController, 'getUniMedsModel'])
 router.get('/models/art_tareas', [ArtTareasController, 'getArtTareasModel'])
 router.get('/models/per_tareas', [PerTareasController, 'getPerTareasModel'])
 router.get('/models/estados', [EstadosController, 'getEstadosModel'])
@@ -161,6 +161,13 @@ router.post('/proveedores', [ProveedoresController, 'create'])
 router.put('/proveedores/:id', [ProveedoresController, 'update'])
 router.delete('/proveedores/:id', [ProveedoresController, 'delete'])
 
+// LIS_PRE_IDS
+router.get('/lis_pre_ids', [LisPreIdsController, 'index'])
+router.get('/lis_pre_ids/:id', [LisPreIdsController, 'show'])
+router.post('/lis_pre_ids', [LisPreIdsController, 'create'])
+router.put('/lis_pre_ids/:id', [LisPreIdsController, 'update'])
+router.delete('/lis_pre_ids/:id', [LisPreIdsController, 'delete'])
+
 //LIS_PRE
 router.get('/lis_pre', [LisPresController, 'index'])
 router.get('/lis_pre/:id', [LisPresController, 'show'])
@@ -195,7 +202,7 @@ router.delete('/per_tareas/:id', [PerTareasController, 'delete'])
 
 
 //UNI_MED
-// router.get('/uni_meds', [UniMedsController, 'index'])
+router.get('/uni_medsAll', [UniMedsController, 'index'])
 router.get('/uni_meds', [UniMedsController, 'indexIds'])
 router.get('/uni_meds/:id', [UniMedsController, 'show'])
 router.post('/uni_meds', [UniMedsController, 'create'])

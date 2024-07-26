@@ -16,23 +16,16 @@ export default class Etapa extends BaseModel {
   declare descripcion: string | null
 
   @column()
-  declare precioTotal: number | 0
-
-  @column()
-  declare medida: number | null
+  declare total: number | 0
 
   @column()
   declare habilitado: boolean | true
-
-  @column()
-  declare heredaMed: boolean | false
 
   @column()
   declare estadoId: number | null
 
   @column()
   declare obraId: number | null
-
 
 
   @column.dateTime({ autoCreate: true })
@@ -52,12 +45,6 @@ export default class Etapa extends BaseModel {
 
   public get editableFields() {
     return {
-      precioTotal: true,
-      medida: true,
-      habilitado: true,
-      heredaMed: true,
-      estadoId: true,
-      obraId: false,
     }
   }
 

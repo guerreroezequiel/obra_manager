@@ -4,7 +4,6 @@ import Marca from '#models/articulo/marca'
 import Presentacion from '#models/articulo/presentacion'
 import Rubro from '#models/articulo/rubro'
 import Tipo from '#models/articulo/tipo'
-import AsoCliObr from '#models/asociaciones/aso_cli_obr'
 import Cliente from '#models/cliente/cliente'
 import Estado from '#models/estado/estado'
 import TipEstado from '#models/estado/tip_est'
@@ -15,6 +14,7 @@ import GruPer from '#models/personal/gru_per'
 import PerRol from '#models/personal/per_rol'
 import Personal from '#models/personal/personal'
 import LisPre from '#models/proveedor/lis_pre'
+import LisPreIds from '#models/proveedor/lis_pre_ids'
 import Proveedor from '#models/proveedor/proveedor'
 import ArtTarea from '#models/tarea/det_tarea/art_tarea'
 import PerTarea from '#models/tarea/det_tarea/per_tarea'
@@ -196,28 +196,23 @@ export default class extends BaseSeeder {
     await UniMed.createMany([
       {
         id: 'mts',
-        descripcion: 'metros',
-        habilitado: true,
+        nombre: 'metros',
       },
       {
         id: 'm2',
-        descripcion: 'metros cuadrados',
-        habilitado: true,
+        nombre: 'metros cuadrados',
       },
       {
         id: 'm3',
-        descripcion: 'metros cubicos',
-        habilitado: true,
+        nombre: 'metros cubicos',
       },
       {
         id: 'kg',
-        descripcion: 'kilogramos',
-        habilitado: true,
+        nombre: 'kilogramos',
       },
       {
         id: 'lts',
-        descripcion: 'litros',
-        habilitado: true,
+        nombre: 'litros',
       },
     ]),
 
@@ -382,11 +377,21 @@ export default class extends BaseSeeder {
 
     ])
 
+    //LIS PRE IDS
+    await LisPreIds.createMany([
+      {
+        nombre: 'Lista 1',
+      },
+      {
+        nombre: 'Lista 2',
+      }
+    ]);
+
     //LISTA PRECIO
     const articulos = await Articulo.all();
     const lisPreData = articulos.map((articulo) => ({
-      nombre: 'Lista 1',
-      precio: Math.floor(Math.random() * (10000 - 100 + 1)) + 100,
+      listaId: 1,
+      precioVenta: Math.floor(Math.random() * (10000 - 100 + 1)) + 100,
       proveedorId: 1,
       articuloId: articulo.id,
     }));
@@ -394,8 +399,8 @@ export default class extends BaseSeeder {
     await LisPre.createMany(lisPreData);
 
     const lisPreData2 = articulos.map((articulo) => ({
-      nombre: 'Lista 2',
-      precio: Math.floor(Math.random() * (10000 - 100 + 1)) + 100,
+      listaId: 2,
+      precioVenta: Math.floor(Math.random() * (10000 - 100 + 1)) + 100,
       proveedorId: 2,
       articuloId: articulo.id,
     }));
@@ -474,80 +479,67 @@ export default class extends BaseSeeder {
         {
           nombre: 'Tarea 1',
           descripcion: 'Descripcion de la tarea 1',
-          condicion: 'Condicion de la tarea 1',
           moduloId: 1,
         },
         {
           nombre: 'Tarea 2',
           descripcion: 'Descripcion de la tarea 2',
-          condicion: 'Condicion de la tarea 2',
           moduloId: 1,
         },
         {
           nombre: 'Tarea 3',
           descripcion: 'Descripcion de la tarea 3',
-          condicion: 'Condicion de la tarea 3',
           moduloId: 1,
         },
 
         {
           nombre: 'Tarea 1',
           descripcion: 'Descripcion de la tarea 1',
-          condicion: 'Condicion de la tarea 1',
           moduloId: 1,
         },
         {
           nombre: 'Tarea 2',
           descripcion: 'Descripcion de la tarea 2',
-          condicion: 'Condicion de la tarea 2',
           moduloId: 2,
         },
         {
           nombre: 'Tarea 3',
           descripcion: 'Descripcion de la tarea 3',
-          condicion: 'Condicion de la tarea 3',
           moduloId: 2,
         },
         {
           nombre: 'Tarea 1',
           descripcion: 'Descripcion de la tarea 1',
-          condicion: 'Condicion de la tarea 1',
           moduloId: 3,
         },
         {
           nombre: 'Tarea 2',
           descripcion: 'Descripcion de la tarea 2',
-          condicion: 'Condicion de la tarea 2',
           moduloId: 3,
         },
         {
           nombre: 'Tarea 3',
           descripcion: 'Descripcion de la tarea 3',
-          condicion: 'Condicion de la tarea 3',
           moduloId: 3,
         },
         {
           nombre: 'Tarea 1',
           descripcion: 'Descripcion de la tarea 1',
-          condicion: 'Condicion de la tarea 1',
           moduloId: 4,
         },
         {
           nombre: 'Tarea 2',
           descripcion: 'Descripcion de la tarea 2',
-          condicion: 'Condicion de la tarea 2',
           moduloId: 4,
         },
         {
           nombre: 'Tarea 3',
           descripcion: 'Descripcion de la tarea 3',
-          condicion: 'Condicion de la tarea 3',
           moduloId: 4,
         },
         {
           nombre: 'Tarea 3',
           descripcion: 'Descripcion de la tarea 3',
-          condicion: 'Condicion de la tarea 3',
           moduloId: 4,
         },
       ]),
@@ -578,7 +570,6 @@ export default class extends BaseSeeder {
 
     for (let i = 1; i <= 25; i++) {
       artTareasData.push({
-        heredaMed: false,
         descripcion: `Descripcion del articulo ${i}`,
         cantidad: i,
         tareaId: i % 3 + 1, // Esto distribuirá los artículos entre las tareas 1, 2 y 3
@@ -607,29 +598,39 @@ export default class extends BaseSeeder {
     ]),
       //END TAREA, ALERTA, ARTICULO TAREA
 
-      await AsoCliObr.createMany([
-        {
-          obraId: 1,
-          clienteId: 1,
-        },
-        {
-          obraId: 2,
-          clienteId: 2,
-        },
-        {
-          obraId: 2,
-          clienteId: 1,
-        },
-      ]),
-
       // USER FIELD SETTINGS
       await UserFieldSetting.createMany([
+
+        // settings lis_pre_ids
+        {
+          userId: 1,
+          tableName: 'lis_pre_ids',
+          fieldName: 'id',
+          type: 'id',
+          tag: 'ID',
+          width: 50,
+          order: 1,
+          isEditable: false,
+          isHidden: false
+        },
+        {
+          userId: 1,
+          tableName: 'lis_pre_ids',
+          fieldName: 'nombre',
+          type: 'text',
+          tag: 'Nombre',
+          width: 200,
+          order: 2,
+          isEditable: true,
+          isHidden: false
+        },
 
         // settings lis_pre
         {
           userId: 1,
           tableName: 'lis_pre',
           fieldName: 'id',
+          type: 'id',
           tag: 'ID',
           width: 50,
           order: 1,
@@ -639,9 +640,10 @@ export default class extends BaseSeeder {
         {
           userId: 1,
           tableName: 'lis_pre',
-          fieldName: 'nombre',
-          tag: 'Nombre',
-          width: 200,
+          fieldName: 'listaId',
+          tag: 'Lista',
+          type: 'list',
+          width: 100,
           order: 2,
           isEditable: true,
           isHidden: false
@@ -649,8 +651,9 @@ export default class extends BaseSeeder {
         {
           userId: 1,
           tableName: 'lis_pre',
-          fieldName: 'precio',
-          tag: 'Precio',
+          fieldName: 'precioVenta',
+          type: 'price',
+          tag: 'Precio de venta',
           width: 100,
           order: 3,
           isEditable: true,
@@ -659,8 +662,9 @@ export default class extends BaseSeeder {
         {
           userId: 1,
           tableName: 'lis_pre',
-          fieldName: 'proveedorId',
-          tag: 'Proveedor ID',
+          fieldName: 'precioCompra',
+          type: 'price',
+          tag: 'Precio de compra',
           width: 100,
           order: 4,
           isEditable: true,
@@ -669,8 +673,9 @@ export default class extends BaseSeeder {
         {
           userId: 1,
           tableName: 'lis_pre',
-          fieldName: 'articuloId',
-          tag: 'Articulo ID',
+          fieldName: 'markup',
+          type: 'percent',
+          tag: 'Precio',
           width: 100,
           order: 5,
           isEditable: true,
@@ -679,10 +684,33 @@ export default class extends BaseSeeder {
         {
           userId: 1,
           tableName: 'lis_pre',
+          fieldName: 'proveedorId',
+          tag: 'Proveedor',
+          type: 'search',
+          width: 100,
+          order: 6,
+          isEditable: true,
+          isHidden: false
+        },
+        {
+          userId: 1,
+          tableName: 'lis_pre',
+          fieldName: 'articuloId',
+          tag: 'Articulo ID',
+          type: 'search',
+          width: 100,
+          order: 7,
+          isEditable: true,
+          isHidden: false
+        },
+        {
+          userId: 1,
+          tableName: 'lis_pre',
           fieldName: 'createdAt',
+          type: 'date',
           tag: 'Creado en',
           width: 200,
-          order: 6,
+          order: 8,
           isEditable: false,
           isHidden: false
         },
@@ -691,12 +719,27 @@ export default class extends BaseSeeder {
           tableName: 'lis_pre',
           fieldName: 'updatedAt',
           tag: 'Actualizado en',
+          type: 'date',
           width: 200,
-          order: 7,
+          order: 9,
           isEditable: false,
           isHidden: false
         },
+        {
+          userId: 1,
+          tableName: 'lis_pre',
+          fieldName: 'descripcion',
+          tag: 'Descripción',
+          type: 'text',
+          width: 200,
+          order: 10,
+          isEditable: true,
+          isHidden: false
+        },
 
+
+
+        //settings articulos
         {
           userId: 1,
           tableName: 'articulos',
@@ -746,7 +789,7 @@ export default class extends BaseSeeder {
           tableName: 'articulos',
           fieldName: 'uniMedId',
           type: 'list',
-          tag: 'Uni Med Art',
+          tag: 'Uni.Med. Articulo',
           width: 100,
           order: 5,
           isEditable: true,
@@ -757,7 +800,7 @@ export default class extends BaseSeeder {
           tableName: 'articulos',
           fieldName: 'uniMedPack',
           type: 'list',
-          tag: 'Uni Med Pack',
+          tag: 'Uni.Med. Pack',
           width: 100,
           order: 6,
           isEditable: true,
@@ -768,7 +811,7 @@ export default class extends BaseSeeder {
           tableName: 'articulos',
           fieldName: 'canPack',
           type: 'number',
-          tag: 'Can Pack',
+          tag: 'Can. x Pack',
           width: 100,
           order: 7,
           isEditable: true,
@@ -835,6 +878,7 @@ export default class extends BaseSeeder {
           tableName: 'cliente',
           fieldName: 'id',
           tag: 'ID',
+          type: 'id',
           width: 50,
           order: 1,
           isEditable: false,
@@ -845,6 +889,7 @@ export default class extends BaseSeeder {
           tableName: 'cliente',
           fieldName: 'nombre',
           tag: 'Nombre',
+          type: 'text',
           width: 200,
           order: 2,
           isEditable: true,
@@ -855,6 +900,7 @@ export default class extends BaseSeeder {
           tableName: 'cliente',
           fieldName: 'mail',
           tag: 'Correo',
+          type: 'text',
           width: 200,
           order: 3,
           isEditable: true,
@@ -865,6 +911,7 @@ export default class extends BaseSeeder {
           tableName: 'cliente',
           fieldName: 'tel',
           tag: 'Teléfono',
+          type: 'text',
           width: 100,
           order: 4,
           isEditable: true,
@@ -875,6 +922,7 @@ export default class extends BaseSeeder {
           tableName: 'cliente',
           fieldName: 'direccion',
           tag: 'Dirección',
+          type: 'text',
           width: 200,
           order: 5,
           isEditable: true,
@@ -885,6 +933,18 @@ export default class extends BaseSeeder {
           tableName: 'cliente',
           fieldName: 'descripcion',
           tag: 'Descripción',
+          type: 'text',
+          width: 200,
+          order: 6,
+          isEditable: true,
+          isHidden: false
+        },
+        {
+          userId: 1,
+          tableName: 'cliente',
+          fieldName: 'catIva',
+          tag: 'Categoria IVA',
+          type: 'list',
           width: 200,
           order: 6,
           isEditable: true,
@@ -895,6 +955,7 @@ export default class extends BaseSeeder {
           tableName: 'cliente',
           fieldName: 'habilitado',
           tag: 'Habilitado',
+          type: 'check',
           width: 100,
           order: 7,
           isEditable: true,
@@ -904,7 +965,8 @@ export default class extends BaseSeeder {
           userId: 1,
           tableName: 'cliente',
           fieldName: 'estadoId',
-          tag: 'Estado ID',
+          tag: 'Estado',
+          type: 'list',
           width: 100,
           order: 8,
           isEditable: true,
@@ -915,6 +977,7 @@ export default class extends BaseSeeder {
           tableName: 'cliente',
           fieldName: 'createdAt',
           tag: 'Creado en',
+          type: 'date',
           width: 200,
           order: 9,
           isEditable: false,
@@ -925,6 +988,7 @@ export default class extends BaseSeeder {
           tableName: 'cliente',
           fieldName: 'updatedAt',
           tag: 'Actualizado en',
+          type: 'date',
           width: 200,
           order: 10,
           isEditable: false,
@@ -937,6 +1001,7 @@ export default class extends BaseSeeder {
           tableName: 'etapa',
           fieldName: 'id',
           tag: 'ID',
+          type: 'id',
           width: 50,
           order: 1,
           isEditable: false,
@@ -947,6 +1012,7 @@ export default class extends BaseSeeder {
           tableName: 'etapa',
           fieldName: 'nombre',
           tag: 'Nombre',
+          type: 'text',
           width: 200,
           order: 2,
           isEditable: true,
@@ -957,6 +1023,7 @@ export default class extends BaseSeeder {
           tableName: 'etapa',
           fieldName: 'descripcion',
           tag: 'Descripción',
+          type: 'text',
           width: 200,
           order: 3,
           isEditable: true,
@@ -965,8 +1032,9 @@ export default class extends BaseSeeder {
         {
           userId: 1,
           tableName: 'etapa',
-          fieldName: 'precioTotal',
-          tag: 'Precio Total',
+          fieldName: 'total',
+          tag: 'Total',
+          type: 'price',
           width: 100,
           order: 4,
           isEditable: true,
@@ -975,18 +1043,9 @@ export default class extends BaseSeeder {
         {
           userId: 1,
           tableName: 'etapa',
-          fieldName: 'medida',
-          tag: 'Medida',
-          width: 100,
-          order: 5,
-          isEditable: true,
-          isHidden: false
-        },
-        {
-          userId: 1,
-          tableName: 'etapa',
           fieldName: 'habilitado',
           tag: 'Habilitado',
+          type: 'check',
           width: 100,
           order: 6,
           isEditable: true,
@@ -995,18 +1054,9 @@ export default class extends BaseSeeder {
         {
           userId: 1,
           tableName: 'etapa',
-          fieldName: 'heredaMed',
-          tag: 'Hereda Medida',
-          width: 100,
-          order: 7,
-          isEditable: true,
-          isHidden: false
-        },
-        {
-          userId: 1,
-          tableName: 'etapa',
           fieldName: 'estadoId',
-          tag: 'Estado ID',
+          tag: 'Estado',
+          type: 'list',
           width: 100,
           order: 8,
           isEditable: true,
@@ -1016,17 +1066,19 @@ export default class extends BaseSeeder {
           userId: 1,
           tableName: 'etapa',
           fieldName: 'obraId',
-          tag: 'Obra ID',
+          tag: 'Obra',
+          type: 'id',
           width: 100,
           order: 9,
           isEditable: true,
-          isHidden: false
+          isHidden: true
         },
         {
           userId: 1,
           tableName: 'etapa',
           fieldName: 'createdAt',
           tag: 'Creado en',
+          type: 'date',
           width: 200,
           order: 10,
           isEditable: false,
@@ -1037,6 +1089,7 @@ export default class extends BaseSeeder {
           tableName: 'etapa',
           fieldName: 'updatedAt',
           tag: 'Actualizado en',
+          type: 'date',
           width: 200,
           order: 11,
           isEditable: false,
@@ -1049,6 +1102,7 @@ export default class extends BaseSeeder {
           tableName: 'modulo',
           fieldName: 'id',
           tag: 'ID',
+          type: 'id',
           width: 50,
           order: 1,
           isEditable: false,
@@ -1059,6 +1113,7 @@ export default class extends BaseSeeder {
           tableName: 'modulo',
           fieldName: 'nombre',
           tag: 'Nombre',
+          type: 'text',
           width: 200,
           order: 2,
           isEditable: true,
@@ -1069,6 +1124,7 @@ export default class extends BaseSeeder {
           tableName: 'modulo',
           fieldName: 'descripcion',
           tag: 'Descripción',
+          type: 'text',
           width: 200,
           order: 3,
           isEditable: true,
@@ -1079,6 +1135,7 @@ export default class extends BaseSeeder {
           tableName: 'modulo',
           fieldName: 'habilitado',
           tag: 'Habilitado',
+          type: 'check',
           width: 100,
           order: 4,
           isEditable: true,
@@ -1087,28 +1144,20 @@ export default class extends BaseSeeder {
         {
           userId: 1,
           tableName: 'modulo',
-          fieldName: 'hereda_med',
-          tag: 'Hereda Medida',
-          width: 100,
-          order: 5,
-          isEditable: true,
-          isHidden: false
-        },
-        {
-          userId: 1,
-          tableName: 'modulo',
           fieldName: 'etapaId',
-          tag: 'Etapa ID',
+          tag: 'Etapa',
+          type: 'id',
           width: 100,
           order: 6,
           isEditable: true,
-          isHidden: false
+          isHidden: true
         },
         {
           userId: 1,
           tableName: 'modulo',
           fieldName: 'estadoId',
-          tag: 'Estado ID',
+          tag: 'Estado',
+          type: 'list',
           width: 100,
           order: 7,
           isEditable: true,
@@ -1119,6 +1168,7 @@ export default class extends BaseSeeder {
           tableName: 'modulo',
           fieldName: 'createdAt',
           tag: 'Creado en',
+          type: 'date',
           width: 200,
           order: 8,
           isEditable: false,
@@ -1129,6 +1179,7 @@ export default class extends BaseSeeder {
           tableName: 'modulo',
           fieldName: 'updatedAt',
           tag: 'Actualizado en',
+          type: 'date',
           width: 200,
           order: 9,
           isEditable: false,
@@ -1141,6 +1192,7 @@ export default class extends BaseSeeder {
           tableName: 'obra',
           fieldName: 'id',
           tag: 'ID',
+          type: 'id',
           width: 50,
           order: 1,
           isEditable: false,
@@ -1151,6 +1203,7 @@ export default class extends BaseSeeder {
           tableName: 'obra',
           fieldName: 'nombre',
           tag: 'Nombre',
+          type: 'text',
           width: 200,
           order: 2,
           isEditable: true,
@@ -1161,6 +1214,7 @@ export default class extends BaseSeeder {
           tableName: 'obra',
           fieldName: 'descripcion',
           tag: 'Descripción',
+          type: 'text',
           width: 200,
           order: 3,
           isEditable: true,
@@ -1169,8 +1223,32 @@ export default class extends BaseSeeder {
         {
           userId: 1,
           tableName: 'obra',
-          fieldName: 'precioTotal',
-          tag: 'Precio Total',
+          fieldName: 'total',
+          tag: 'Total',
+          type: 'price',
+          width: 100,
+          order: 4,
+          isEditable: true,
+          isHidden: false
+        },
+        {
+          userId: 1,
+          tableName: 'obra',
+          fieldName: 'subtotal',
+          tag: 'Subtotal',
+          type: 'price',
+          width: 100,
+          order: 4,
+          isEditable: true,
+          isHidden: false
+        },
+
+        {
+          userId: 1,
+          tableName: 'obra',
+          fieldName: 'descuento',
+          tag: 'Descuento',
+          type: 'percent',
           width: 100,
           order: 4,
           isEditable: true,
@@ -1181,6 +1259,7 @@ export default class extends BaseSeeder {
           tableName: 'obra',
           fieldName: 'medida',
           tag: 'Medida',
+          type: 'number',
           width: 100,
           order: 5,
           isEditable: true,
@@ -1191,6 +1270,7 @@ export default class extends BaseSeeder {
           tableName: 'obra',
           fieldName: 'habilitado',
           tag: 'Habilitado',
+          type: 'check',
           width: 100,
           order: 6,
           isEditable: true,
@@ -1200,7 +1280,8 @@ export default class extends BaseSeeder {
           userId: 1,
           tableName: 'obra',
           fieldName: 'estadoId',
-          tag: 'Estado ID',
+          tag: 'Estado',
+          type: 'list',
           width: 100,
           order: 7,
           isEditable: true,
@@ -1211,6 +1292,7 @@ export default class extends BaseSeeder {
           tableName: 'obra',
           fieldName: 'createdAt',
           tag: 'Creado en',
+          type: 'date',
           width: 200,
           order: 8,
           isEditable: false,
@@ -1221,9 +1303,21 @@ export default class extends BaseSeeder {
           tableName: 'obra',
           fieldName: 'updatedAt',
           tag: 'Actualizado en',
+          type: 'date',
           width: 200,
           order: 9,
           isEditable: false,
+          isHidden: false
+        },
+        {
+          userId: 1,
+          tableName: 'obra',
+          fieldName: 'clienteId',
+          tag: 'Cliente',
+          type: 'search',
+          width: 200,
+          order: 10,
+          isEditable: true,
           isHidden: false
         },
 
@@ -1233,6 +1327,7 @@ export default class extends BaseSeeder {
           tableName: 'personal',
           fieldName: 'id',
           tag: 'ID',
+          type: 'id',
           width: 50,
           order: 1,
           isEditable: false,
@@ -1243,6 +1338,7 @@ export default class extends BaseSeeder {
           tableName: 'personal',
           fieldName: 'direccion',
           tag: 'Dirección',
+          type: 'text',
           width: 200,
           order: 2,
           isEditable: true,
@@ -1253,6 +1349,7 @@ export default class extends BaseSeeder {
           tableName: 'personal',
           fieldName: 'descripcion',
           tag: 'Descripción',
+          type: 'text',
           width: 200,
           order: 3,
           isEditable: true,
@@ -1272,7 +1369,8 @@ export default class extends BaseSeeder {
           userId: 1,
           tableName: 'personal',
           fieldName: 'perRolId',
-          tag: 'Rol ID',
+          tag: 'Rol',
+          type: 'list',
           width: 100,
           order: 5,
           isEditable: true,
@@ -1282,7 +1380,8 @@ export default class extends BaseSeeder {
           userId: 1,
           tableName: 'personal',
           fieldName: 'perTareaId',
-          tag: 'Tarea ID',
+          tag: 'Tarea',
+          type: 'id',
           width: 100,
           order: 6,
           isEditable: true,
@@ -1293,6 +1392,7 @@ export default class extends BaseSeeder {
           tableName: 'personal',
           fieldName: 'createdAt',
           tag: 'Creado en',
+          type: 'date',
           width: 200,
           order: 7,
           isEditable: false,
@@ -1303,6 +1403,7 @@ export default class extends BaseSeeder {
           tableName: 'personal',
           fieldName: 'updatedAt',
           tag: 'Actualizado en',
+          type: 'date',
           width: 200,
           order: 8,
           isEditable: false,
@@ -1315,6 +1416,7 @@ export default class extends BaseSeeder {
           tableName: 'proveedor',
           fieldName: 'id',
           tag: 'ID',
+          type: 'id',
           width: 50,
           order: 1,
           isEditable: false,
@@ -1325,6 +1427,7 @@ export default class extends BaseSeeder {
           tableName: 'proveedor',
           fieldName: 'nombre',
           tag: 'Nombre',
+          type: 'text',
           width: 200,
           order: 2,
           isEditable: true,
@@ -1335,6 +1438,7 @@ export default class extends BaseSeeder {
           tableName: 'proveedor',
           fieldName: 'mail',
           tag: 'Correo Electrónico',
+          type: 'text',
           width: 200,
           order: 3,
           isEditable: true,
@@ -1345,6 +1449,7 @@ export default class extends BaseSeeder {
           tableName: 'proveedor',
           fieldName: 'tel',
           tag: 'Teléfono',
+          type: 'text',
           width: 100,
           order: 4,
           isEditable: true,
@@ -1355,6 +1460,7 @@ export default class extends BaseSeeder {
           tableName: 'proveedor',
           fieldName: 'habilitado',
           tag: 'Habilitado',
+          type: 'check',
           width: 100,
           order: 5,
           isEditable: true,
@@ -1365,6 +1471,7 @@ export default class extends BaseSeeder {
           tableName: 'proveedor',
           fieldName: 'direccion',
           tag: 'Dirección',
+          type: 'text',
           width: 200,
           order: 6,
           isEditable: true,
@@ -1375,6 +1482,7 @@ export default class extends BaseSeeder {
           tableName: 'proveedor',
           fieldName: 'descripcion',
           tag: 'Descripción',
+          type: 'text',
           width: 200,
           order: 7,
           isEditable: true,
@@ -1384,7 +1492,8 @@ export default class extends BaseSeeder {
           userId: 1,
           tableName: 'proveedor',
           fieldName: 'estadoId',
-          tag: 'Estado ID',
+          tag: 'Estado',
+          type: 'list',
           width: 100,
           order: 8,
           isEditable: true,
@@ -1395,6 +1504,7 @@ export default class extends BaseSeeder {
           tableName: 'proveedor',
           fieldName: 'createdAt',
           tag: 'Creado en',
+          type: 'date',
           width: 200,
           order: 9,
           isEditable: false,
@@ -1405,6 +1515,7 @@ export default class extends BaseSeeder {
           tableName: 'proveedor',
           fieldName: 'updatedAt',
           tag: 'Actualizado en',
+          type: 'date',
           width: 200,
           order: 10,
           isEditable: false,
@@ -1438,7 +1549,7 @@ export default class extends BaseSeeder {
           userId: 1,
           tableName: 'art_tarea',
           fieldName: 'articuloNombre',
-          tag: 'Articulo Nombre',
+          tag: 'Articulo',
           type: 'string',
           width: 200,
           order: 3,
@@ -1449,8 +1560,8 @@ export default class extends BaseSeeder {
           userId: 1,
           tableName: 'art_tarea',
           fieldName: 'uniMedId',
-          tag: 'Unidad de Medida ID',
-          type: 'choice',
+          tag: 'Uni. Med.',
+          type: 'list',
           width: 50,
           order: 4,
           isEditable: true,
@@ -1470,9 +1581,9 @@ export default class extends BaseSeeder {
         {
           userId: 1,
           tableName: 'art_tarea',
-          fieldName: 'heredaMed',
-          tag: 'Hereda Medida',
-          type: 'check',
+          fieldName: 'cantidad',
+          tag: 'Cantidad',
+          type: 'number',
           width: 50,
           order: 6,
           isEditable: true,
@@ -1481,9 +1592,9 @@ export default class extends BaseSeeder {
         {
           userId: 1,
           tableName: 'art_tarea',
-          fieldName: 'cantidad',
-          tag: 'Cantidad',
-          type: 'number',
+          fieldName: 'precioUnitario',
+          tag: 'Precio Unitario',
+          type: 'price',
           width: 50,
           order: 7,
           isEditable: true,
@@ -1492,9 +1603,9 @@ export default class extends BaseSeeder {
         {
           userId: 1,
           tableName: 'art_tarea',
-          fieldName: 'cantidadTotal',
-          tag: 'Cantidad Total',
-          type: 'number',
+          fieldName: 'total',
+          tag: 'Total',
+          type: 'price',
           width: 50,
           order: 8,
           isEditable: true,
@@ -1503,9 +1614,9 @@ export default class extends BaseSeeder {
         {
           userId: 1,
           tableName: 'art_tarea',
-          fieldName: 'precioUnitario',
-          tag: 'Precio Unitario',
-          type: 'number',
+          fieldName: 'subtotal',
+          tag: 'subtotal',
+          type: 'price',
           width: 50,
           order: 9,
           isEditable: true,
@@ -1514,9 +1625,9 @@ export default class extends BaseSeeder {
         {
           userId: 1,
           tableName: 'art_tarea',
-          fieldName: 'precioTotal',
-          tag: 'Precio Total',
-          type: 'number',
+          fieldName: 'descuento',
+          tag: 'Descuento',
+          type: 'percent',
           width: 50,
           order: 10,
           isEditable: true,
@@ -1531,7 +1642,7 @@ export default class extends BaseSeeder {
           width: 50,
           order: 11,
           isEditable: true,
-          isHidden: false
+          isHidden: true
         },
         {
           userId: 1,
@@ -1562,6 +1673,7 @@ export default class extends BaseSeeder {
           tableName: 'tarea',
           fieldName: 'id',
           tag: 'ID',
+          type: 'id',
           width: 50,
           order: 1,
           isEditable: false,
@@ -1572,6 +1684,7 @@ export default class extends BaseSeeder {
           tableName: 'tarea',
           fieldName: 'nombre',
           tag: 'Nombre',
+          type: 'text',
           width: 200,
           order: 2,
           isEditable: true,
@@ -1582,6 +1695,7 @@ export default class extends BaseSeeder {
           tableName: 'tarea',
           fieldName: 'descripcion',
           tag: 'Descripción',
+          type: 'text',
           width: 200,
           order: 3,
           isEditable: true,
@@ -1590,8 +1704,9 @@ export default class extends BaseSeeder {
         {
           userId: 1,
           tableName: 'tarea',
-          fieldName: 'precioTotal',
-          tag: 'Precio Total',
+          fieldName: 'total',
+          tag: 'Total',
+          type: 'price',
           width: 100,
           order: 4,
           isEditable: true,
@@ -1602,6 +1717,7 @@ export default class extends BaseSeeder {
           tableName: 'tarea',
           fieldName: 'habilitado',
           tag: 'Habilitado',
+          type: 'check',
           width: 100,
           order: 5,
           isEditable: true,
@@ -1612,6 +1728,7 @@ export default class extends BaseSeeder {
           tableName: 'tarea',
           fieldName: 'condicion',
           tag: 'Condición',
+          type: 'list',
           width: 200,
           order: 6,
           isEditable: true,
@@ -1621,7 +1738,8 @@ export default class extends BaseSeeder {
           userId: 1,
           tableName: 'tarea',
           fieldName: 'condBool',
-          tag: 'Condición Booleana',
+          tag: 'Aplica?',
+          type: 'check',
           width: 100,
           order: 7,
           isEditable: true,
@@ -1630,28 +1748,20 @@ export default class extends BaseSeeder {
         {
           userId: 1,
           tableName: 'tarea',
-          fieldName: 'heredaMed',
-          tag: 'Hereda Medida',
-          width: 100,
-          order: 8,
-          isEditable: true,
-          isHidden: false
-        },
-        {
-          userId: 1,
-          tableName: 'tarea',
           fieldName: 'moduloId',
-          tag: 'Módulo ID',
+          tag: 'Módulo',
+          type: 'id',
           width: 100,
           order: 9,
           isEditable: true,
-          isHidden: false
+          isHidden: true
         },
         {
           userId: 1,
           tableName: 'tarea',
           fieldName: 'estadoId',
-          tag: 'Estado ID',
+          tag: 'Estado',
+          type: 'list',
           width: 100,
           order: 10,
           isEditable: true,
@@ -1662,6 +1772,7 @@ export default class extends BaseSeeder {
           tableName: 'tarea',
           fieldName: 'createdAt',
           tag: 'Creado en',
+          type: 'date',
           width: 200,
           order: 11,
           isEditable: false,
@@ -1672,12 +1783,132 @@ export default class extends BaseSeeder {
           tableName: 'tarea',
           fieldName: 'updatedAt',
           tag: 'Actualizado en',
+          type: 'date',
           width: 200,
           order: 12,
           isEditable: false,
           isHidden: false
         },
 
+        //settings rubros
+        {
+          userId: 1,
+          tableName: 'rubros',
+          fieldName: 'id',
+          tag: 'ID',
+          type: 'id',
+          width: 50,
+          order: 1,
+          isEditable: false,
+          isHidden: false
+        },
+        {
+          userId: 1,
+          tableName: 'rubros',
+          fieldName: 'nombre',
+          tag: 'Nombre',
+          type: 'text',
+          width: 200,
+          order: 2,
+          isEditable: true,
+          isHidden: false
+        },
+
+        //settings marcas
+        {
+          userId: 1,
+          tableName: 'marcas',
+          fieldName: 'id',
+          tag: 'ID',
+          type: 'id',
+          width: 50,
+          order: 1,
+          isEditable: false,
+          isHidden: false
+        },
+        {
+          userId: 1,
+          tableName: 'marcas',
+          fieldName: 'nombre',
+          tag: 'Nombre',
+          type: 'text',
+          width: 200,
+          order: 2,
+          isEditable: true,
+          isHidden: false
+        },
+
+        //settings tipos
+        {
+          userId: 1,
+          tableName: 'tipos',
+          fieldName: 'id',
+          tag: 'ID',
+          type: 'id',
+          width: 50,
+          order: 1,
+          isEditable: false,
+          isHidden: false
+        },
+        {
+          userId: 1,
+          tableName: 'tipos',
+          fieldName: 'nombre',
+          tag: 'Nombre',
+          type: 'text',
+          width: 200,
+          order: 2,
+          isEditable: true,
+          isHidden: false
+        },
+
+        //settings presentaciones
+        {
+          userId: 1,
+          tableName: 'presentacions',
+          fieldName: 'id',
+          tag: 'ID',
+          type: 'id',
+          width: 50,
+          order: 1,
+          isEditable: false,
+          isHidden: false
+        },
+        {
+          userId: 1,
+          tableName: 'presentacions',
+          fieldName: 'nombre',
+          tag: 'Nombre',
+          type: 'text',
+          width: 200,
+          order: 2,
+          isEditable: true,
+          isHidden: false
+        },
+
+        //settings uni_med
+        {
+          userId: 1,
+          tableName: 'uni_meds',
+          fieldName: 'id',
+          type: 'id',
+          tag: 'ID',
+          width: 50,
+          order: 1,
+          isEditable: true,
+          isHidden: false
+        },
+        {
+          userId: 1,
+          tableName: 'uni_meds',
+          fieldName: 'nombre',
+          type: 'text',
+          tag: 'Nombre',
+          width: 200,
+          order: 2,
+          isEditable: true,
+          isHidden: false
+        },
       ]);
     // END USER FIELD SETTINGS
   }

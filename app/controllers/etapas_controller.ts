@@ -12,9 +12,11 @@ export default class EtapasController {
 
   // Create a new etapa
   public async create({ request, response }: HttpContext) {
-    const etapa = request.only(['nombre', 'descripcion', 'area', 'habilitado', 'heredaMed'])
+    const data = request.only(['nombre', 'descripcion', 'habilitado', 'obraId'])
+    const etapa = await Etapa.create(data)
     return response.json(etapa)
   }
+
 
   // Show etapa by id
   public async show({ params, response }: HttpContext) {
@@ -36,7 +38,7 @@ export default class EtapasController {
     if (!etapa) {
       return response.status(404).json({ error: 'Etapa not found' })
     }
-    const data = request.only(['nombre', 'descripcion', 'area', 'habilitado', 'heredaMed'])
+    const data = request.only(['nombre', 'descripcion', 'habilitado',])
     etapa.merge(data)
     await etapa.save()
     return response.json(etapa)

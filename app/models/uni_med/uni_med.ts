@@ -1,4 +1,4 @@
-import { DateTime } from 'luxon'
+
 import { BaseModel, column } from '@adonisjs/lucid/orm'
 
 export default class UniMed extends BaseModel {
@@ -6,15 +6,6 @@ export default class UniMed extends BaseModel {
   declare id: string
 
   @column()
-  declare descripcion: string | null
-
-  @column()
-  declare habilitado: boolean | true
-
-  @column.dateTime({ autoCreate: true })
-  declare createdAt: DateTime
-
-  @column.dateTime({ autoCreate: true, autoUpdate: true })
-  declare updatedAt: DateTime
+  declare nombre: string | null
 
 }

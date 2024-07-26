@@ -2,7 +2,6 @@
 
 import { HttpContext } from '@adonisjs/core/http'
 import UniMed from '#models/uni_med/uni_med'
-import db from '@adonisjs/lucid/services/db'
 
 export default class UniMedsController {
 
@@ -20,7 +19,7 @@ export default class UniMedsController {
 
   //crear uniMed
   public async create({ request, response }: HttpContext) {
-    const data = request.only(['nombre', 'descripcion', 'habilitado'])
+    const data = request.only(['id', 'nombre',])
     const uniMed = await UniMed.create(data)
     return response.json(uniMed)
   }
@@ -40,7 +39,7 @@ export default class UniMedsController {
     if (!uniMed) {
       return response.status(404).json({ error: 'UniMed not found' })
     }
-    const data = request.only(['nombre', 'descripcion', 'habilitado'])
+    const data = request.only(['id', 'nombre',])
     uniMed.merge(data)
     await uniMed.save()
     return response.json(uniMed)
@@ -56,23 +55,5 @@ export default class UniMedsController {
     return response.status(200).json({ message: 'UniMed deleted' })
   }
 
-  //Obtener modelo de uniMeds
-  public async getUniMedsModel({ response }: HttpContext) {
-    try {
-      const uniMedsModelSchema = await db.rawQuery('DESCRIBE uni_meds');
-      const filteredSchema = uniMedsModelSchema[0]
-        .filter((field: any) => field.Field !== 'created_at' && field.Field !== 'updated_at')
-        .map((field: any) => ({
-          Field: field.Field,
-          Type: field.Type,
-          Null: field.Null,
-          Key: field.Key,
-          Default: field.Default,
-          Extra: field.Extra
-        }))
-      return response.json(filteredSchema)
-    } catch (error) {
-      return response.status(500).json({ error: error.message })
-    }
-  }
+
 }

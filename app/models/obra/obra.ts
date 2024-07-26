@@ -1,6 +1,6 @@
 import { DateTime } from 'luxon'
-import type { HasMany, HasOne, ManyToMany } from '@adonisjs/lucid/types/relations'
-import { BaseModel, manyToMany, column, hasMany, hasOne } from '@adonisjs/lucid/orm'
+import type { HasMany, HasOne, } from '@adonisjs/lucid/types/relations'
+import { BaseModel, column, hasMany, hasOne } from '@adonisjs/lucid/orm'
 import Etapa from '#models/etapa/etapa'
 import Cliente from '#models/cliente/cliente'
 import Estado from '#models/estado/estado'
@@ -16,7 +16,16 @@ export default class Obra extends BaseModel {
   declare descripcion: string | null
 
   @column()
-  declare precioTotal: number | 0
+  declare total: number | 0
+
+  @column()
+  declare subtotal: number | 0
+
+  @column()
+  declare descuento: number | 0
+
+  @column()
+  declare iva: number | 1
 
   @column()
   declare medida: number | null
@@ -38,8 +47,8 @@ export default class Obra extends BaseModel {
   @hasMany(() => Etapa)
   declare etapas: HasMany<typeof Etapa>
 
-  @manyToMany(() => Cliente)
-  declare clientes: ManyToMany<typeof Cliente>
+  @hasOne(() => Cliente)
+  declare clientes: HasOne<typeof Cliente>
 
   @hasOne(() => Estado)
   declare estado: HasOne<typeof Estado>
@@ -49,7 +58,6 @@ export default class Obra extends BaseModel {
       id: false,
       nombre: true,
       descripcion: true,
-      precioTotal: true,
       medida: true,
       habilitado: true,
       estadoId: true,

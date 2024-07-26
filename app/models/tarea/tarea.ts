@@ -21,19 +21,16 @@ export default class Tarea extends BaseModel {
   declare descripcion: string | null
 
   @column()
-  declare precioTotal: number | 0
+  declare total: number | 0
+
+  @column()
+  declare subtotal: number | 0
+
+  @column()
+  declare descuento: number | 0
 
   @column()
   declare habilitado: boolean | true
-
-  @column()
-  declare condicion: string | null
-
-  @column()
-  declare condBool: boolean | false
-
-  @column()
-  declare heredaMed: boolean | false
 
   @column()
   declare moduloId: number | null
@@ -42,13 +39,10 @@ export default class Tarea extends BaseModel {
   declare estadoId: number | null
 
   @column()
-  declare medida: number | null
+  declare cantidad: number | null
 
   @column()
   declare uniMedId: string | null
-
-  @column()
-  declare UniMedId: number | null
 
 
   @column.dateTime({ autoCreate: true })

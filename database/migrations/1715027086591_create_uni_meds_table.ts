@@ -6,10 +6,7 @@ export default class UniMeds extends BaseSchema {
   public async up() {
     this.schema.createTable(this.tableName, (table) => {
       table.string('id', 10).primary().unique().notNullable()
-      table.string('descripcion', 255).nullable()
-      table.boolean('habilitado').defaultTo(true)
-      table.timestamp('created_at', { useTz: true })
-      table.timestamp('updated_at', { useTz: true })
+      table.string('nombre', 100).nullable()
     })
   }
 

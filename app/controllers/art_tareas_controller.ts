@@ -21,7 +21,7 @@ export default class ArtTareasController {
 
   //crear tareas de un articulo
   public async create({ request, response }: HttpContext) {
-    const data = request.only(['nombre', 'descripcion', 'heredaMed', 'cantidad', 'cantidadTotal', 'precioUnitario', 'precioTotal', 'uniMedId', 'tareaId', 'articuloId'])
+    const data = request.only(['nombre', 'descripcion', 'cantidad', 'precioUnitario', 'descuento', 'subtotal', 'total', 'uniMedId', 'tareaId', 'articuloId'])
     const artTarea = await ArtTarea.create(data)
     await artTarea.load('articulo')
     await artTarea.load('tarea')
@@ -43,7 +43,7 @@ export default class ArtTareasController {
     if (!artTarea) {
       return response.status(404).json({ error: 'ArtTarea not found' })
     }
-    const data = request.only(['articuloNombre', 'descripcion', 'heredaMed', 'cantidad', 'cantidadTotal', 'precioUnitario', 'precioTotal', 'uniMedId'])
+    const data = request.only(['articuloNombre', 'descripcion', 'cantidad', 'descuento', 'subtotal', 'total', 'precioUnitario', 'uniMedId'])
     artTarea.merge(data)
     await artTarea.save()
     await artTarea.load('articulo')

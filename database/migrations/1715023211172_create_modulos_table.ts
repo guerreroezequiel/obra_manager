@@ -9,7 +9,7 @@ export default class Modulos extends BaseSchema {
       table.string('nombre', 255).notNullable()
       table.string('descripcion', 255).nullable()
       table.boolean('habilitado').defaultTo(true)
-      table.boolean('hereda_med').defaultTo(false)
+      table.decimal('total', 12, 2).nullable()
       // table.integer('etapas_id').unsigned().references('id').inTable('etapas').nullable()
       // table.integer('estado_id').unsigned().references('id').inTable('estados').nullable()
       table.timestamp('created_at', { useTz: true })

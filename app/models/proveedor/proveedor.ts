@@ -1,7 +1,8 @@
 import { DateTime } from 'luxon'
-import { BaseModel, column, hasOne } from '@adonisjs/lucid/orm'
+import { BaseModel, column, hasMany, hasOne } from '@adonisjs/lucid/orm'
 import Estado from '#models/estado/estado'
-import type { HasOne } from '@adonisjs/lucid/types/relations'
+import type { HasMany, HasOne } from '@adonisjs/lucid/types/relations'
+import LisPre from './lis_pre.js'
 
 
 export default class Proveedor extends BaseModel {
@@ -29,8 +30,6 @@ export default class Proveedor extends BaseModel {
   @column()
   declare estadoId: number | null
 
-
-
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
 
@@ -40,6 +39,9 @@ export default class Proveedor extends BaseModel {
 
   @hasOne(() => Estado)
   declare estado: HasOne<typeof Estado>
+
+  @hasMany(() => LisPre)
+  declare lista: HasMany<typeof LisPre>
 
   public get editableFields() {
     return {

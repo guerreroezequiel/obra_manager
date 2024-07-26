@@ -16,10 +16,10 @@ export default class Modulo extends BaseModel {
   declare descripcion: string | null
 
   @column()
-  declare habilitado: boolean | true
+  declare total: number | 0
 
   @column()
-  declare hereda_med: boolean | false
+  declare habilitado: boolean | true
 
   @column()
   declare etapaId: number | null

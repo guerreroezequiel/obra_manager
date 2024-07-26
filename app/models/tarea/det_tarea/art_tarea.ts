@@ -22,19 +22,19 @@ export default class ArtTarea extends BaseModel {
   declare descripcion: string | null
 
   @column()
-  declare heredaMed: boolean | false
-
-  @column()
   declare cantidad: number | 0
-
-  @column()
-  declare cantidadTotal: number | 0
 
   @column()
   declare precioUnitario: number | 0
 
   @column()
-  declare precioTotal: number | 0
+  declare total: number | 0
+
+  @column()
+  declare subtotal: number | 0
+
+  @column()
+  declare descuento: number | 0
 
   @column()
   declare tareaId: number
@@ -63,7 +63,6 @@ export default class ArtTarea extends BaseModel {
       cantidad: true,
       cantidadTotal: false,
       precioUnitario: true,
-      precioTotal: true,
       tareaId: false,
     }
   }
