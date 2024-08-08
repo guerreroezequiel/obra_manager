@@ -1,7 +1,6 @@
 import { DateTime } from 'luxon'
-import { BaseModel, column, hasMany, hasOne } from '@adonisjs/lucid/orm'
-import Estado from '#models/estado/estado'
-import type { HasMany, HasOne } from '@adonisjs/lucid/types/relations'
+import { BaseModel, column, hasMany, } from '@adonisjs/lucid/orm'
+import type { HasMany, } from '@adonisjs/lucid/types/relations'
 import LisPre from './lis_pre.js'
 
 
@@ -27,8 +26,6 @@ export default class Proveedor extends BaseModel {
   @column()
   declare descripcion: string | null
 
-  @column()
-  declare estadoId: number | null
 
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
@@ -37,8 +34,6 @@ export default class Proveedor extends BaseModel {
   declare updatedAt: DateTime
 
 
-  @hasOne(() => Estado)
-  declare estado: HasOne<typeof Estado>
 
   @hasMany(() => LisPre)
   declare lista: HasMany<typeof LisPre>
@@ -47,7 +42,6 @@ export default class Proveedor extends BaseModel {
     return {
       direccion: true,
       descripcion: true,
-      estadoId: true,
       createdAt: false,
       updatedAt: false,
     }

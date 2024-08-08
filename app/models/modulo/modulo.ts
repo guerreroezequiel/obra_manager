@@ -1,9 +1,8 @@
 import { DateTime } from 'luxon'
-import type { BelongsTo, HasMany, HasOne } from '@adonisjs/lucid/types/relations'
-import { BaseModel, belongsTo, column, hasMany, hasOne } from '@adonisjs/lucid/orm'
+import type { BelongsTo, HasMany, } from '@adonisjs/lucid/types/relations'
+import { BaseModel, belongsTo, column, hasMany, } from '@adonisjs/lucid/orm'
 import Etapa from '#models/etapa/etapa'
 import Tarea from '#models/tarea/tarea'
-import Estado from '#models/estado/estado'
 
 export default class Modulo extends BaseModel {
   @column({ isPrimary: true })
@@ -19,13 +18,7 @@ export default class Modulo extends BaseModel {
   declare total: number | 0
 
   @column()
-  declare habilitado: boolean | true
-
-  @column()
   declare etapaId: number | null
-
-  @column()
-  declare estadoId: number | null
 
   @column()
   declare hablitado: boolean | true
@@ -44,8 +37,6 @@ export default class Modulo extends BaseModel {
   @hasMany(() => Tarea)
   declare tareas: HasMany<typeof Tarea>
 
-  @hasOne(() => Estado)
-  declare estado: HasOne<typeof Estado>
 
 }
 

@@ -8,7 +8,7 @@ export default class Etapas extends BaseSchema {
       table.increments('id')
       table.string('nombre', 255).notNullable()
       table.string('descripcion', 255).nullable()
-      table.boolean('habilitado').defaultTo(true)
+      table.boolean('finalizado').defaultTo(false)
       table.decimal('total', 12, 2).nullable()
       // table.integer('estado_id').unsigned().references('id').inTable('estados').nullable()
       // table.integer('obra_id').unsigned().references('id').inTable('obras').nullable()

@@ -43,7 +43,11 @@ export default class ArtTareasController {
     if (!artTarea) {
       return response.status(404).json({ error: 'ArtTarea not found' })
     }
-    const data = request.only(['articuloNombre', 'descripcion', 'cantidad', 'descuento', 'subtotal', 'total', 'precioUnitario', 'uniMedId'])
+    const data = request.only([
+      'articuloNombre', 'descripcion', 'cantidad', 'descuento', 'subtotal', 'total',
+      'precioUnitario', 'uniMedId', 'uniMedPack', 'rendimiento', 'canPack', 'rubroId',
+      'marcaId', 'tipoId', 'presentacionId'
+    ])
     artTarea.merge(data)
     await artTarea.save()
     await artTarea.load('articulo')

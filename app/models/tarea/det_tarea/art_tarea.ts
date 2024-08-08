@@ -16,9 +16,6 @@ export default class ArtTarea extends BaseModel {
   declare articuloNombre: string | null
 
   @column()
-  declare uniMedId: string | null
-
-  @column()
   declare descripcion: string | null
 
   @column()
@@ -39,6 +36,29 @@ export default class ArtTarea extends BaseModel {
   @column()
   declare tareaId: number
 
+  @column()
+  declare uniMedId: string | null
+
+  @column()
+  declare rubroId: string | null
+
+  @column()
+  declare tipoId: string | null
+
+  @column()
+  declare marcaId: string | null
+
+  @column()
+  declare presentacionId: string | null
+
+  @column()
+  declare uniMedPack: string | null
+
+  @column()
+  declare canPack: number | null
+
+  @column()
+  declare rendimiento: number | null
 
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime

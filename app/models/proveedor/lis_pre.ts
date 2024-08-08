@@ -16,7 +16,7 @@ export default class LisPre extends BaseModel {
   declare precioVenta: number | 0
 
   @column()
-  declare markUp: number | 1
+  declare markUp: number | 0
 
   @column()
   declare precioCompra: number | 0

@@ -7,7 +7,7 @@ export default class extends BaseSchema {
     this.schema.alterTable(this.tableName, (table) => {
       table.integer('lista_id').unsigned().references('id').inTable('lis_pre_ids')
       table.integer('proveedor_id').unsigned().references('id').inTable('proveedors').nullable()
-      table.integer('articulo_id').unsigned().references('id').inTable('articulos').nullable()
+      table.integer('articulo_id').unsigned().references('id').inTable('articulos')
     })
   }
 

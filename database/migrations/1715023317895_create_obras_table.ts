@@ -6,13 +6,11 @@ export default class Obras extends BaseSchema {
   public async up() {
     this.schema.createTable(this.tableName, (table) => {
       table.increments('id')
-      table.string('nombre', 255).notNullable()
-      table.string('descripcion', 255).nullable()
+      table.string('codigo', 255).notNullable()
+      table.string('direccion', 255).nullable()
       table.decimal('subtotal', 12, 2).nullable()
       table.decimal('total', 12, 2).nullable()
       table.decimal('descuento', 5, 2).defaultTo(1)
-      table.decimal('iva', 5, 2).defaultTo(0)
-      table.boolean('habilitado').defaultTo(true)
       table.decimal('medida', 12, 2).nullable()
       // table.integer('estado_id').unsigned().references('id').inTable('estados').nullable()
       table.timestamp('created_at', { useTz: true })

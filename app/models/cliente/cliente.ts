@@ -2,7 +2,6 @@ import { DateTime } from 'luxon'
 import type { HasMany, HasOne } from '@adonisjs/lucid/types/relations'
 import { BaseModel, column, hasMany, hasOne } from '@adonisjs/lucid/orm'
 import Obra from '#models/obra/obra'
-import Estado from '#models/estado/estado'
 import CatIva from './cat_iva.js'
 
 
@@ -29,9 +28,6 @@ export default class Cliente extends BaseModel {
   declare habilitado: boolean | true
 
   @column()
-  declare estadoId: number | null
-
-  @column()
   declare catIvaId: number | null
 
   @column.dateTime({ autoCreate: true })
@@ -42,9 +38,6 @@ export default class Cliente extends BaseModel {
 
   @hasMany(() => Obra)
   declare obra: HasMany<typeof Obra>
-
-  @hasOne(() => Estado)
-  declare estado: HasOne<typeof Estado>
 
   @hasOne(() => CatIva)
   declare catIva: HasOne<typeof CatIva>
@@ -58,7 +51,6 @@ export default class Cliente extends BaseModel {
       direccion: true,
       descripcion: true,
       habilitado: true,
-      estadoId: true,
       createdAt: false,
       updatedAt: false,
     }

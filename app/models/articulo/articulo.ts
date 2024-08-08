@@ -1,7 +1,7 @@
 import { DateTime } from 'luxon'
-import { BaseModel, column, hasMany, hasOne } from '@adonisjs/lucid/orm'
+import { BaseModel, belongsTo, column, hasMany, hasOne } from '@adonisjs/lucid/orm'
 import UniMed from '#models/uni_med/uni_med'
-import type { HasMany, HasOne } from '@adonisjs/lucid/types/relations'
+import type { BelongsTo, HasMany, HasOne } from '@adonisjs/lucid/types/relations'
 import ArtTarea from '#models/tarea/det_tarea/art_tarea'
 import LisPre from '#models/proveedor/lis_pre'
 import Marca from './marca.js'
@@ -58,20 +58,22 @@ export default class Articulo extends BaseModel {
   @hasOne(() => UniMed)
   declare uniMed: HasOne<typeof UniMed>
 
-  @hasOne(() => UniMed)
+  @hasOne(() => UniMed, {
+    foreignKey: 'uniMedPack'
+  })
   declare uniMedP: HasOne<typeof UniMed>
 
-  @hasOne(() => Rubro)
-  declare rubro: HasOne<typeof Rubro>
+  @belongsTo(() => Rubro)
+  declare rubro: BelongsTo<typeof Rubro>
 
-  @hasOne(() => Presentacion)
-  declare presentacion: HasOne<typeof Presentacion>
+  @belongsTo(() => Presentacion)
+  declare presentacion: BelongsTo<typeof Presentacion>
 
-  @hasOne(() => Marca)
-  declare marca: HasOne<typeof Marca>
+  @belongsTo(() => Marca)
+  declare marca: BelongsTo<typeof Marca>
 
-  @hasOne(() => Tipo)
-  declare tipo: HasOne<typeof Tipo>
+  @belongsTo(() => Tipo)
+  declare tipo: BelongsTo<typeof Tipo>
 
   @hasMany(() => ArtTarea)
   declare perTareaId: HasMany<typeof ArtTarea>

@@ -3,17 +3,19 @@ import type { HasMany, HasOne, } from '@adonisjs/lucid/types/relations'
 import { BaseModel, column, hasMany, hasOne } from '@adonisjs/lucid/orm'
 import Etapa from '#models/etapa/etapa'
 import Cliente from '#models/cliente/cliente'
-import Estado from '#models/estado/estado'
 
 export default class Obra extends BaseModel {
   @column({ isPrimary: true })
   declare id: number
 
   @column()
-  declare nombre: string
+  declare codigo: string
 
   @column()
-  declare descripcion: string | null
+  declare direccion: string | null
+
+  @column()
+  declare clienteId: number | null
 
   @column()
   declare total: number | 0
@@ -25,17 +27,10 @@ export default class Obra extends BaseModel {
   declare descuento: number | 0
 
   @column()
-  declare iva: number | 1
-
-  @column()
   declare medida: number | null
 
   @column()
-  declare habilitado: boolean | true
-
-  @column()
   declare estadoId: number | null
-
 
 
   @column.dateTime({ autoCreate: true })
@@ -50,17 +45,12 @@ export default class Obra extends BaseModel {
   @hasOne(() => Cliente)
   declare clientes: HasOne<typeof Cliente>
 
-  @hasOne(() => Estado)
-  declare estado: HasOne<typeof Estado>
-
   public get editableFields() {
     return {
       id: false,
       nombre: true,
       descripcion: true,
       medida: true,
-      habilitado: true,
-      estadoId: true,
     }
   }
 

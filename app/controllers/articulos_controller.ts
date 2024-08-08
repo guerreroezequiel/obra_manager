@@ -15,7 +15,7 @@ export default class ArticulosController {
    * Store a new article
    */
   public async create({ request, response }: HttpContext) {
-    const data = request.only(['nombre', 'descripcion', 'tipo', 'habilitado'])
+    const data = request.only(['nombre', 'descripcion', 'tipoId', 'habilitado', 'uniMedId', 'rubroId', 'marcaId', 'presentacionId', 'canPack', 'uniMedPack', 'rendimiento'])
     const articulo = await Articulo.create(data)
     return response.json(articulo)
   }

@@ -170,6 +170,7 @@ router.delete('/lis_pre_ids/:id', [LisPreIdsController, 'delete'])
 
 //LIS_PRE
 router.get('/lis_pre', [LisPresController, 'index'])
+router.get('/lis_pre/buscador', [LisPresController, 'indexBus'])
 router.get('/lis_pre/:id', [LisPresController, 'show'])
 router.post('/lis_pre', [LisPresController, 'create'])
 router.put('/lis_pre/:id', [LisPresController, 'update'])

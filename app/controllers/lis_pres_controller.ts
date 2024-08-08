@@ -4,19 +4,117 @@ import db from '@adonisjs/lucid/services/db'
 
 export default class LisPresController {
   public async index({ response }: HttpContext) {
-    const lisPres = await LisPre.query().preload('articulo', (query) => {
-      query.select('nombre', 'descripcion', 'uniMedId', 'id')
-    })
+    const lisPres = await LisPre.query()
+      .preload('articulo', (articuloQuery) => {
+        articuloQuery.select('nombre', 'descripcion', 'uniMedId', 'uniMedPack', 'rendimiento', 'canPack', 'rubroId', 'marcaId', 'tipoId', 'presentacionId')
+          .preload('rubro', (rubroQuery) => {
+            rubroQuery.select('nombre')
+          })
+          .preload('marca', (marcaQuery) => {
+            marcaQuery.select('nombre')
+          })
+          .preload('presentacion', (presentacionQuery) => {
+            presentacionQuery.select('nombre')
+          })
+          .preload('tipo', (tipoQuery) => {
+            tipoQuery.select('nombre')
+          })
+      })
 
-    // Convert each LisPre object to a plain JavaScript object and flatten the articulo object
     const lisPresObjects = lisPres.map((lisPre) => {
       const lisPreObject = lisPre.toJSON()
 
       if (lisPreObject.articulo) {
         lisPreObject.articuloNombre = lisPreObject.articulo.nombre
         lisPreObject.articuloDescripcion = lisPreObject.articulo.descripcion
-        lisPreObject.articuloUniMed = lisPreObject.articulo.uniMedId
-        lisPreObject.articuloId = lisPreObject.articulo.id
+        lisPreObject.articuloUniMedId = lisPreObject.articulo.uniMedId
+        lisPreObject.articuloUniMedPack = lisPreObject.articulo.uniMedPack
+        lisPreObject.articuloRendimiento = lisPreObject.articulo.rendimiento
+        lisPreObject.articuloCanPack = lisPreObject.articulo.canPack
+
+
+        if (lisPreObject.articulo.rubro) {
+          lisPreObject.articuloRubroId = lisPreObject.articulo.rubro.nombre
+        }
+        if (lisPreObject.articulo.marca) {
+          lisPreObject.articuloMarcaId = lisPreObject.articulo.marca.nombre
+        }
+        if (lisPreObject.articulo.presentacion) {
+          lisPreObject.articuloPresentacionId = lisPreObject.articulo.presentacion.nombre
+        }
+        if (lisPreObject.articulo.tipo) {
+          lisPreObject.articuloTipoId = lisPreObject.articulo.tipo.nombre
+        }
+
+        delete lisPreObject.articulo
+      }
+
+      return lisPreObject
+    })
+
+    return response.json(lisPresObjects)
+  }
+
+  public async indexBus({ response }: HttpContext) {
+    const lisPres = await LisPre.query()
+      .preload('proveedor', (proveedorQuery) => {
+        proveedorQuery.select('nombre')
+      })
+      .preload('lista', (listaQuery) => {
+        listaQuery.select('nombre')
+      })
+      .preload('articulo', (articuloQuery) => {
+        articuloQuery.select('nombre', 'descripcion', 'uniMedId', 'uniMedPack', 'rendimiento', 'canPack', 'rubroId', 'marcaId', 'tipoId', 'presentacionId')
+          .preload('rubro', (rubroQuery) => {
+            rubroQuery.select('nombre')
+          })
+          .preload('marca', (marcaQuery) => {
+            marcaQuery.select('nombre')
+          })
+          .preload('presentacion', (presentacionQuery) => {
+            presentacionQuery.select('nombre')
+          })
+          .preload('tipo', (tipoQuery) => {
+            tipoQuery.select('nombre')
+          })
+      })
+
+    const lisPresObjects = lisPres.map((lisPre) => {
+      const lisPreObject = lisPre.toJSON()
+
+      if (lisPreObject.articulo) {
+        lisPreObject.articuloNombre = lisPreObject.articulo.nombre
+        lisPreObject.articuloDescripcion = lisPreObject.articulo.descripcion
+        lisPreObject.articuloUniMedId = lisPreObject.articulo.uniMedId
+        lisPreObject.articuloUniMedPack = lisPreObject.articulo.uniMedPack
+        lisPreObject.articuloRendimiento = lisPreObject.articulo.rendimiento
+        lisPreObject.articuloCanPack = lisPreObject.articulo.canPack
+        if (lisPreObject.proveedor) {
+          lisPreObject.proveedorId = lisPreObject.proveedor.nombre
+          delete lisPreObject.proveedor
+        }
+        if (lisPreObject.lista) {
+          lisPreObject.listaId = lisPreObject.lista.nombre
+          delete lisPreObject.lista
+        }
+
+        if (lisPreObject.articulo.rubro) {
+          lisPreObject.articuloRubroId = lisPreObject.articulo.rubro.nombre
+        }
+
+        if (lisPreObject.articulo.rubro) {
+          lisPreObject.articuloRubroId = lisPreObject.articulo.rubro.nombre
+        }
+        if (lisPreObject.articulo.marca) {
+          lisPreObject.articuloMarcaId = lisPreObject.articulo.marca.nombre
+        }
+        if (lisPreObject.articulo.presentacion) {
+          lisPreObject.articuloPresentacionId = lisPreObject.articulo.presentacion.nombre
+        }
+        if (lisPreObject.articulo.tipo) {
+          lisPreObject.articuloTipoId = lisPreObject.articulo.tipo.nombre
+        }
+
         delete lisPreObject.articulo
       }
 
@@ -27,18 +125,11 @@ export default class LisPresController {
   }
 
   public async create({ request, response }: HttpContext) {
-    const proveedorId = request.input('proveedor_id')
-    const articuloId = request.input('articulo_id')
-    const listaId = request.input('lis_pre_id') // Agregando lis_pre_id
-    const lisPre = new LisPre()
-    lisPre.proveedor = proveedorId
-    lisPre.articulo = articuloId
-    lisPre.lista = listaId
-    await lisPre.save()
-    await lisPre.load('articulo')
-    await lisPre.load('lista')
+    const data = request.only(['proveedorId', 'articuloId', 'listaId', 'precioVenta', 'descripcion'])
+    const lisPre = await LisPre.create(data)
     return response.json(lisPre)
   }
+
 
   public async show({ params, response }: HttpContext) {
     const lisPre = await LisPre.query().where('id', params.id).preload('articulo').first()
@@ -53,7 +144,7 @@ export default class LisPresController {
     if (!lisPre) {
       return response.status(404).json({ error: 'Articulo not found' })
     }
-    const data = request.only(['proveedorId', 'articuloId', 'listaId', 'precioVenta', 'markUp', 'precioCompra', 'descripcion'])
+    const data = request.only(['proveedorId', 'articuloId', 'listaId', 'precioVenta', 'descripcion'])
     lisPre.merge(data)
     await lisPre.save()
     return response.json(lisPre)

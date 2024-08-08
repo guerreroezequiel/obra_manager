@@ -13,7 +13,7 @@ export default class ObrasController {
 
   // Create a new obra
   public async create({ request, response }: HttpContext) {
-    const data = request.only(['nombre', 'descripcion', 'habilitado'])
+    const data = request.only(['nombre', 'descripcion', 'habilitado', 'medida', 'clienteId', 'estadoId'])
     const obra = await Obra.create(data)
     return response.json(obra)
   }
@@ -38,7 +38,7 @@ export default class ObrasController {
     if (!obra) {
       return response.status(404).json({ error: 'Obra not found 2' })
     }
-    const data = request.only(['nombre', 'descripcion', 'habilitado', 'medida', 'precioTotal', 'estadoId'])
+    const data = request.only(['nombre', 'descripcion', 'habilitado', 'medida', 'clienteId', 'estadoId', 'descuento', 'subtotal', 'total'])
     obra.merge(data)
     await obra.save()
     return response.json(obra)
@@ -105,12 +105,11 @@ export default class ObrasController {
     try {
       const obra = await Obra.query()
         .where('id', params.id)
-        .where('habilitado', true)
         .select('*')
         .preload('etapas', (etapaQuery) => {
-          etapaQuery.where('habilitado', true).select('*').preload('modulos', (modulosQuery) => {
-            modulosQuery.where('habilitado', true).select('*').preload('tareas', (tareasQuery) => {
-              tareasQuery.where('habilitado', true).select('*');
+          etapaQuery.select('*').preload('modulos', (modulosQuery) => {
+            modulosQuery.select('*').preload('tareas', (tareasQuery) => {
+              tareasQuery.select('*');
             });
           });
         })
