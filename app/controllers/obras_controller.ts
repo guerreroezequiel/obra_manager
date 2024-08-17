@@ -124,6 +124,32 @@ export default class ObrasController {
     }
   }
 
+  //FULL obra
+  async getObraPresupuesto({ params, response }: HttpContext) {
+    try {
+      const obra = await Obra.query()
+        .where('id', params.id)
+        .select('*')
+        .preload('etapas', (etapaQuery) => {
+          etapaQuery.select('*').preload('modulos', (modulosQuery) => {
+            modulosQuery.select('*').preload('tareas', (tareasQuery) => {
+              tareasQuery.select('*').preload('art_tareas', (artTareasQuery) => {
+                artTareasQuery.select('*');
+              });
+            });
+          });
+        })
+        .first();
+
+      if (!obra) {
+        return response.status(404).json({ message: 'Obra no encontrada' });
+      }
+      return response.json({ obra });
+    } catch (error) {
+      return response.status(500).json({ message: 'Algo salió mal' + error });
+    }
+  }
+
 
   //Obtener campos editables de artTareas
   public async getEditableFields({ response }: HttpContext) {

@@ -137,6 +137,7 @@ router.put('/obras/:id', [ObrasController, 'update'])
 router.delete('/obras/:id', [ObrasController, 'delete'])
 router.get('/obras/:id/relations', [ObrasController, 'getObraRelations'])
 router.get('/obras/:id/full', [ObrasController, 'getObraFullDetails'])
+router.get('/obras/:id/presupuesto', [ObrasController, 'getObraPresupuesto'])
 
 
 //PERSONAL
