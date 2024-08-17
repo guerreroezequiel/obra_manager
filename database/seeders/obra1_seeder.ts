@@ -20,8 +20,8 @@ import ArtTarea from '#models/tarea/det_tarea/art_tarea'
 import PerTarea from '#models/tarea/det_tarea/per_tarea'
 import Tarea from '#models/tarea/tarea'
 import UniMed from '#models/uni_med/uni_med'
-import User from '#models/user/user'
-import UserFieldSetting from '#models/user/user_field_setting'
+import User from '#models/user'
+import UserFieldSetting from '#models/user_field_setting'
 import { BaseSeeder } from '@adonisjs/lucid/seeders'
 
 export default class extends BaseSeeder {

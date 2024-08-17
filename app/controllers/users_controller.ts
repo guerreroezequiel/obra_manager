@@ -1,4 +1,4 @@
-import User from '#models/user/user'
+import User from '#models/user'
 import type { HttpContext } from '@adonisjs/core/http'
 import db from '@adonisjs/lucid/services/db'
 

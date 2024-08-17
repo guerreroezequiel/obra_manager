@@ -11,12 +11,11 @@ const AuthFinder = withAuthFinder(() => hash.use('scrypt'), {
 })
 
 export default class User extends compose(BaseModel, AuthFinder) {
-
   @column({ isPrimary: true })
   declare id: number
 
   @column()
-  declare username: string
+  declare fullName: string | null
 
   @column()
   declare email: string
@@ -24,23 +23,11 @@ export default class User extends compose(BaseModel, AuthFinder) {
   @column({ serializeAs: null })
   declare password: string
 
-  @column()
-  declare avatarUrl: string | null
-
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
-  declare updatedAt: DateTime
-  
-  @column()
-  declare enabled: boolean | true
+  declare updatedAt: DateTime | null
 
-  static accessTokens = DbAccessTokensProvider.forModel(User, {
-    expiresIn: '30 days',
-    prefix: 'oat_',
-    table: 'auth_access_tokens',
-    type: 'auth_token',
-    tokenSecretLength: 40,
-  })
+  static accessTokens = DbAccessTokensProvider.forModel(User)
 }

@@ -6,7 +6,9 @@ export default class ArticulosController {
   /**
    * Fetch all articles
    */
-  public async index({ response }: HttpContext) {
+  public async index({ response, auth }: HttpContext) {
+    const user = auth.user
+    console.log(user)
     const articulos = await Articulo.all()
     return response.json(articulos)
   }
