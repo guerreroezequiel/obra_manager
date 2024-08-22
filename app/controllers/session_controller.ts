@@ -1,5 +1,6 @@
 
-import User from '#models/user'
+
+import User from '#models/user/user'
 import { HttpContext } from '@adonisjs/core/http'
 
 

@@ -1,6 +1,10 @@
 import { HttpContext } from '@adonisjs/core/http'
 import Obra from '#models/obra/obra'
 import db from '@adonisjs/lucid/services/db'
+import ArtTarea from '#models/tarea/det_tarea/art_tarea'
+import Tarea from '#models/tarea/tarea'
+import Modulo from '#models/modulo/modulo'
+import Etapa from '#models/etapa/etapa'
 
 
 export default class ObrasController {
@@ -13,7 +17,7 @@ export default class ObrasController {
 
   // Create a new obra
   public async create({ request, response }: HttpContext) {
-    const data = request.only(['nombre', 'descripcion', 'habilitado', 'medida', 'clienteId', 'estadoId'])
+    const data = request.only(['codigo', 'direccion', 'medida',])
     const obra = await Obra.create(data)
     return response.json(obra)
   }
@@ -38,7 +42,7 @@ export default class ObrasController {
     if (!obra) {
       return response.status(404).json({ error: 'Obra not found 2' })
     }
-    const data = request.only(['nombre', 'descripcion', 'habilitado', 'medida', 'clienteId', 'estadoId', 'descuento', 'subtotal', 'total'])
+    const data = request.only(['codigo', 'direccion', 'medida', 'clienteId', 'descuento', 'subtotal', 'total'])
     obra.merge(data)
     await obra.save()
     return response.json(obra)
@@ -50,10 +54,38 @@ export default class ObrasController {
     if (!obra) {
       return response.status(404).json({ error: 'Obra not found 3' })
     }
+
+    // Obtener las etapas asociadas a la obra
+    const etapas = await Etapa.query().where('obraId', obra.id)
+
+    for (const etapa of etapas) {
+      // Obtener los módulos asociados a la etapa
+      const modulos = await Modulo.query().where('etapaId', etapa.id)
+
+      for (const modulo of modulos) {
+        // Obtener las tareas asociadas al módulo
+        const tareas = await Tarea.query().where('moduloId', modulo.id)
+
+        for (const tarea of tareas) {
+          // Eliminar las art_tareas asociadas a la tarea
+          await ArtTarea.query().where('tareaId', tarea.id).delete()
+          // Eliminar la tarea
+          await tarea.delete()
+        }
+
+        // Eliminar el módulo
+        await modulo.delete()
+      }
+
+      // Eliminar la etapa
+      await etapa.delete()
+    }
+
+    // Eliminar la obra
     await obra.delete()
+
     return response.status(200).json({ message: 'Obra deleted' })
   }
-
   //Obtener modelo de obra
   public async getObraModel({ response }: HttpContext) {
     try {
@@ -81,7 +113,7 @@ export default class ObrasController {
     try {
       const obra = await Obra.query()
         .where('id', params.id)
-        .select('id', 'nombre')
+        .select('id', 'codigo')
         .preload('etapas', (etapaQuery) => {
           etapaQuery.select('id', 'nombre').preload('modulos', (modulosQuery) => {
             modulosQuery.select('id', 'nombre').preload('tareas', (tareasQuery) => {

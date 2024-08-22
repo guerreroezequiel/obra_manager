@@ -20,8 +20,8 @@ import ArtTarea from '#models/tarea/det_tarea/art_tarea'
 import PerTarea from '#models/tarea/det_tarea/per_tarea'
 import Tarea from '#models/tarea/tarea'
 import UniMed from '#models/uni_med/uni_med'
-import User from '#models/user'
-import UserFieldSetting from '#models/user_field_setting'
+import User from '#models/user/user'
+import UserFieldSetting from '#models/user/user_field_setting'
 import { BaseSeeder } from '@adonisjs/lucid/seeders'
 
 export default class extends BaseSeeder {
@@ -30,18 +30,12 @@ export default class extends BaseSeeder {
     // USUARIOS
     await User.createMany([
       {
-        username: 'User1',
         email: 'user1@example.com',
         password: 'password1',
-        avatarUrl: null,
-        enabled: true,
       },
       {
-        username: 'User2',
         email: 'user2@example.com',
         password: 'password2',
-        avatarUrl: null,
-        enabled: true,
       }
     ]);
     // END USUARIOS
@@ -536,19 +530,19 @@ export default class extends BaseSeeder {
       await PerTarea.createMany([
         {
           personalId: 1,
-          tareaId: 1,
+
         },
         {
           personalId: 2,
-          tareaId: 1,
+
         },
         {
           personalId: 2,
-          tareaId: 2,
+
         },
         {
           personalId: 3,
-          tareaId: 3,
+
         }
       ]);
 

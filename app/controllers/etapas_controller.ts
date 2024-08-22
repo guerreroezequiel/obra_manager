@@ -1,6 +1,9 @@
 import { HttpContext } from '@adonisjs/core/http'
 import Etapa from '#models/etapa/etapa'
 import db from '@adonisjs/lucid/services/db'
+import Modulo from '#models/modulo/modulo'
+import Tarea from '#models/tarea/tarea'
+import ArtTarea from '#models/tarea/det_tarea/art_tarea'
 
 export default class EtapasController {
 
@@ -12,7 +15,7 @@ export default class EtapasController {
 
   // Create a new etapa
   public async create({ request, response }: HttpContext) {
-    const data = request.only(['nombre', 'descripcion', 'habilitado', 'obraId'])
+    const data = request.only(['nombre', 'descripcion', 'obraId'])
     const etapa = await Etapa.create(data)
     return response.json(etapa)
   }
@@ -38,7 +41,7 @@ export default class EtapasController {
     if (!etapa) {
       return response.status(404).json({ error: 'Etapa not found' })
     }
-    const data = request.only(['nombre', 'descripcion', 'habilitado',])
+    const data = request.only(['nombre', 'descripcion',])
     etapa.merge(data)
     await etapa.save()
     return response.json(etapa)
@@ -46,13 +49,38 @@ export default class EtapasController {
 
   // Delete etapa
   public async delete({ params, response }: HttpContext) {
-    const etapa = await Etapa.find(params.id)
-    if (!etapa) {
-      return response.status(404).json({ error: 'Etapa not found' })
+    try {
+      const etapa = await Etapa.find(params.id)
+      if (!etapa) {
+        return response.status(404).json({ error: 'Etapa not found' })
+      }
+
+      // Obtener los módulos asociados a la etapa
+      const modulos = await Modulo.query().where('etapaId', etapa.id)
+
+      for (const modulo of modulos) {
+        // Obtener las tareas asociadas al módulo
+        const tareas = await Tarea.query().where('moduloId', modulo.id)
+
+        for (const tarea of tareas) {
+          // Eliminar las art_tareas asociadas a la tarea
+          await ArtTarea.query().where('tareaId', tarea.id).delete()
+          // Eliminar la tarea
+          await tarea.delete()
+        }
+
+        // Eliminar el módulo
+        await modulo.delete()
+      }
+
+      // Eliminar la etapa
+      await etapa.delete()
+
+      return response.json({ message: 'Etapa deleted successfully' })
+    } catch (error) {
+      console.error('Error deleting etapa:', error)
+      return response.status(500).json({ error: error.message })
     }
-    etapa.habilitado = false;
-    await etapa.save()
-    return response.json(etapa)
   }
 
 

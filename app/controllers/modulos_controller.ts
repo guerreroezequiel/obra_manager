@@ -1,6 +1,8 @@
 import { HttpContext } from '@adonisjs/core/http'
 import db from '@adonisjs/lucid/services/db'
 import Modulo from '#models/modulo/modulo'
+import Tarea from '#models/tarea/tarea'
+import ArtTarea from '#models/tarea/det_tarea/art_tarea'
 
 export default class ModulosController {
   // List all modulos
@@ -11,7 +13,7 @@ export default class ModulosController {
 
   // Create a new modulo
   public async create({ request, response }: HttpContext) {
-    const data = request.only(['nombre', 'descripcion', 'habilitado', 'etapaId'])
+    const data = request.only(['nombre', 'descripcion', 'etapaId'])
     const modulo = await Modulo.create(data)
     return response.json(modulo)
   }
@@ -36,7 +38,7 @@ export default class ModulosController {
     if (!modulo) {
       return response.status(404).json({ error: 'Modulo not found' })
     }
-    const data = request.only(['nombre', 'descripcion', 'habilitado',])
+    const data = request.only(['nombre', 'descripcion',])
     modulo.merge(data)
     await modulo.save()
     return response.json(modulo)
@@ -44,14 +46,32 @@ export default class ModulosController {
 
   // Delete modulo
   public async delete({ params, response }: HttpContext) {
-    const modulo = await Modulo.find(params.id)
-    if (!modulo) {
-      return response.status(404).json({ error: 'Modulo not found' })
+    try {
+      const modulo = await Modulo.find(params.id)
+      if (!modulo) {
+        return response.status(404).json({ error: 'Modulo not found' })
+      }
+
+      // Obtener las tareas asociadas al módulo
+      const tareas = await Tarea.query().where('moduloId', modulo.id)
+
+      for (const tarea of tareas) {
+        // Eliminar las art_tareas asociadas a la tarea
+        await ArtTarea.query().where('tareaId', tarea.id).delete()
+        // Eliminar la tarea
+        await tarea.delete()
+      }
+
+      // Eliminar el módulo
+      await modulo.delete()
+
+      return response.json({ message: 'Modulo deleted successfully' })
+    } catch (error) {
+      console.error('Error deleting modulo:', error)
+      return response.status(500).json({ error: error.message })
     }
-    modulo.habilitado = false;
-    await modulo.save()
-    return response.json(modulo)
   }
+
 
   //Obtener modelo de modulos
   public async getModulosModel({ response }: HttpContext) {

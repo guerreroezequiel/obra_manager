@@ -2,7 +2,7 @@ import { DateTime } from 'luxon'
 
 import type { BelongsTo } from '@adonisjs/lucid/types/relations'
 import { BaseModel, column, belongsTo } from '@adonisjs/lucid/orm'
-import Tarea from '../tarea.js'
+// import Tarea from '../tarea.js'
 import Personal from '#models/personal/personal'
 
 export default class PerTarea extends BaseModel {
@@ -12,8 +12,8 @@ export default class PerTarea extends BaseModel {
   @column()
   declare personalId: number
 
-  @column()
-  declare tareaId: number
+  // @column()
+  // declare tareaId: number
 
 
   @column.dateTime({ autoCreate: true })
@@ -25,8 +25,8 @@ export default class PerTarea extends BaseModel {
   @belongsTo(() => Personal)
   declare personal: BelongsTo<typeof Personal>
 
-  @belongsTo(() => Tarea)
-  declare tarea: BelongsTo<typeof Tarea>
+  // @belongsTo(() => Tarea)
+  // declare tarea: BelongsTo<typeof Tarea>
 
 
 }

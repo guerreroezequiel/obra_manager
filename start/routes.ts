@@ -28,9 +28,6 @@ import { middleware } from './kernel.js'
 
 router.group(() => {
 
-
-
-
     //MODELOS
     router.get('/models/obras', [ObrasController, 'getObraModel'])
     router.get('/models/personals', [PersonalsController, 'getPersonalsModel'])
@@ -57,9 +54,6 @@ router.group(() => {
     router.get('/editables/personals', [PersonalsController, 'getEditableFields'])
     router.get('/editables/clientes', [ClientesController, 'getEditableFields'])
     router.get('/editables/proveedors', [ProveedoresController, 'getEditableFields'])
-
-
-
 
     //USERS
     router.get('/users', [UsersController, 'index'])
@@ -143,7 +137,6 @@ router.group(() => {
     router.get('/obras/:id/full', [ObrasController, 'getObraFullDetails'])
     router.get('/obras/:id/presupuesto', [ObrasController, 'getObraPresupuesto'])
 
-
     //PERSONAL
     router.get('/personal', [PersonalsController, 'index'])
     router.get('/personal/:id', [PersonalsController, 'show'])
@@ -157,7 +150,6 @@ router.group(() => {
     router.post('/per_rol', [PerRolsController, 'create'])
     router.put('/per_rol/:id', [PerRolsController, 'update'])
     router.delete('/per_rol/:id', [PerRolsController, 'delete'])
-
 
     //PROVEEDORES
     router.get('/proveedores', [ProveedoresController, 'index'])
@@ -180,7 +172,6 @@ router.group(() => {
     router.post('/lis_pre', [LisPresController, 'create'])
     router.put('/lis_pre/:id', [LisPresController, 'update'])
     router.delete('/lis_pre/:id', [LisPresController, 'delete'])
-
 
     //TAREAS
     router.get('/tareas', [TareasController, 'index'])
@@ -205,7 +196,6 @@ router.group(() => {
     // router.post('/per_tareas', [PerTareasController, 'create'])
     router.put('/per_tareas/:id', [PerTareasController, 'update'])
     router.delete('/per_tareas/:id', [PerTareasController, 'delete'])
-
 
     //UNI_MED
     router.get('/uni_medsAll', [UniMedsController, 'index'])

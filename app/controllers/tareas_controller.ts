@@ -1,6 +1,8 @@
 import { HttpContext } from '@adonisjs/core/http'
 import Tarea from '#models/tarea/tarea'
 import db from '@adonisjs/lucid/services/db'
+import ArtTarea from '#models/tarea/det_tarea/art_tarea'
+import Alerta from '#models/alerta/alerta'
 
 export default class TareasController {
 
@@ -45,14 +47,27 @@ export default class TareasController {
 
   //delete a tarea
   public async delete({ params, response }: HttpContext) {
-    const tarea = await Tarea.find(params.id)
-    if (!tarea) {
-      return response.status(404).json({ error: 'Tarea not found' })
+    try {
+      const tarea = await Tarea.find(params.id)
+      if (!tarea) {
+        return response.status(404).json({ error: 'Tarea not found' })
+      }
+
+      // Eliminar las art_tareas asociadas
+
+      await Alerta.query().where('tareaId', tarea.id).delete()
+      await ArtTarea.query().where('tareaId', tarea.id).delete()
+
+      // Eliminar la tarea
+      await tarea.delete()
+
+      return response.json({ message: 'Tarea deleted successfully' })
+    } catch (error) {
+      console.error('Error deleting tarea:', error)
+      return response.status(500).json({ error: error.message })
     }
-    tarea.habilitado = false;
-    await tarea.save()
-    return response.json(tarea)
   }
+
 
   //copiar tarea
   public async copy({ params, request, response }: HttpContext) {
