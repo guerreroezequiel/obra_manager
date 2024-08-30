@@ -6,7 +6,7 @@ export default class PerTareasController {
 
   //mostrar todas perTareas
   public async index({ response }: HttpContext) {
-    const perTareas = await PerTarea.query().preload('personal').preload('tarea')
+    const perTareas = await PerTarea.query().preload('personal')
     return response.json(perTareas)
   }
 
@@ -45,7 +45,7 @@ export default class PerTareasController {
       return response.status(404).json({ error: 'PerTarea not found' })
     }
     await perTarea.load('personal')
-    await perTarea.load('tarea')
+    // await perTarea.load('tarea')
     return response.json(perTarea)
   }
 
@@ -63,7 +63,7 @@ export default class PerTareasController {
     perTarea.merge(updatedData)
     await perTarea.save()
     await perTarea.load('personal')
-    await perTarea.load('tarea')
+    // await perTarea.load('tarea')
     return response.json(perTarea)
   }
 
