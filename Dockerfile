@@ -13,7 +13,6 @@ COPY . .
 # Build app
 RUN npm run build 
 RUN npm run migration:run
-RUN npm run seed
 
 
 # Expose port
