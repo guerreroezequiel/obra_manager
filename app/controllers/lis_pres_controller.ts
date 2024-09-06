@@ -20,6 +20,9 @@ export default class LisPresController {
             tipoQuery.select('nombre')
           })
       })
+      .preload('proveedor', (proveedorQuery) => {
+        proveedorQuery.select('nombre')
+      })
 
     const lisPresObjects = lisPres.map((lisPre) => {
       const lisPreObject = lisPre.toJSON()
@@ -47,6 +50,11 @@ export default class LisPresController {
         }
 
         delete lisPreObject.articulo
+      }
+
+      if (lisPreObject.proveedor) {
+        lisPreObject.proveedorNombre = lisPreObject.proveedor.nombre
+        delete lisPreObject.proveedor
       }
 
       return lisPreObject
@@ -125,7 +133,7 @@ export default class LisPresController {
   }
 
   public async create({ request, response }: HttpContext) {
-    const data = request.only(['proveedorId', 'articuloId', 'listaId', 'precioVenta', 'descripcion'])
+    const data = request.only(['articuloId', 'listaId', 'precioVenta', 'descripcion', 'proveedorId'])
     const lisPre = await LisPre.create(data)
     return response.json(lisPre)
   }

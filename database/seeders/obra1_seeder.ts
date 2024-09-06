@@ -645,22 +645,22 @@ export default class extends BaseSeeder {
           userId: 1,
           tableName: 'lis_pre',
           fieldName: 'proveedorId',
-          tag: 'Proveedor',
-          type: 'search',
+          tag: 'Id Proveedor',
+          type: 'id',
           width: 100,
           order: 4,
-          isEditable: true,
+          isEditable: false,
           isHidden: false
         },
         {
           userId: 1,
           tableName: 'lis_pre',
           fieldName: 'articuloId',
-          tag: 'Articulo',
-          type: 'search',
+          tag: 'Id Articulo',
+          type: 'id',
           width: 100,
           order: 5,
-          isEditable: true,
+          isEditable: false,
           isHidden: false
         },
         {
@@ -704,7 +704,7 @@ export default class extends BaseSeeder {
           type: 'text',
           width: 100,
           order: 9,
-          isEditable: true,
+          isEditable: false,
           isHidden: false
         },
         {
@@ -715,7 +715,7 @@ export default class extends BaseSeeder {
           type: 'text',
           width: 100,
           order: 10,
-          isEditable: true,
+          isEditable: false,
           isHidden: false
         },
         {
@@ -726,7 +726,7 @@ export default class extends BaseSeeder {
           type: 'text',
           width: 100,
           order: 11,
-          isEditable: true,
+          isEditable: false,
           isHidden: false
         },
         {
@@ -737,7 +737,7 @@ export default class extends BaseSeeder {
           type: 'text',
           width: 100,
           order: 12,
-          isEditable: true,
+          isEditable: false,
           isHidden: false
         },
         {
@@ -748,7 +748,7 @@ export default class extends BaseSeeder {
           type: 'text',
           width: 100,
           order: 13,
-          isEditable: true,
+          isEditable: false,
           isHidden: false
         },
         {
@@ -759,7 +759,7 @@ export default class extends BaseSeeder {
           type: 'text',
           width: 100,
           order: 14,
-          isEditable: true,
+          isEditable: false,
           isHidden: false
         },
         {
@@ -770,7 +770,7 @@ export default class extends BaseSeeder {
           type: 'number',
           width: 100,
           order: 15,
-          isEditable: true,
+          isEditable: false,
           isHidden: false
         },
         {
@@ -781,6 +781,28 @@ export default class extends BaseSeeder {
           type: 'number',
           width: 100,
           order: 16,
+          isEditable: false,
+          isHidden: false
+        },
+        {
+          userId: 1,
+          tableName: 'lis_pre',
+          fieldName: 'articuloNombre',
+          tag: 'Articulo',
+          type: 'search',
+          width: 100,
+          order: 17,
+          isEditable: true,
+          isHidden: false
+        },
+        {
+          userId: 1,
+          tableName: 'lis_pre',
+          fieldName: 'proveedorNombre',
+          tag: 'Proveedor',
+          type: 'search',
+          width: 100,
+          order: 18,
           isEditable: true,
           isHidden: false
         },
